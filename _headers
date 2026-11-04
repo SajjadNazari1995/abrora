@@ -1,0 +1,7 @@
+# Netlify: always check these files for a new version so phones notice updates quickly.
+/sw.js
+  Cache-Control: no-cache
+/js/version.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache

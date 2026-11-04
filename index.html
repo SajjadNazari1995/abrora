@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-theme="light" class="splashing">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ابرورا</title>
+<meta name="description" content="Abrora — ابرورا: ردیاب خصوصی و آفلاین چرخه‌ی قاعدگی">
+<meta name="theme-color" content="#fbf6ff">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ابرورا">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="stylesheet" href="css/app.css">
+<link rel="apple-touch-startup-image" href="splash/launch-1320x2868.jpg" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1206x2622.jpg" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1290x2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1179x2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1284x2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1170x2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1125x2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1242x2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-828x1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-1242x2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/launch-750x1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="preload" as="image" href="icons/splash-bg.svg">
+<link rel="preload" as="font" type="font/woff2" href="fonts/Vazir-Bold.woff2" crossorigin>
+<style>
+/* Opening screen (shown instantly, before any script runs) */
+html.splashing, html.splashing body { background: #070522; overflow: hidden; }
+#splash { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden;
+  background: #1c1360 url("icons/splash-bg.svg") center / cover no-repeat;
+  transition: opacity .7s ease, transform .9s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .9s; }
+#splash.out { opacity: 0; transform: scale(1.06); visibility: hidden; pointer-events: none; }
+#splash .sp-center { display: flex; flex-direction: column; align-items: center; gap: 26px; margin-top: -4vh; }
+#splash .sp-logo { position: relative; width: 148px; height: 148px; animation: spPop .9s cubic-bezier(.2, 1.2, .3, 1) both, spFloat 5s ease-in-out 1s infinite; }
+#splash .sp-logo::before { content: ""; position: absolute; inset: -34px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 170, 220, .55), rgba(150, 120, 255, .25) 55%, transparent); animation: spPulse 3.2s ease-in-out infinite; }
+#splash .sp-logo img { position: relative; width: 100%; height: 100%; border-radius: 38px; display: block; box-shadow: 0 18px 50px rgba(20, 8, 70, .55), 0 0 0 1.5px rgba(255, 255, 255, .28); }
+#splash .sp-name { font-family: "Vazir", system-ui, -apple-system, "Geeza Pro", sans-serif; font-weight: 700; font-size: 46px; line-height: 1.4; color: #fff; direction: rtl;
+  text-shadow: 0 2px 22px rgba(255, 150, 215, .65), 0 0 2px rgba(255, 255, 255, .6); animation: spName 1s cubic-bezier(.2, .8, .2, 1) .35s both; }
+@keyframes spPop { from { opacity: 0; transform: scale(.55) translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes spFloat { 50% { transform: translateY(-9px); } }
+@keyframes spPulse { 50% { transform: scale(1.12); opacity: .75; } }
+@keyframes spName { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) { #splash .sp-logo, #splash .sp-logo::before, #splash .sp-name { animation: none; } }
+</style>
+<script>
+/* Apply saved language and theme before first paint so nothing flashes. */
+(function () {
+  try {
+    var s = (JSON.parse(localStorage.getItem('abrora:v1') || '{}') || {}).settings || {};
+    var l = ['fa', 'en', 'de'].indexOf(s.lang) >= 0 ? s.lang : 'fa', h = document.documentElement;
+    h.lang = l; h.dir = l === 'fa' ? 'rtl' : 'ltr';
+    if (s.font === 'iransans') h.setAttribute('data-font', 'iransans');
+    var th = s.theme || 'auto';
+    var dark = th === 'dark' || (th === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    h.setAttribute('data-theme', dark ? 'dark' : 'light');
+  } catch (e) {
+    try { if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark'); } catch (e2) {}
+  }
+})();
+</script>
+</head>
+<body>
+<div id="splash" aria-hidden="true"><div class="sp-center"><div class="sp-logo"><img src="icons/logo.svg" alt="" width="148" height="148"></div><div class="sp-name">اَبرورا</div></div></div>
+<div id="app"></div>
+<noscript>Abrora needs JavaScript. / ابرورا به جاوااسکریپت نیاز دارد.</noscript>
+<script>
+/* Keep the opening screen up for a moment (so it can be enjoyed), then fade it out once the app is ready. */
+(function () {
+  var t0 = Date.now(), MIN = 2000, done = false, still = /[?&]still\b/.test(location.search), meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', '#1c1360');
+  self.hideSplash = function () {
+    if (done || still) return; done = true;
+    setTimeout(function () {
+      var el = document.getElementById('splash');
+      document.dispatchEvent(new Event('abrora:splash-end'));
+      document.documentElement.classList.remove('splashing');
+      if (!el) return;
+      el.classList.add('out');
+      setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1200);
+    }, Math.max(0, MIN - (Date.now() - t0)));
+  };
+  setTimeout(self.hideSplash, 7000); // never get stuck
+})();
+</script>
+<script src="js/version.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/config.js"></script>
+<script src="js/update.js"></script>
+<script src="js/sync.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

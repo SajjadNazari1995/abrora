@@ -1,0 +1,95 @@
+{
+  "id": "when-to-see-a-doctor",
+  "status": "published",
+  "category": "health",
+  "emoji": "🩺",
+  "tone": "sky",
+  "phases": ["any", "late"],
+  "signals": ["cramps", "headache"],
+  "moods": [],
+  "readMin": 3,
+  "order": 10,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "چه زمانی به پزشک مراجعه کنیم؟",
+    "en": "When to talk to a doctor",
+    "de": "Wann zur Ärztin oder zum Arzt?"
+  },
+  "summary": {
+    "fa": "بیشتر تغییرات چرخه بی‌خطرند، اما چند نشانه ارزیابی پزشکی می‌خواهند: چرخه‌ی خیلی کوتاه یا بلند، پریود بیش از هفت روز، خونریزی زیاد، درد شدید یا قطع‌شدن پریود. اینجا فهرست روشنی از آن‌ها آمده است.",
+    "en": "Most cycle changes are harmless, but some signs need a medical check: a cycle that is very short or long, a period over seven days, heavy bleeding, severe pain or missed periods. Here is a clear list.",
+    "de": "Die meisten Zyklusveränderungen sind harmlos, einige Zeichen sollten aber ärztlich abgeklärt werden: ein sehr kurzer oder langer Zyklus, eine Periode über sieben Tage, starke Blutung, starke Schmerzen oder ausbleibende Perioden. Hier steht eine klare Liste."
+  },
+  "body": {
+    "fa": [
+      { "h": "در یک نوبت عادی پزشک بگویید اگر…" },
+      { "ul": [
+        "چرخه‌هایتان مدام کوتاه‌تر از ۲۱ یا بلندتر از ۳۵ روز است، یا از ماهی به ماه دیگر خیلی تغییر می‌کند.",
+        "پریود بیش از ۷ روز طول می‌کشد یا خونریزی‌تان زیاد است.",
+        "بین دو پریود یا بعد از رابطه خونریزی می‌کنید.",
+        "دردی دارید که زندگی روزمره را مختل می‌کند یا ماه‌به‌ماه بدتر می‌شود.",
+        "پریودتان بیش از ۳ ماه نیامده و باردار نیستید.",
+        "پس از یائسگی دوباره خونریزی می‌کنید."
+      ] },
+      { "h": "علت‌های شایع نامنظمی" },
+      { "p": "استرس، کاهش یا افزایش وزن، ورزش بسیار سنگین، شیردهی، بعضی روش‌های پیشگیری از بارداری و داروها، سندرم تخمدان پلی‌کیستیک (PCOS)، مشکلات تیروئید و نزدیک‌شدن به یائسگی. اگر پریودتان دیر شده و ممکن است باردار باشید، تست بارداری بدهید." },
+      { "h": "فوراً مراجعه کنید اگر…" },
+      { "ul": [
+        "درد ناگهانی و شدید شکم یا لگن دارید، به‌ویژه همراه با تب یا غش.",
+        "خونریزی بسیار زیاد با سرگیجه یا ضعف دارید.",
+        "احتمال بارداری هست و با درد یا خونریزی همراه است.",
+        "نشانه‌ای شما را بسیار نگران کرده است."
+      ] },
+      { "p": "ثبت منظم پریود، علائم و درد در این برنامه می‌تواند اطلاعات دقیقی برای پزشک فراهم کند." }
+    ],
+    "en": [
+      { "h": "Tell a doctor at a routine visit if…" },
+      { "ul": [
+        "Your cycles are regularly shorter than 21 or longer than 35 days, or vary a lot from month to month.",
+        "Your period lasts more than 7 days or your bleeding is heavy.",
+        "You bleed between periods or after sex.",
+        "You have pain that disrupts daily life or gets worse month by month.",
+        "You have had no period for more than 3 months and you are not pregnant.",
+        "You bleed again after menopause."
+      ] },
+      { "h": "Common causes of irregular periods" },
+      { "p": "Stress, weight loss or gain, very heavy exercise, breastfeeding, some contraceptives and medicines, polycystic ovary syndrome (PCOS), thyroid problems and approaching menopause. If your period is late and you could be pregnant, take a pregnancy test." },
+      { "h": "Get help right away if…" },
+      { "ul": [
+        "You have sudden, severe abdominal or pelvic pain, especially with fever or fainting.",
+        "You have very heavy bleeding with dizziness or weakness.",
+        "You may be pregnant and have pain or bleeding.",
+        "Any symptom is worrying you a lot."
+      ] },
+      { "p": "Logging your periods, symptoms and pain regularly in this app gives your doctor accurate information." }
+    ],
+    "de": [
+      { "h": "Sprich bei einem normalen Termin mit der Praxis, wenn …" },
+      { "ul": [
+        "deine Zyklen dauerhaft kürzer als 21 oder länger als 35 Tage sind oder stark von Monat zu Monat schwanken.",
+        "deine Periode länger als 7 Tage dauert oder die Blutung stark ist.",
+        "du zwischen den Perioden oder nach dem Sex blutest.",
+        "du Schmerzen hast, die den Alltag beeinträchtigen oder von Monat zu Monat schlimmer werden.",
+        "deine Periode seit mehr als 3 Monaten ausbleibt und du nicht schwanger bist.",
+        "du nach den Wechseljahren wieder blutest."
+      ] },
+      { "h": "Häufige Ursachen für unregelmäßige Perioden" },
+      { "p": "Stress, Gewichtsab- oder -zunahme, sehr intensiver Sport, Stillzeit, manche Verhütungsmittel und Medikamente, das polyzystische Ovarsyndrom (PCOS), Schilddrüsenprobleme und die nahenden Wechseljahre. Ist deine Periode verspätet und du könntest schwanger sein, mach einen Schwangerschaftstest." },
+      { "h": "Sofort Hilfe holen, wenn …" },
+      { "ul": [
+        "du plötzliche, starke Bauch- oder Unterleibsschmerzen hast, besonders mit Fieber oder Ohnmacht.",
+        "du sehr stark blutest und dir schwindelig oder schwach ist.",
+        "du schwanger sein könntest und Schmerzen oder Blutungen hast.",
+        "ein Symptom dir große Sorgen macht."
+      ] },
+      { "p": "Wenn du Perioden, Beschwerden und Schmerzen regelmäßig in dieser App einträgst, hat deine Ärztin bzw. dein Arzt genaue Informationen." }
+    ]
+  },
+  "sources": [
+    { "title": "Irregular periods", "org": "NHS", "url": "https://www.nhs.uk/symptoms/irregular-periods/" },
+    { "title": "Missed or late periods", "org": "NHS", "url": "https://www.nhs.uk/symptoms/missed-or-late-periods/" },
+    { "title": "Heavy periods", "org": "NHS", "url": "https://www.nhs.uk/conditions/heavy-periods/" },
+    { "title": "Amenorrhea: Absence of Periods", "org": "ACOG", "url": "https://www.acog.org/womens-health/faqs/amenorrhea-absence-of-periods" }
+  ]
+}

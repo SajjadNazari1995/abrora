@@ -1,0 +1,75 @@
+{
+  "id": "pms-and-mood",
+  "status": "published",
+  "category": "pms",
+  "emoji": "🌦️",
+  "tone": "sky",
+  "phases": ["pms", "luteal"],
+  "signals": ["bloating", "breast", "fatigue", "cravings", "acne"],
+  "moods": ["irritable", "sad", "anxious", "sensitive"],
+  "readMin": 4,
+  "order": 4,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "PMS و نوسان خلق‌وخو",
+    "en": "PMS and mood swings",
+    "de": "PMS und Stimmungsschwankungen"
+  },
+  "summary": {
+    "fa": "در یکی دو هفته‌ی پیش از پریود، بسیاری از افراد نفخ، خستگی، حساسیت یا تغییر خلق را حس می‌کنند. این الگو معمولاً با شروع پریود تمام می‌شود. خواب، حرکت و غذای متعادل کمک می‌کند.",
+    "en": "In the week or two before a period, many people notice bloating, tiredness, sensitivity or mood changes. The pattern usually ends once the period starts. Sleep, movement and balanced meals can help.",
+    "de": "In ein bis zwei Wochen vor der Periode bemerken viele Blähbauch, Müdigkeit, Empfindlichkeit oder Stimmungswechsel. Das Muster endet meist mit Beginn der Periode. Schlaf, Bewegung und ausgewogene Mahlzeiten können helfen."
+  },
+  "body": {
+    "fa": [
+      { "h": "PMS چیست؟" },
+      { "p": "سندرم پیش از قاعدگی (PMS) مجموعه‌ای از نشانه‌های جسمی و عاطفی است که پس از تخمک‌گذاری و پیش از پریود ظاهر می‌شود و معمولاً چند روز بعد از شروع پریود از بین می‌رود. نشانه‌ها می‌توانند شامل نفخ، حساسیت پستان، سردرد، خستگی، هوس غذا، جوش، تحریک‌پذیری، غم یا اضطراب باشند. علت دقیق روشن نیست؛ تغییرات هورمونی و واکنش مغز به آن‌ها نقش دارند." },
+      { "h": "چه چیزهایی کمک می‌کند؟" },
+      { "ul": [
+        "ورزش منظم و خواب کافی.",
+        "غذای متعادل و وعده‌های منظم؛ کمتر کردن کافئین، الکل و غذاهای خیلی شور.",
+        "روش‌های آرام‌سازی مثل تنفس عمیق، پیاده‌روی یا نوشتن حال خود.",
+        "ثبت نشانه‌ها در برنامه در دو تا سه چرخه تا الگوی خودتان را ببینید."
+      ] },
+      { "h": "وقتی نشانه‌ها شدیدند" },
+      { "p": "اگر نشانه‌های عاطفی بسیار قوی‌اند، مثل خشم شدید، ناامیدی، اضطراب یا افسردگی که کار و روابط شما را مختل می‌کند، ممکن است اختلال ملال پیش از قاعدگی (PMDD) باشد. این وضعیت قابل درمان است؛ با پزشک صحبت کنید. اگر به آسیب‌زدن به خودتان فکر می‌کنید، همین حالا با اورژانس یا یک خط کمک تماس بگیرید یا با یک نفر مورد اعتماد صحبت کنید." },
+      { "h": "نکته" },
+      { "p": "اگر نشانه‌ها در تمام چرخه ادامه دارند و فقط پیش از پریود نیستند، ارزیابی پزشکی مفید است؛ ممکن است علت دیگری مثل مشکل تیروئید یا افسردگی وجود داشته باشد." }
+    ],
+    "en": [
+      { "h": "What is PMS?" },
+      { "p": "Premenstrual syndrome (PMS) is a group of physical and emotional symptoms that appear after ovulation and before a period, and usually fade within a few days after the period starts. Symptoms can include bloating, breast tenderness, headache, tiredness, food cravings, acne, irritability, sadness or anxiety. The exact cause is not clear; hormone changes and how the brain responds to them play a part." },
+      { "h": "What can help?" },
+      { "ul": [
+        "Regular exercise and enough sleep.",
+        "Balanced meals at regular times; less caffeine, alcohol and very salty food.",
+        "Relaxation such as deep breathing, walking or writing down how you feel.",
+        "Logging symptoms in the app for two to three cycles to see your own pattern."
+      ] },
+      { "h": "When symptoms are severe" },
+      { "p": "If emotional symptoms are very strong, such as intense anger, hopelessness, anxiety or depression that disrupts work or relationships, it may be premenstrual dysphoric disorder (PMDD). It can be treated, so talk to a doctor. If you are thinking about harming yourself, contact emergency services or a crisis line right now, or tell someone you trust." },
+      { "h": "Worth knowing" },
+      { "p": "If symptoms last through the whole cycle and not just before your period, a medical check is useful. Another cause, such as a thyroid problem or depression, may be involved." }
+    ],
+    "de": [
+      { "h": "Was ist PMS?" },
+      { "p": "Das prämenstruelle Syndrom (PMS) ist eine Gruppe körperlicher und seelischer Beschwerden, die nach dem Eisprung und vor der Periode auftreten und meist wenige Tage nach Beginn der Periode abklingen. Dazu können Blähbauch, Brustspannen, Kopfschmerzen, Müdigkeit, Heißhunger, Pickel, Gereiztheit, Traurigkeit oder Ängstlichkeit gehören. Die genaue Ursache ist nicht geklärt; Hormonschwankungen und die Reaktion des Gehirns darauf spielen eine Rolle." },
+      { "h": "Was kann helfen?" },
+      { "ul": [
+        "Regelmäßige Bewegung und genug Schlaf.",
+        "Ausgewogene Mahlzeiten zu festen Zeiten; weniger Koffein, Alkohol und sehr salzige Speisen.",
+        "Entspannung, etwa tiefes Atmen, Spazierengehen oder Aufschreiben, wie es dir geht.",
+        "Beschwerden zwei bis drei Zyklen lang in der App eintragen, um dein eigenes Muster zu sehen."
+      ] },
+      { "h": "Wenn die Beschwerden stark sind" },
+      { "p": "Sind die seelischen Beschwerden sehr stark, etwa heftige Wut, Hoffnungslosigkeit, Angst oder Niedergeschlagenheit, die Arbeit oder Beziehungen beeinträchtigen, kann eine prämenstruelle dysphorische Störung (PMDS) vorliegen. Sie ist behandelbar, sprich mit einer Ärztin bzw. einem Arzt. Wenn du daran denkst, dir etwas anzutun, ruf jetzt den Notruf oder eine Krisenhotline an oder sprich mit einer vertrauten Person." },
+      { "h": "Gut zu wissen" },
+      { "p": "Halten die Beschwerden den ganzen Zyklus über an und nicht nur vor der Periode, ist eine ärztliche Abklärung sinnvoll. Es kann eine andere Ursache dahinterstecken, etwa ein Schilddrüsenproblem oder eine Depression." }
+    ]
+  },
+  "sources": [
+    { "title": "PMS (premenstrual syndrome)", "org": "NHS", "url": "https://www.nhs.uk/conditions/pre-menstrual-syndrome/" },
+    { "title": "Premenstrual Syndrome (PMS)", "org": "ACOG", "url": "" }
+  ]
+}

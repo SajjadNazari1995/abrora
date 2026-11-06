@@ -1,0 +1,82 @@
+{
+  "id": "heavy-bleeding-iron",
+  "status": "published",
+  "category": "health",
+  "emoji": "🩸",
+  "tone": "rose",
+  "phases": ["menstrual"],
+  "signals": ["fatigue"],
+  "moods": [],
+  "readMin": 4,
+  "order": 6,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "خونریزی زیاد و کم‌خونی فقر آهن",
+    "en": "Heavy bleeding and iron deficiency",
+    "de": "Starke Blutung und Eisenmangel"
+  },
+  "summary": {
+    "fa": "اگر مدام پد یا تامپون خیس می‌شود یا پریود بیش از هفت روز طول می‌کشد، این خونریزی زیاد است و ارزیابی می‌خواهد. از دست‌رفتن خون می‌تواند آهن بدن را کم کند و خستگی بیاورد.",
+    "en": "If you soak through pads or tampons very often, or your period lasts more than seven days, that is heavy bleeding and worth checking. Ongoing blood loss can lower your iron and leave you tired.",
+    "de": "Wenn du sehr oft Binden oder Tampons durchtränkst oder deine Periode länger als sieben Tage dauert, ist das eine starke Blutung und sollte abgeklärt werden. Anhaltender Blutverlust kann das Eisen senken und müde machen."
+  },
+  "body": {
+    "fa": [
+      { "h": "چه وقت خونریزی زیاد حساب می‌شود؟" },
+      { "ul": [
+        "پریودی که بیش از ۷ روز طول می‌کشد.",
+        "خیس‌شدن کامل پد یا تامپون هر ساعت، چند ساعت پشت‌سرهم.",
+        "نیاز به دو پد هم‌زمان یا بیدارشدن شبانه برای تعویض.",
+        "لخته‌هایی به اندازه‌ی یک سکه‌ی بزرگ (حدود ۲٫۵ سانتی‌متر) یا بزرگ‌تر."
+      ] },
+      { "h": "علت‌ها" },
+      { "p": "از علت‌های شایع می‌توان به نامنظمی هورمونی، فیبروم یا پولیپ رحم، آدنومیوز، اختلال‌های انعقاد خون، مشکلات تیروئید و برخی داروها یا وسایل داخل رحمی اشاره کرد. تعیین علت به معاینه و گاهی آزمایش یا سونوگرافی نیاز دارد و درمان‌های مؤثر وجود دارد." },
+      { "h": "کم‌خونی فقر آهن" },
+      { "p": "خونریزی زیاد و مداوم می‌تواند ذخیره‌ی آهن را کم کند. نشانه‌ها شامل خستگی غیرعادی، رنگ‌پریدگی، تنگی نفس هنگام فعالیت، سرگیجه، تپش قلب و ریزش مو است. تشخیص با آزمایش خون (هموگلوبین و فریتین) انجام می‌شود." },
+      { "h": "تغذیه و مکمل" },
+      { "p": "منابع غذایی آهن شامل گوشت قرمز، مرغ و ماهی، حبوبات، عدس، توفو، سبزی‌های برگ‌تیره و غلات غنی‌شده‌اند. ویتامین C (مثل مرکبات یا فلفل دلمه‌ای) جذب آهن گیاهی را بهتر می‌کند و چای و قهوه همراه غذا جذب را کم می‌کنند. مکمل آهن را فقط پس از آزمایش و با نظر پزشک مصرف کنید؛ مصرف زیاد خطرناک است." },
+      { "h": "چه وقت فوراً مراجعه کنید؟" },
+      { "p": "اگر چند ساعت هر ساعت یک پد یا تامپون کاملاً خیس می‌شود، یا خونریزی با سرگیجه شدید، غش، تپش قلب یا تنگی نفس همراه است، فوراً به اورژانس بروید. در غیر این صورت هم اگر پریودهایتان زیاد است، یک نوبت پزشک بگیرید." }
+    ],
+    "en": [
+      { "h": "When is bleeding considered heavy?" },
+      { "ul": [
+        "A period that lasts longer than 7 days.",
+        "Soaking through a pad or tampon every hour for several hours in a row.",
+        "Needing two pads at once, or waking at night to change protection.",
+        "Clots about the size of a large coin (around 2.5 cm) or bigger."
+      ] },
+      { "h": "Causes" },
+      { "p": "Common causes include hormone imbalance, uterine fibroids or polyps, adenomyosis, bleeding disorders, thyroid problems, and some medicines or intrauterine devices. Finding the cause needs an exam and sometimes blood tests or an ultrasound, and effective treatments exist." },
+      { "h": "Iron-deficiency anemia" },
+      { "p": "Heavy, ongoing bleeding can use up your iron stores. Signs include unusual tiredness, paleness, shortness of breath on effort, dizziness, a racing heart and hair loss. It is diagnosed with a blood test (hemoglobin and ferritin)." },
+      { "h": "Food and supplements" },
+      { "p": "Iron-rich foods include red meat, poultry and fish, beans, lentils, tofu, dark leafy greens and fortified cereals. Vitamin C (such as citrus fruit or bell pepper) helps you absorb plant iron, while tea and coffee with meals reduce absorption. Take iron supplements only after a blood test and on a doctor’s advice; too much is harmful." },
+      { "h": "When to get help right away" },
+      { "p": "If you soak through a pad or tampon every hour for several hours, or bleeding comes with severe dizziness, fainting, a racing heart or shortness of breath, go to the emergency room. Otherwise, if your periods are heavy, book a doctor’s appointment." }
+    ],
+    "de": [
+      { "h": "Wann gilt eine Blutung als stark?" },
+      { "ul": [
+        "Eine Periode, die länger als 7 Tage dauert.",
+        "Mehrere Stunden hintereinander jede Stunde eine Binde oder einen Tampon durchtränken.",
+        "Zwei Binden gleichzeitig brauchen oder nachts zum Wechseln aufwachen.",
+        "Blutgerinnsel in der Größe einer großen Münze (etwa 2,5 cm) oder größer."
+      ] },
+      { "h": "Ursachen" },
+      { "p": "Häufige Ursachen sind hormonelles Ungleichgewicht, Myome oder Polypen der Gebärmutter, Adenomyose, Blutgerinnungsstörungen, Schilddrüsenprobleme sowie manche Medikamente oder Intrauterinpessare. Die Ursache zu finden, braucht eine Untersuchung und manchmal Blutwerte oder einen Ultraschall; es gibt wirksame Behandlungen." },
+      { "h": "Eisenmangelanämie" },
+      { "p": "Starker, anhaltender Blutverlust kann die Eisenspeicher aufbrauchen. Anzeichen sind ungewöhnliche Müdigkeit, Blässe, Atemnot bei Belastung, Schwindel, Herzklopfen und Haarausfall. Festgestellt wird sie mit einer Blutuntersuchung (Hämoglobin und Ferritin)." },
+      { "h": "Ernährung und Präparate" },
+      { "p": "Eisenreiche Lebensmittel sind rotes Fleisch, Geflügel und Fisch, Bohnen, Linsen, Tofu, dunkles Blattgemüse und angereicherte Frühstücksflocken. Vitamin C (zum Beispiel Zitrusfrüchte oder Paprika) verbessert die Aufnahme von pflanzlichem Eisen, Tee und Kaffee zu den Mahlzeiten verringern sie. Eisenpräparate nimmst du nur nach einer Blutuntersuchung und nach ärztlichem Rat; zu viel schadet." },
+      { "h": "Wann sofort Hilfe holen?" },
+      { "p": "Wenn du mehrere Stunden jede Stunde eine Binde oder einen Tampon durchtränkst oder die Blutung mit starkem Schwindel, Ohnmacht, Herzrasen oder Atemnot einhergeht, such sofort die Notaufnahme auf. Sonst gilt: Sind deine Perioden stark, vereinbare einen Termin in der Arztpraxis." }
+    ]
+  },
+  "sources": [
+    { "title": "Heavy Menstrual Bleeding", "org": "ACOG", "url": "https://www.acog.org/womens-health/faqs/heavy-menstrual-bleeding" },
+    { "title": "Heavy periods", "org": "NHS", "url": "https://www.nhs.uk/conditions/heavy-periods/" },
+    { "title": "Iron deficiency anaemia", "org": "NHS", "url": "https://www.nhs.uk/conditions/iron-deficiency-anaemia/" }
+  ]
+}

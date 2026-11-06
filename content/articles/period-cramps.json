@@ -1,0 +1,85 @@
+{
+  "id": "period-cramps",
+  "status": "published",
+  "category": "pain",
+  "emoji": "🫖",
+  "tone": "butter",
+  "phases": ["menstrual"],
+  "signals": ["cramps", "backache"],
+  "moods": [],
+  "readMin": 4,
+  "order": 3,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "درد و گرفتگی پریود: چه کار می‌شود کرد؟",
+    "en": "Period cramps: what can help?",
+    "de": "Regelschmerzen: was kann helfen?"
+  },
+  "summary": {
+    "fa": "گرفتگی پریود شایع است و معمولاً با گرما، حرکت ملایم، استراحت و در صورت مناسب‌بودن مسکن بدون نسخه کم می‌شود. اگر درد شدید است یا زندگی روزمره را مختل می‌کند، حتماً به پزشک بگویید.",
+    "en": "Period cramps are common and often ease with warmth, gentle movement, rest and, if suitable for you, an over-the-counter pain reliever. If the pain is severe or disrupts daily life, tell a doctor.",
+    "de": "Regelschmerzen sind häufig und lassen oft mit Wärme, sanfter Bewegung, Ruhe und – wenn für dich geeignet – einem rezeptfreien Schmerzmittel nach. Sind die Schmerzen stark oder beeinträchtigen den Alltag, sprich mit einer Ärztin bzw. einem Arzt."
+  },
+  "body": {
+    "fa": [
+      { "h": "چرا درد می‌گیرد؟" },
+      { "p": "پیش از پریود و در روزهای اول آن، رحم ماده‌هایی به نام پروستاگلاندین می‌سازد که عضله‌ی رحم را منقبض می‌کنند تا لایه‌ی داخلی آن دفع شود. هرچه مقدار این ماده‌ها بیشتر باشد، گرفتگی شدیدتر می‌شود. درد معمولاً زیر شکم است و ممکن است به کمر و ران‌ها هم برسد." },
+      { "h": "چه چیزهایی کمک می‌کند؟" },
+      { "ul": [
+        "گرما: کیسه‌ی آب گرم یا پد گرمایی روی شکم یا کمر.",
+        "حرکت ملایم مثل پیاده‌روی، کشش یا یوگا. ورزش منظم می‌تواند درد پریود را کمتر کند.",
+        "خواب کافی، آب فراوان و کم‌کردن استرس.",
+        "مسکن‌های بدون نسخه مثل ایبوپروفن یا استامینوفن فقط طبق برچسب دارو. داروهای ضدالتهاب معمولاً وقتی بهتر اثر می‌کنند که از همان ابتدای درد مصرف شوند. اگر آسم، زخم معده، بیماری کلیه یا حساسیت دارویی دارید یا باردار هستید، پیش از مصرف از پزشک یا داروساز بپرسید."
+      ] },
+      { "h": "چه وقت باید به پزشک بگویید؟" },
+      { "ul": [
+        "درد شدید که با مسکن بدون نسخه بهتر نمی‌شود یا شما را از کار و درس بازمی‌دارد.",
+        "دردی که ماه‌به‌ماه بدتر می‌شود یا بعد از حدود ۲۵ سالگی تازه شروع شده است.",
+        "درد همراه با خونریزی خیلی زیاد، درد هنگام رابطه، تب یا ترشح غیرعادی."
+      ] },
+      { "p": "درد شدید گاهی نشانه‌ی بیماری‌هایی مثل آندومتریوز یا فیبروم است که درمان دارند. ثبت روزانه‌ی درد در برنامه به پزشک کمک می‌کند." }
+    ],
+    "en": [
+      { "h": "Why does it hurt?" },
+      { "p": "Before and during the first days of a period, the uterus makes substances called prostaglandins that make the uterine muscle contract so the lining can be shed. The more of them there are, the stronger the cramps. The pain is usually low in the abdomen and can spread to the back and thighs." },
+      { "h": "What can help?" },
+      { "ul": [
+        "Warmth: a hot-water bottle or heating pad on your abdomen or lower back.",
+        "Gentle movement such as walking, stretching or yoga. Regular exercise can reduce period pain.",
+        "Enough sleep, plenty of water and less stress.",
+        "Over-the-counter pain relievers such as ibuprofen or paracetamol (acetaminophen), only as directed on the label. Anti-inflammatory medicines tend to work best when taken at the first sign of pain. If you have asthma, stomach ulcers, kidney disease or a drug allergy, or you are pregnant, ask a doctor or pharmacist first."
+      ] },
+      { "h": "When to tell a doctor" },
+      { "ul": [
+        "Severe pain that does not improve with over-the-counter pain relief or keeps you from work or school.",
+        "Pain that gets worse from month to month, or that started for the first time after about age 25.",
+        "Pain together with very heavy bleeding, pain during sex, fever or unusual discharge."
+      ] },
+      { "p": "Severe pain can sometimes be a sign of conditions such as endometriosis or fibroids, which can be treated. Logging your pain in the app gives your doctor useful detail." }
+    ],
+    "de": [
+      { "h": "Warum tut es weh?" },
+      { "p": "Vor und in den ersten Tagen der Periode bildet die Gebärmutter Botenstoffe, die Prostaglandine, die den Gebärmuttermuskel zusammenziehen, damit die Schleimhaut abgestoßen werden kann. Je mehr davon vorhanden sind, desto stärker sind die Krämpfe. Der Schmerz sitzt meist im Unterbauch und kann in den Rücken und die Oberschenkel ausstrahlen." },
+      { "h": "Was kann helfen?" },
+      { "ul": [
+        "Wärme: Wärmflasche oder Wärmekissen auf Bauch oder unteren Rücken.",
+        "Sanfte Bewegung wie Spazierengehen, Dehnen oder Yoga. Regelmäßige Bewegung kann Regelschmerzen verringern.",
+        "Ausreichend Schlaf, viel Wasser und weniger Stress.",
+        "Rezeptfreie Schmerzmittel wie Ibuprofen oder Paracetamol nur nach Packungsbeilage. Entzündungshemmende Mittel wirken meist am besten, wenn man sie schon beim ersten Anzeichen von Schmerz nimmt. Bei Asthma, Magengeschwüren, Nierenerkrankungen, Arzneimittelallergie oder Schwangerschaft frag vorher in der Arztpraxis oder Apotheke."
+      ] },
+      { "h": "Wann zur Ärztin oder zum Arzt?" },
+      { "ul": [
+        "Starke Schmerzen, die auf rezeptfreie Mittel nicht ansprechen oder dich von Arbeit oder Schule abhalten.",
+        "Schmerzen, die von Monat zu Monat schlimmer werden oder erst nach etwa dem 25. Lebensjahr neu aufgetreten sind.",
+        "Schmerzen zusammen mit sehr starker Blutung, Schmerzen beim Sex, Fieber oder ungewöhnlichem Ausfluss."
+      ] },
+      { "p": "Starke Schmerzen können manchmal auf Erkrankungen wie Endometriose oder Myome hinweisen, die behandelt werden können. Wenn du deine Schmerzen in der App einträgst, hat deine Ärztin bzw. dein Arzt hilfreiche Details." }
+    ]
+  },
+  "sources": [
+    { "title": "Period pain", "org": "NHS", "url": "https://www.nhs.uk/symptoms/period-pain/" },
+    { "title": "Dysmenorrhea: Painful Periods", "org": "ACOG", "url": "https://www.acog.org/womens-health/faqs/dysmenorrhea-painful-periods" },
+    { "title": "Physical activity and your menstrual cycle", "org": "Office on Women’s Health (U.S. HHS)", "url": "https://womenshealth.gov/getting-active/physical-activity-menstrual-cycle" }
+  ]
+}

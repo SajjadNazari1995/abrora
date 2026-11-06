@@ -2,5 +2,8 @@
    googleClientId: the OAuth Client ID created in Google Cloud Console
    (see README-fa.txt, section "پشتیبان‌گیری ابری"). Leave empty to hide cloud backup. */
 self.ABRORA_CONFIG = {
-  googleClientId: '334047380062-c5j9j7mpu0tjmgfm40ggos25rutm0icj.apps.googleusercontent.com'
+  googleClientId: '',
+  /* Where the articles come from. 'content/' = the files inside this app (GitHub).
+     When you move to your own server, put its address here (it must end with the same file layout). */
+  contentBase: 'content/'
 };

@@ -1,0 +1,65 @@
+{
+  "id": "cycle-phases",
+  "status": "published",
+  "category": "basics",
+  "emoji": "🌗",
+  "tone": "rose",
+  "phases": ["any"],
+  "signals": [],
+  "moods": [],
+  "readMin": 3,
+  "order": 2,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "چهار مرحله‌ی چرخه",
+    "en": "The four phases of your cycle",
+    "de": "Die vier Phasen deines Zyklus"
+  },
+  "summary": {
+    "fa": "چرخه چهار مرحله دارد: پریود، پیش از تخمک‌گذاری، تخمک‌گذاری و پیش از پریود بعدی. هورمون‌ها در هر مرحله فرق می‌کنند و به همین دلیل حال و انرژی شما هم می‌تواند فرق کند.",
+    "en": "A cycle has four phases: period, the time before ovulation, ovulation, and the time before the next period. Hormones differ in each phase, which is why your mood and energy can change too.",
+    "de": "Ein Zyklus hat vier Phasen: Periode, Zeit vor dem Eisprung, Eisprung und Zeit vor der nächsten Periode. Die Hormone unterscheiden sich in jeder Phase, deshalb können auch Stimmung und Energie schwanken."
+  },
+  "body": {
+    "fa": [
+      { "h": "مرحله‌ی ۱: پریود" },
+      { "p": "لایه‌ی داخلی رحم همراه با خونریزی دفع می‌شود. در این روزها سطح استروژن و پروژسترون پایین است. بعضی افراد گرفتگی، خستگی یا سردرد را تجربه می‌کنند." },
+      { "h": "مرحله‌ی ۲: پیش از تخمک‌گذاری (فولیکولار)" },
+      { "p": "هورمون محرک فولیکول (FSH) تخمدان‌ها را برای آماده‌کردن یک تخمک تحریک می‌کند و استروژن بالا می‌رود. لایه‌ی داخلی رحم دوباره ضخیم می‌شود. بسیاری از افراد در این مرحله انرژی بیشتری حس می‌کنند." },
+      { "h": "مرحله‌ی ۳: تخمک‌گذاری" },
+      { "p": "افزایش ناگهانی هورمون لوتئینه‌کننده (LH) باعث آزادشدن یک تخمک از تخمدان می‌شود. تخمک فقط حدود ۱۲ تا ۲۴ ساعت قابل لقاح است. تخمک‌گذاری معمولاً حدود دو هفته پیش از پریود بعدی رخ می‌دهد." },
+      { "h": "مرحله‌ی ۴: پیش از پریود (لوتئال)" },
+      { "p": "پس از تخمک‌گذاری پروژسترون بالا می‌رود. اگر بارداری رخ ندهد، پروژسترون و استروژن در روزهای آخر افت می‌کنند. در این زمان ممکن است نشانه‌های PMS مثل نفخ، حساسیت پستان یا نوسان خلق ظاهر شود." },
+      { "h": "خوب است بدانید" },
+      { "p": "این مرحله‌ها راهنمای کلی‌اند. مدت هر مرحله در هر فرد و حتی در چرخه‌های مختلف یک فرد فرق می‌کند." }
+    ],
+    "en": [
+      { "h": "Phase 1: period" },
+      { "p": "The lining of the uterus is shed with the bleeding. Estrogen and progesterone are low in these days. Some people have cramps, tiredness or headaches." },
+      { "h": "Phase 2: before ovulation (follicular phase)" },
+      { "p": "Follicle-stimulating hormone (FSH) prompts the ovaries to prepare an egg, and estrogen rises. The lining of the uterus builds up again. Many people feel more energetic in this phase." },
+      { "h": "Phase 3: ovulation" },
+      { "p": "A sudden rise in luteinizing hormone (LH) makes an ovary release an egg. The egg can be fertilized for only about 12 to 24 hours. Ovulation usually happens roughly two weeks before the next period." },
+      { "h": "Phase 4: before your period (luteal phase)" },
+      { "p": "After ovulation, progesterone rises. If there is no pregnancy, progesterone and estrogen drop in the last days. You may then notice PMS signs such as bloating, breast tenderness or mood swings." },
+      { "h": "Good to know" },
+      { "p": "The phases are a rough guide. How long each phase lasts differs from person to person and even from one cycle to the next." }
+    ],
+    "de": [
+      { "h": "Phase 1: Periode" },
+      { "p": "Die Gebärmutterschleimhaut wird mit der Blutung abgestoßen. In diesen Tagen sind Östrogen und Progesteron niedrig. Manche Menschen haben Krämpfe, Müdigkeit oder Kopfschmerzen." },
+      { "h": "Phase 2: vor dem Eisprung (Follikelphase)" },
+      { "p": "Das follikelstimulierende Hormon (FSH) regt die Eierstöcke an, eine Eizelle heranreifen zu lassen, und das Östrogen steigt. Die Gebärmutterschleimhaut baut sich wieder auf. Viele spüren in dieser Phase mehr Energie." },
+      { "h": "Phase 3: Eisprung" },
+      { "p": "Ein plötzlicher Anstieg des luteinisierenden Hormons (LH) löst den Eisprung aus: Ein Eierstock gibt eine Eizelle ab. Sie ist nur etwa 12 bis 24 Stunden befruchtbar. Der Eisprung findet meist rund zwei Wochen vor der nächsten Periode statt." },
+      { "h": "Phase 4: vor der Periode (Lutealphase)" },
+      { "p": "Nach dem Eisprung steigt das Progesteron. Tritt keine Schwangerschaft ein, sinken Progesteron und Östrogen in den letzten Tagen. Dann können PMS-Zeichen wie Blähbauch, Brustspannen oder Stimmungsschwankungen auftreten." },
+      { "h": "Gut zu wissen" },
+      { "p": "Die Phasen sind eine grobe Orientierung. Wie lange jede Phase dauert, unterscheidet sich von Mensch zu Mensch und sogar von Zyklus zu Zyklus." }
+    ]
+  },
+  "sources": [
+    { "title": "Your menstrual cycle", "org": "Office on Women’s Health (U.S. HHS)", "url": "https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle" }
+  ]
+}

@@ -2,19 +2,20 @@
 (function () {
   'use strict';
 
-  var E = Engine, I = I18N, t = I.t, num = I.num;
+  var E = Engine, I = I18N, t = I.t, num = I.num, CT = self.Content, LK = self.Lock;
   var KEY = 'abrora:v1';
   var VERSION = (self.ABRORA_RELEASE || {}).version || '1.0.0';
   var SNAP_KEY = 'abrora:pre-update', UNDO_KEY = 'abrora:pre-restore';
   var THEMES = ['auto', 'light', 'dark'];
-  var ISO_RE = /^\d{4}-\d{2}-\d{2}$/;
+  var ISO_RE = /^\d{4}-\d{2}-\d{2}$/, SLUG_RE = /^[a-z0-9][a-z0-9-]{0,79}$/;
+  function cleanName(v) { return String(v || '').replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 30); }
 
   /* ============ storage ============ */
   function defaults() {
     return {
       v: 1,
-      settings: { lang: 'fa', font: 'vazir', theme: 'auto', weekStart: 1, cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
-      periods: [], logs: {}
+      settings: { lang: 'fa', font: 'vazir', theme: 'auto', weekStart: 1, calendar: 'gregorian', name: '', cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
+      periods: [], logs: {}, reads: {}, saved: []
     };
   }
   function clamp(v, a, b, d) { v = Math.round(+v); return isFinite(v) ? Math.min(b, Math.max(a, v)) : d; }
@@ -26,6 +27,8 @@
     if (THEMES.indexOf(s.theme) >= 0) d.settings.theme = s.theme;
     if (s.font === 'iransans' || s.font === 'vazir') d.settings.font = s.font;
     if ([0, 1, 6].indexOf(+s.weekStart) >= 0) d.settings.weekStart = +s.weekStart;
+    if (s.calendar === 'jalali' || s.calendar === 'gregorian') d.settings.calendar = s.calendar;
+    if (typeof s.name === 'string') d.settings.name = cleanName(s.name);
     d.settings.cycleLen = clamp(s.cycleLen, 20, 60, 28);
     d.settings.periodLen = clamp(s.periodLen, 1, 12, 5);
     d.settings.lutealLen = clamp(s.lutealLen, 8, 18, 14);
@@ -44,6 +47,9 @@
       if (typeof l.note === 'string') o.note = l.note.slice(0, 2000);
       if (!emptyLog(o)) d.logs[k] = o;
     });
+    var rd = j.reads && typeof j.reads === 'object' ? j.reads : {};
+    Object.keys(rd).slice(0, 500).forEach(function (k) { if (SLUG_RE.test(k) && isFinite(+rd[k])) d.reads[k] = Math.round(+rd[k]); });
+    (Array.isArray(j.saved) ? j.saved : []).forEach(function (k) { if (typeof k === 'string' && SLUG_RE.test(k) && d.saved.indexOf(k) < 0 && d.saved.length < 200) d.saved.push(k); });
     return d;
   }
   function load() {
@@ -68,7 +74,8 @@
   var today = E.todayN(), A = null, ST = null;
   var ui = {
     view: 'home', prev: 'home', sheet: null, sheetShown: false, intro: true,
-    cal: null, onb: null,
+    cal: null, onb: null, lib: { cat: 'all', q: '' },
+    locked: false, lockMsg: '', lockHelp: false, lockOk: null, unlocking: false,
     upd: null, updHidden: false, updStatus: '', installEvt: null
   };
 
@@ -81,8 +88,8 @@
     var hm = num(('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2));
     return (n === today ? t('today') : I.fmt.dayMonth(n)) + ' ' + hm;
   }
-  function monthOf(n) { var p = E.parts(n); return { y: p.y, m: p.m }; }
-  function shiftMonth(c, d) { var m = c.m + d, y = c.y; while (m < 0) { m += 12; y--; } while (m > 11) { m -= 12; y++; } return { y: y, m: m }; }
+  function monthOf(n) { return Cal.ym(S.settings.calendar, n); }
+  function shiftMonth(c, d) { return Cal.shift(c, d); }
 
   var IC = {
     cycle: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/>',
@@ -93,7 +100,8 @@
     chev: '<path d="M9 5.5l6.5 6.5L9 18.5"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
     minus: '<path d="M5 12h14"/>',
-    heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>'
+    heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5"/>'
   };
   function icon(name, cls) {
     return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[name] + '</svg>';
@@ -115,6 +123,7 @@
   }
   function applyLang() {
     I.setLang(S.settings.lang);
+    I.setCalendar(S.settings.calendar);
     var h = document.documentElement;
     h.lang = S.settings.lang;
     h.dir = I.isRTL() ? 'rtl' : 'ltr';
@@ -215,6 +224,171 @@
       '<span class="txt">' + esc(em.length ? t('b.log_today_done') : t('b.log_today')) + '</span>' + icon('chev', 'chev flip') + '</button>';
   }
 
+  /* ============ greeting, articles ============ */
+  function kindKey() {
+    switch (ST.kind) {
+      case 'period': return 'menstrual';
+      case 'ovulation': case 'fertile': return 'fertile';
+      case 'pms': return 'pms';
+      case 'late': return 'late';
+      case 'none': return '';
+      default: return ST.phase === 'luteal' ? 'luteal' : 'follicular';
+    }
+  }
+  function greetHTML() {
+    var nm = S.settings.name, key = kindKey(), msg = key ? I.kind(key, today) : '';
+    if (!nm && !msg) return '';
+    return '<section class="greet">' + (nm ? '<h1>' + esc(t('g.hello', nm)) + ' <span aria-hidden="true">🌸</span></h1>' : '') +
+      (msg ? '<p>' + esc(msg) + '</p>' : '') + '</section>';
+  }
+  /* What we know about today, for choosing articles. */
+  function recCtx() {
+    var l = S.logs[E.toISO(today)] || {}, symR = [], moodR = [];
+    for (var d = 1; d <= 3; d++) {
+      var g = S.logs[E.toISO(today - d)];
+      if (g) { symR = symR.concat(g.sym || []); moodR = moodR.concat(g.mood || []); }
+    }
+    return { day: today, phase: ST.kind === 'none' ? 'any' : ST.phase, kind: ST.kind, sym: l.sym || [], symRecent: symR,
+      mood: l.mood || [], moodRecent: moodR, reads: S.reads };
+  }
+  function artItem(id) { var X = CT.index(); return X ? X.articles.filter(function (a) { return a.id === id; })[0] : null; }
+  function catName(id) {
+    var X = CT.index(), c = X && X.categories.filter(function (x) { return x.id === id; })[0];
+    return c ? c.name[I.getLang()] : '';
+  }
+  function artRow(a, why) {
+    var lg = I.getLang(), cat = catName(a.category);
+    return '<button class="art-row" data-act="article" data-id="' + a.id + '"><span class="tile tone-' + a.tone + '" aria-hidden="true">' + esc(a.emoji) + '</span>' +
+      '<span class="art-t"><b>' + esc(a.title[lg]) + '</b><small>' + esc((cat ? cat + ' · ' : '') + t('art.min', a.readMin)) + '</small>' +
+      (why ? '<em class="why">' + esc(t('art.why.' + why)) + '</em>' : '') + '</span>' + icon('chev', 'flip') + '</button>';
+  }
+  function recommendedHTML(n, titleKey) {
+    var X = CT.index();
+    if (!X || !X.articles.length) return '';
+    return '<h2 class="section-title">' + esc(t(titleKey)) + '</h2><div class="art-list">' +
+      CT.recommend(X.articles, recCtx(), n).map(function (r) { return artRow(r.article, r.why); }).join('') + '</div>';
+  }
+  function artListHTML() {
+    var X = CT.index(), L = ui.lib, items = X.articles;
+    if (L.cat === 'saved') items = items.filter(function (a) { return S.saved.indexOf(a.id) >= 0; });
+    else if (L.cat !== 'all') items = items.filter(function (a) { return a.category === L.cat; });
+    items = CT.search(items, L.q, I.getLang());
+    if (!items.length) return '<p class="empty-note">' + esc(t(L.cat === 'saved' && !L.q ? 'art.none_saved' : 'art.none')) + '</p>';
+    return items.map(function (a) { return artRow(a); }).join('');
+  }
+  function libraryHTML() {
+    var X = CT.index(), h = '<h2 class="section-title">' + esc(t('tips.articles')) + '</h2>';
+    if (!X) {
+      return h + '<div class="empty-note"><p>' + esc(t('art.unavailable')) + '</p><button class="btn soft" data-act="lib-retry">' + esc(t('art.retry')) + '</button></div>';
+    }
+    var L = ui.lib, lg = I.getLang();
+    var chips = [['all', t('art.all')], ['saved', t('art.saved')]].concat(X.categories.map(function (c) { return [c.id, c.name[lg]]; }));
+    h += '<div class="search"><input id="artQ" class="field" type="search" autocomplete="off" enterkeyhint="search" aria-label="' + esc(t('art.search')) +
+      '" placeholder="' + esc(t('art.search')) + '" value="' + esc(L.q) + '"></div>';
+    h += '<div class="fchips" role="group">' + chips.map(function (c) {
+      return '<button class="fchip" data-act="lib-cat" data-v="' + esc(c[0]) + '" aria-pressed="' + (L.cat === c[0]) + '">' + esc(c[1]) + '</button>';
+    }).join('') + '</div>';
+    return h + '<div class="art-list" id="art-list">' + artListHTML() + '</div>';
+  }
+  function blockHTML(b) {
+    if (b.h) return '<h3 class="rh">' + esc(b.h) + '</h3>';
+    if (b.p) return '<p class="body">' + esc(b.p) + '</p>';
+    if (b.ul) return '<ul class="rl">' + b.ul.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    return '';
+  }
+  function articleSheet(sh) {
+    var a = artItem(sh.id), lg = I.getLang();
+    if (!a) return '<p class="body">' + esc(t('art.none')) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
+    var saved = S.saved.indexOf(a.id) >= 0;
+    var saveBtn = '<button class="btn soft block" data-act="article-save" aria-pressed="' + saved + '">' + esc(t(saved ? 'art.unsave' : 'art.save')) + '</button>';
+    var closeBtn = '<button class="btn block" data-act="sheet-close" style="color:var(--ink2)">' + esc(t('close')) + '</button>';
+    var h = '<div class="big-em" aria-hidden="true">' + esc(a.emoji) + '</div><div class="art-meta">' + esc((catName(a.category) ? catName(a.category) + ' · ' : '') + t('art.min', a.readMin)) + '</div><h2>' + esc(a.title[lg]) + '</h2>';
+    if (!sh.full) {
+      return h + '<p class="body">' + esc(a.summary[lg]) + '</p><div class="actions"><button class="btn primary block" data-act="article-full">' + esc(t('art.read_full')) + '</button>' +
+        saveBtn + closeBtn + '</div><p class="sub art-disc">' + esc(t('art.disclaimer')) + '</p>';
+    }
+    if (sh.st === 'loading') return h + '<p class="body">' + esc(t('art.loading')) + '</p>';
+    if (sh.st === 'fail') {
+      return h + '<p class="body">' + esc(t('art.fail')) + '</p><div class="actions"><button class="btn primary block" data-act="article-full">' + esc(t('art.retry')) +
+        '</button><button class="btn soft block" data-act="article-back">' + esc(t('art.back')) + '</button></div>';
+    }
+    var b = sh.b;
+    h += '<div class="reader">' + b.body[lg].map(blockHTML).join('') + '</div>';
+    if (b.sources.length) {
+      h += '<h3 class="rh">' + esc(t('art.sources')) + '</h3><ul class="src" dir="ltr" lang="en">' + b.sources.map(function (x) {
+        var txt = esc((x.org ? x.org + ' — ' : '') + x.title);
+        return '<li>' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + txt + '</a>' : txt) + '</li>';
+      }).join('') + '</ul>';
+    }
+    h += '<p class="sub art-disc">' + esc(t('art.disclaimer')) + (a.updated ? ' ' + esc(t('art.updated', I.fmt.full(E.toN(a.updated)))) : '') + '</p>';
+    return h + '<div class="actions">' + saveBtn + '<button class="btn soft block" data-act="article-back">' + esc(t('art.back')) + '</button>' + closeBtn + '</div>';
+  }
+  function painSheet() {
+    var X = CT.index(), l = S.logs[E.toISO(today)] || {};
+    var picked = (l.sym || []).filter(function (x) { return CT.PAIN.indexOf(x) >= 0; });
+    var h = '<div class="big-em" aria-hidden="true">🩹</div><h2>' + esc(t('pain.title')) + '</h2><p class="body">' + esc(t('pain.desc')) + '</p><div class="chips">' +
+      I.SYMPTOMS.filter(function (m) { return CT.PAIN.indexOf(m[0]) >= 0; }).map(function (m) {
+        return chip('pain-sym', m[0], m[1], t('sym.' + m[0]), picked.indexOf(m[0]) >= 0);
+      }).join('') + '</div>';
+    if (X && picked.length) {
+      h += '<h3 class="rh">' + esc(t('pain.for')) + '</h3><div class="art-list">' +
+        CT.forPain(X.articles, picked, recCtx(), 3).map(function (r) { return artRow(r.article, null); }).join('') + '</div>';
+    } else h += '<p class="sub" style="margin-top:12px">' + esc(t(X ? 'pain.pick' : 'art.unavailable')) + '</p>';
+    return h + '<p class="sub art-disc">' + esc(t('pain.warn')) + '</p><div class="actions"><button class="btn soft block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
+  }
+
+  /* ============ app lock ============ */
+  var LOCK_GRACE = 20000, awayAt = 0;
+  function lockHTML() {
+    var h = '<div class="applock-card"><img class="logo" src="icons/logo.svg" alt="">';
+    if (ui.lockHelp) {
+      return h + '<h1>' + esc(t('lock.reset_t')) + '</h1><p class="lead">' + esc(t('lock.reset_d')) + '</p><div class="stack">' +
+        '<button class="btn danger block" data-act="lock-reset-yes">' + esc(t('lock.reset_yes')) + '</button>' +
+        '<button class="btn soft block" data-act="lock-help-back">' + esc(t('back')) + '</button></div></div>';
+    }
+    return h + '<h1>' + esc(t('app.name')) + '</h1><p class="lead">' + esc(t(ui.lockMsg ? 'lock.retry' : 'lock.locked')) + '</p><div class="stack">' +
+      '<button class="btn primary block" data-act="lock-unlock">' + icon('lock') + ' ' + esc(t('lock.unlock')) + '</button>' +
+      '<button class="btn block" data-act="lock-help" style="color:var(--ink2)">' + esc(t('lock.help')) + '</button></div></div>';
+  }
+  function renderLock() {
+    var r = $('#lock-root');
+    if (!r) return;
+    r.innerHTML = ui.locked ? '<div class="applock" role="dialog" aria-modal="true" aria-label="' + esc(t('lock.locked')) + '">' + lockHTML() + '</div>' : '';
+    document.documentElement.classList.toggle('is-locked', !!ui.locked);
+  }
+  function lockNow() {
+    if (!LK || !LK.enabled()) { document.documentElement.classList.remove('away'); return; }
+    ui.locked = true; ui.lockMsg = ''; ui.lockHelp = false; renderLock();
+  }
+  function tryUnlock(silent) {
+    if (ui.unlocking) return;
+    ui.unlocking = true;
+    LK.verify().then(function () {
+      ui.unlocking = false; ui.locked = false; ui.lockMsg = '';
+      document.documentElement.classList.remove('away'); renderLock();
+    }, function (e) {
+      ui.unlocking = false;
+      if (!silent) { ui.lockMsg = (e && e.code) || 'fail'; renderLock(); }
+    });
+  }
+  function lockGroup() {
+    var on = LK.enabled(), h = '<section class="group"><h3>' + esc(t('lock.title')) + '</h3>';
+    if (ui.lockOk === false && !on) return h + '<p class="hint">' + esc(t('lock.none')) + '</p></section>';
+    return h + '<div class="block"><button class="switch-row" data-act="lock-toggle" role="switch" aria-checked="' + on + '"><span><b>' + esc(t('lock.row')) + '</b></span>' +
+      '<span class="switch" aria-hidden="true" aria-checked="' + on + '"></span></button></div><p class="hint">' + esc(t('lock.desc')) + '</p></section>';
+  }
+
+  /* ============ articles: loading ============ */
+  var contentAt = 0;
+  function afterContent() {
+    if (!ui.sheet && !ui.locked && S.settings.onboarded && (ui.view === 'home' || ui.view === 'tips')) renderView();
+  }
+  function loadContent(force) {
+    contentAt = Date.now();
+    return CT.load(force).then(function () { afterContent(); return CT.prefetch(); }, function () { afterContent(); });
+  }
+  function refreshContent() { if (Date.now() - contentAt > 3600000) loadContent(true); }
+
   function homeHTML() {
     var h = topbar();
     if (!isStandalone() && isIOS() && !S.settings.installDismissed) {
@@ -223,6 +397,7 @@
     if (self.Sync && Sync.needsAttention()) {
       h += '<div class="banner" role="note"><div>' + esc(t('cl.banner')) + '</div><button data-act="cloud-signin">' + esc(t('cl.signin')) + '</button></div>';
     }
+    h += greetHTML();
     h += '<section class="ring-wrap">' + ringSVG() + '<div class="ring-center">' + ringCenter() + '</div></section>';
     h += '<div class="legend"><span><i class="dot p"></i>' + esc(t('ph.period')) + '</span><span><i class="dot f"></i>' + esc(t('ph.fertile')) + '</span><span><i class="dot m"></i>' + esc(t('ph.pms')) + '</span></div>';
     if (!A.empty) {
@@ -232,17 +407,21 @@
         '<div class="mini c"><div class="k">' + esc(t('q.cycle_day')) + '</div><div class="v">' + esc(num(Math.max(1, ST.dayInCycle))) + '</div><div class="s">' + esc(t('q.cycle_len', A.L)) + '</div></div></div>';
     }
     h += todayPill();
+    h += '<button class="pain-pill" data-act="pain"><span class="pe" aria-hidden="true">🩹</span><span class="txt">' + esc(t('pain.btn')) + '</span>' + icon('chev', 'chev flip') + '</button>';
     h += '<h2 class="section-title">' + esc(t('h.tips')) + '</h2><div class="carousel">';
     (I.TIPS[ST.phase] || I.TIPS.follicular).forEach(function (tp, i) {
       var tx = I.pick(tp);
       h += '<button class="tip tone-' + tp.tone + '" data-act="tip" data-phase="' + ST.phase + '" data-i="' + i + '"><b>' + esc(tx[0]) + '</b><span class="em" aria-hidden="true">' + tp.e + '</span></button>';
     });
-    return h + '</div>';
+    h += '</div>';
+    var rec = recommendedHTML(2, 'h.recommended');
+    if (rec) h += rec + '<button class="btn soft block more" data-act="tab" data-v="tips">' + esc(t('art.see_all')) + '</button>';
+    return h;
   }
 
   /* ---- calendar grid (shared by calendar view and date picker) ---- */
   function monthGrid(c, mode, selected) {
-    var first = E.fromYMD(c.y, c.m, 1), dim = E.daysInMonth(c.y, c.m);
+    var cal = S.settings.calendar, first = Cal.firstOf(cal, c.y, c.m), dim = Cal.daysIn(cal, c.y, c.m);
     var ws = S.settings.weekStart, lead = (E.parts(first).wd - ws + 7) % 7, h = '<div class="week" aria-hidden="true">';
     for (var i = 0; i < 7; i++) { var wd = (ws + i) % 7; h += '<div title="' + esc(I.weekdayName(wd)) + '">' + esc(I.weekdayShort(wd)) + '</div>'; }
     h += '</div><div class="grid">';
@@ -295,7 +474,7 @@
       h += '<h2 class="section-title">' + esc(t('s.history')) + '</h2><div class="card"><div class="small muted">' + esc(t('s.history_sub', A.L)) + '</div><div class="bars">' +
         '<div class="avg-line" style="bottom:' + (22 + Math.round(A.L / mx * H)) + 'px"></div>';
       cyc.forEach(function (c) {
-        var m = E.parts(c.start).m;
+        var m = I.fmt.monthOf(c.start);
         h += '<div class="bar-col"><span class="val">' + esc(num(c.len)) + '</span><div class="bar" style="height:' + Math.round(c.len / mx * H) + 'px"></div><span class="lab">' + esc(I.monthShort(m)) + '</span></div>';
       });
       h += '</div></div>';
@@ -324,10 +503,8 @@
       var tx = I.pick(tp);
       h += '<div class="tip-row tone-' + tp.tone + '"><span class="em" aria-hidden="true">' + tp.e + '</span><div><b>' + esc(tx[0]) + '</b><span>' + esc(tx[1]) + '</span></div></div>';
     });
-    h += '<h2 class="section-title">' + esc(t('tips.articles')) + '</h2>';
-    I.ARTICLES.forEach(function (a) {
-      h += '<button class="list-row" data-act="article" data-id="' + a.id + '"><span class="tile tone-' + a.tone + '" aria-hidden="true">' + a.e + '</span><b>' + esc(I.pick(a)[0]) + '</b>' + icon('chev', 'flip') + '</button>';
-    });
+    h += recommendedHTML(3, 'art.recommended');
+    h += libraryHTML();
     return h;
   }
 
@@ -390,6 +567,8 @@
   function settingsHTML() {
     var s = S.settings, h = '';
     h += '<div class="page-head"><div class="left"><button class="icon-btn" data-act="settings-back" aria-label="' + esc(t('back')) + '">' + icon('chev', 'flip-back') + '</button><h1 class="page-title">' + esc(t('st.title')) + '</h1></div></div>';
+    h += '<section class="group"><h3>' + esc(t('st.profile')) + '</h3><label class="lbl" for="nameField">' + esc(t('st.name')) + '</label><input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(s.name) + '"></section>';
+    h += '<section class="group"><h3>' + esc(t('st.calendar')) + '</h3>' + seg([['gregorian', t('cal.gregorian')], ['jalali', t('cal.jalali')]], s.calendar, 'set-cal') + '<p class="hint">' + esc(t('st.cal_hint')) + '</p></section>';
     h += '<section class="group"><h3>' + esc(t('st.language')) + '</h3>' + seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang') + '</section>';
     h += '<section class="group"><h3>' + esc(t('st.font')) + '</h3>' + seg([['vazir', t('st.font.vazir')], ['iransans', t('st.font.iransans')]], s.font, 'set-font') + '</section>';
     h += '<section class="group"><h3>' + esc(t('st.theme')) + '</h3>' + seg(THEMES.map(function (x) { return [x, t('st.theme.' + x)]; }), s.theme, 'set-theme') + '<p class="hint">' + esc(t('st.theme.hint')) + '</p></section>';
@@ -397,7 +576,7 @@
     h += '<section class="group"><h3>' + esc(t('st.defaults')) + '</h3><p class="hint">' + esc(t('st.defaults_hint')) + '</p>' +
       stepper(t('st.cycle_len'), 'cycleLen', s.cycleLen) + stepper(t('st.period_len'), 'periodLen', s.periodLen) + stepper(t('st.luteal'), 'lutealLen', s.lutealLen) +
       '<p class="hint">' + esc(t('st.luteal_hint')) + '</p></section>';
-    h += cloudGroup() + updateGroup();
+    h += lockGroup() + cloudGroup() + updateGroup();
     h += '<section class="group"><h3>' + esc(t('st.data')) + '</h3><p class="hint">' + esc(t('st.private')) + '</p><div class="stack">' +
       '<button class="btn soft block" data-act="export">' + esc(t('st.export')) + '</button>' +
       '<button class="btn soft block" data-act="import">' + esc(t('st.import')) + '</button>' +
@@ -415,7 +594,11 @@
     var dots = '<div class="steps">' + [0, 1, 2].map(function (i) { return '<i class="' + (i === step ? 'on' : '') + '"></i>'; }).join('') + '</div>';
     if (step === 0) {
       body = '<img class="hero" src="icons/logo.svg" alt=""><h1>' + esc(t('o.welcome')) + '</h1><p class="lead">' + esc(t('o.welcome_d')) + '</p>' +
-        seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang').replace('class="seg"', 'class="seg lang-seg"');
+        '<div class="onb-form"><label class="lbl" for="nameField">' + esc(t('o.name_l')) + '</label>' +
+        '<input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(o.name || '') + '">' +
+        '<p class="hint">' + esc(t('o.name_h')) + '</p>' +
+        '<div class="lbl">' + esc(t('o.lang_l')) + '</div>' + seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang') +
+        '<div class="lbl">' + esc(t('o.cal_l')) + '</div>' + seg([['gregorian', t('cal.gregorian')], ['jalali', t('cal.jalali')]], s.calendar, 'set-cal') + '</div>';
       foot = '<button class="btn primary block" data-act="onb-next">' + esc(t('o.start')) + '</button>' +
         (self.Sync && Sync.configured() ? '<button class="btn soft block" data-act="cloud-connect">' + esc(t('cl.new_phone')) + '</button>' : '');
     } else if (step === 1) {
@@ -475,11 +658,8 @@
       var tp = I.TIPS[sh.phase][sh.i], tx = I.pick(tp);
       return '<div class="big-em" aria-hidden="true">' + tp.e + '</div><h2>' + esc(tx[0]) + '</h2><p class="body">' + esc(tx[1]) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
     }
-    if (sh.type === 'article') {
-      var a = I.ARTICLES.filter(function (x) { return x.id === sh.id; })[0], at = I.pick(a);
-      return '<div class="big-em" aria-hidden="true">' + a.e + '</div><h2>' + esc(at[0]) + '</h2>' + at[1].map(function (p) { return '<p class="body">' + esc(p) + '</p>'; }).join('') +
-        '<p class="sub" style="margin-top:18px">' + esc(t('st.disclaimer')) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
-    }
+    if (sh.type === 'article') return articleSheet(sh);
+    if (sh.type === 'pain') return painSheet();
     if (sh.type === 'pick') {
       return '<h2>' + esc(t('o.last_t')) + '</h2><div class="sub">' + esc(t('o.last_d')) + '</div><div class="cal-card" style="margin-top:14px"><div class="cal-head"><button class="cal-nav" data-act="pick-prev" aria-label="' + esc(t('cal.prev')) + '">' + icon('chev', 'flip-back') + '</button><div class="cal-title">' + esc(I.fmt.monthYear(sh.c.y, sh.c.m)) + '</div><button class="cal-nav" data-act="pick-next" aria-label="' + esc(t('cal.next')) + '">' + icon('chev', 'flip') + '</button></div>' + monthGrid(sh.c, 'pick') + '</div>' +
         '<div class="actions"><button class="btn soft block" data-act="sheet-close">' + esc(t('st.cancel')) + '</button></div>';
@@ -525,7 +705,7 @@
     var root = $('#sheet-root'), docEl = document.documentElement;
     if (!ui.sheet) { root.innerHTML = ''; docEl.classList.remove('lock'); ui.sheetShown = false; return; }
     var old = root.querySelector('.sheet'), sc = old ? old.scrollTop : 0, first = !ui.sheetShown;
-    root.innerHTML = '<div class="scrim' + (first ? '' : ' open') + '" data-act="sheet-close"></div><div class="sheet' + (first ? '' : ' open') + '" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>' + sheetContent() + '</div>';
+    root.innerHTML = '<div class="scrim' + (first ? '' : ' open') + '" data-act="sheet-close"></div><div class="sheet' + (first ? '' : ' open') + (ui.sheet.type === 'article' || ui.sheet.type === 'pain' ? ' tall' : '') + '" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>' + sheetContent() + '</div>';
     docEl.classList.add('lock');
     var sh = root.querySelector('.sheet');
     if (first) {
@@ -535,7 +715,8 @@
         if (s2) { s2.classList.add('open'); try { s2.focus({ preventScroll: true }); } catch (e) { } }
         if (sc2) sc2.classList.add('open');
       }); });
-    } else sh.scrollTop = sc;
+    } else sh.scrollTop = ui.sheet.top ? 0 : sc;
+    ui.sheet.top = false;
   }
   function openSheet(o) { ui.sheet = o; ui.sheetShown = false; renderSheet(); }
   function closeSheet() {
@@ -576,6 +757,12 @@
     rs.push({ s: s, e: e, open: open });
     E.setRanges(S, E.merge(rs)); save();
   }
+  /* Forget everything saved on this phone, but keep how the app looks (language, font, theme, calendar). */
+  function wipeLocal() {
+    var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, weekStart: S.settings.weekStart, calendar: S.settings.calendar };
+    S = defaults(); Object.assign(S.settings, keep);
+    try { localStorage.removeItem(SNAP_KEY); localStorage.removeItem(UNDO_KEY); } catch (e) { }
+  }
   var A_ = {
     tab: function (el) { ui.view = el.dataset.v; ui.sheet = null; renderSheet(); renderView(); window.scrollTo(0, 0); },
     settings: function () { ui.prev = ui.view === 'settings' ? 'home' : ui.view; ui.view = 'settings'; renderView(); window.scrollTo(0, 0); },
@@ -585,7 +772,49 @@
     'cal-today': function () { ui.cal = monthOf(today); renderView(); },
     day: function (el) { openSheet({ type: 'day', n: +el.dataset.n }); },
     tip: function (el) { openSheet({ type: 'tip', phase: el.dataset.phase, i: +el.dataset.i }); },
-    article: function (el) { openSheet({ type: 'article', id: el.dataset.id }); },
+    article: function (el) { openSheet({ type: 'article', id: el.dataset.id, full: false }); },
+    'article-full': function () {
+      var sh = ui.sheet;
+      if (!sh || sh.type !== 'article') return;
+      sh.full = true; sh.st = 'loading'; sh.top = true;
+      S.reads[sh.id] = today; save(); renderSheet();
+      CT.get(sh.id).then(function (b) { if (ui.sheet === sh) { sh.st = 'ok'; sh.b = b; sh.top = true; renderSheet(); } },
+        function () { if (ui.sheet === sh) { sh.st = 'fail'; renderSheet(); } });
+    },
+    'article-back': function () { var sh = ui.sheet; if (sh && sh.type === 'article') { sh.full = false; sh.top = true; renderSheet(); } },
+    'article-save': function () {
+      var sh = ui.sheet; if (!sh || sh.type !== 'article') return;
+      var i = S.saved.indexOf(sh.id);
+      if (i >= 0) S.saved.splice(i, 1); else S.saved.push(sh.id);
+      save(); renderSheet();
+    },
+    pain: function () { openSheet({ type: 'pain' }); },
+    'pain-sym': function (el) { var id = el.dataset.id; updLog(today, function (l) { l.sym = toggleIn(l.sym, id); }); render(); },
+    'lib-cat': function (el) { ui.lib.cat = el.dataset.v; renderView(); },
+    'lib-retry': function () { loadContent(true); },
+    'set-cal': function (el) {
+      S.settings.calendar = el.dataset.v; I.setCalendar(S.settings.calendar);
+      if (ui.onb) S.settings.weekStart = el.dataset.v === 'jalali' ? 6 : 1;
+      ui.cal = monthOf(today); if (ui.onb) ui.onb.cal = monthOf(today);
+      save(); render();
+    },
+    'lock-toggle': function () {
+      if (LK.enabled()) LK.disable().then(function () { toast('lock.off'); renderView(); }, function () { toast('lock.off_fail'); });
+      else LK.enable().then(function () { toast('lock.on'); renderView(); }, function () { toast('lock.fail'); });
+    },
+    'lock-unlock': function () { tryUnlock(false); },
+    'lock-help': function () { ui.lockHelp = true; renderLock(); },
+    'lock-help-back': function () { ui.lockHelp = false; renderLock(); },
+    'lock-reset-yes': function () {
+      LK.forget();
+      wipeLocal();
+      if (self.Sync) { try { Sync.disconnect(); } catch (e) { } }
+      save(true);
+      ui.locked = false; ui.lockHelp = false; ui.view = 'home'; ui.sheet = null;
+      ui.onb = { step: 0, cal: monthOf(today), last: null };
+      document.documentElement.classList.remove('away');
+      renderLock(); renderSheet(); render();
+    },
     'sheet-close': function () { flushNote(); closeSheet(); render(); },
     'start-period': function () { addPeriod(today, today); render(); toast('toast.started'); },
     'end-period': function () {
@@ -632,8 +861,7 @@
     import: function () { var f = $('#importFile'); if (f) f.click(); },
     erase: function () { openSheet({ type: 'erase' }); },
     'erase-yes': function () {
-      var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, weekStart: S.settings.weekStart };
-      S = defaults(); Object.assign(S.settings, keep); save();
+      wipeLocal(); LK.forget(); save();
       ui.sheet = null; renderSheet(); ui.view = 'home'; ui.onb = { step: 0, cal: monthOf(today), last: null }; render();
     },
     /* app updates */
@@ -678,7 +906,7 @@
     'onb-nextm': function () { ui.onb.cal = shiftMonth(ui.onb.cal, 1); renderView(); },
     'onb-finish': function () {
       var last = ui.onb.last;
-      S.settings.onboarded = true; save();
+      S.settings.onboarded = true; S.settings.name = cleanName(ui.onb.name || ''); save();
       if (last) { compute(); addPeriod(last, last + S.settings.periodLen - 1); }
       ui.onb = null; ui.intro = true;
       try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { }
@@ -762,24 +990,53 @@
       pendingNote = { n: +el.dataset.n, v: el.value };
       clearTimeout(noteTimer); noteTimer = setTimeout(flushNote, 500);
     }
+    if (el && el.id === 'nameField') {
+      if (ui.onb) ui.onb.name = el.value.slice(0, 30);
+      else { S.settings.name = cleanName(el.value); save(true); clearTimeout(nameTimer); nameTimer = setTimeout(function () { save(); }, 800); }
+    }
+    if (el && el.id === 'artQ') {
+      ui.lib.q = el.value;
+      var box = $('#art-list'); if (box && CT.index()) box.innerHTML = artListHTML();
+    }
   });
+  var nameTimer = null;
   document.addEventListener('focusout', function (e) { if (e.target && e.target.classList && e.target.classList.contains('note')) flushNote(); });
   document.addEventListener('change', function (e) {
     if (e.target && e.target.id === 'importFile' && e.target.files && e.target.files[0]) importFile(e.target.files[0]);
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ui.sheet) A_['sheet-close'](); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ui.sheet && !ui.locked) A_['sheet-close']();
+    if (e.key === 'Enter' && e.target && (e.target.id === 'nameField' || e.target.id === 'artQ')) e.target.blur();
+  });
+  // Cover the app as soon as it goes to the background, and ask for the phone's lock again after a short break.
+  document.addEventListener('visibilitychange', function () {
+    var root = document.documentElement;
+    if (document.hidden) {
+      if (LK && LK.enabled() && !ui.locked) { awayAt = Date.now(); root.classList.add('away'); }
+    } else {
+      if (root.classList.contains('away')) {
+        if (Date.now() - awayAt > LOCK_GRACE) { lockNow(); tryUnlock(true); } else root.classList.remove('away');
+      }
+      refreshContent();
+    }
+  });
+  window.addEventListener('online', function () { if (!CT.index() || CT.failed()) loadContent(true); else refreshContent(); });
   document.addEventListener('visibilitychange', function () { if (!document.hidden && E.todayN() !== today) { render(); } });
   window.addEventListener('pagehide', flushNote);
 
   /* ============ boot ============ */
-  document.addEventListener('abrora:splash-end', function () { applyTheme(); });
+  document.addEventListener('abrora:splash-end', function () { applyTheme(); if (ui.locked) tryUnlock(true); });
   function boot() {
     document.getElementById('app').innerHTML =
-      '<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div id="view-root"></div><div id="tab-root"></div><div id="sheet-root"></div><div id="update-root"></div><div id="toast-root"></div>';
+      '<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div id="view-root"></div><div id="tab-root"></div><div id="sheet-root"></div><div id="update-root"></div><div id="toast-root"></div><div id="lock-root"></div>';
+    if (LK && LK.enabled()) ui.locked = true;
     if (!S.settings.onboarded) ui.onb = { step: 0, cal: monthOf(today), last: null };
     ui.cal = monthOf(today);
     var back = self.Sync ? Sync.handleRedirect() : null;
     render();
+    renderLock();
+    if (LK) LK.supported().then(function (ok) { ui.lockOk = ok; if (ui.view === 'settings' && !ui.sheet && S.settings.onboarded) renderView(); });
+    loadContent(false);
     if (self.Sync) {
       Sync.init({ getPayload: function () { return { app: 'abrora', version: 1, appVersion: VERSION, exportedAt: new Date().toISOString(), data: S }; } });
       Sync.on(function () { if (ui.view === 'settings' && !ui.sheet && S.settings.onboarded) renderView(); });

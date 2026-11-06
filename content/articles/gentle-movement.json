@@ -1,0 +1,88 @@
+{
+  "id": "gentle-movement",
+  "status": "published",
+  "category": "movement",
+  "emoji": "🧘",
+  "tone": "mint",
+  "phases": ["menstrual", "follicular", "luteal"],
+  "signals": ["fatigue", "cramps", "backache", "bloating"],
+  "moods": ["sad", "anxious", "irritable"],
+  "readMin": 4,
+  "order": 8,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "حرکت ملایم، کشش و یوگا در طول چرخه",
+    "en": "Gentle movement, stretching and yoga through your cycle",
+    "de": "Sanfte Bewegung, Dehnen und Yoga im Laufe des Zyklus"
+  },
+  "summary": {
+    "fa": "لازم نیست در پریود ورزش را کنار بگذارید؛ حرکت ملایم می‌تواند گرفتگی و خلق را بهتر کند. به بدنتان گوش بدهید و شدت را با انرژی همان روز تنظیم کنید.",
+    "en": "You do not have to stop exercising during your period; gentle movement can ease cramps and lift your mood. Listen to your body and match the intensity to your energy that day.",
+    "de": "Du musst während der Periode nicht auf Sport verzichten; sanfte Bewegung kann Krämpfe lindern und die Stimmung heben. Hör auf deinen Körper und passe die Intensität an deine Energie an diesem Tag an."
+  },
+  "body": {
+    "fa": [
+      { "h": "شواهد چه می‌گویند؟" },
+      { "p": "ورزش منظم می‌تواند درد پریود و برخی نشانه‌های PMS را کم کند و خلق را بهتر کند. راهنمای سازمان جهانی بهداشت برای بزرگسالان حداقل ۱۵۰ تا ۳۰۰ دقیقه فعالیت هوازی متوسط در هفته و دو روز تمرین تقویتی است. دلیلی وجود ندارد که در پریود ورزش را قطع کنید، مگر اینکه حالتان خوب نباشد." },
+      { "h": "بر اساس حال امروز" },
+      { "ul": [
+        "روزهای گرفتگی یا خستگی: پیاده‌روی آرام، کشش ملایم، یوگای سبک یا شنای آرام.",
+        "روزهای پرانرژی (اغلب پیش از تخمک‌گذاری): تمرین قدرتی یا هوازی شدیدتر.",
+        "روزهای پیش از پریود: حرکت متوسط، کشش و تنفس عمیق برای کم‌کردن تنش و خواب بهتر."
+      ] },
+      { "h": "چند حرکت کششی ساده" },
+      { "ul": [
+        "حالت کودک: ۳۰ تا ۶۰ ثانیه با تنفس آرام.",
+        "گربه و گاو: ۸ تا ۱۰ تکرار آرام برای کمر.",
+        "چرخش ستون فقرات به حالت خوابیده: برای هر طرف حدود ۳۰ ثانیه.",
+        "زانو به سینه، خوابیده به پشت: حدود ۳۰ ثانیه."
+      ] },
+      { "h": "چه وقت تمرین را متوقف کنید؟" },
+      { "p": "اگر درد شدید می‌شود، سرگیجه یا ضعف دارید یا خونریزی خیلی زیاد است، ورزش را متوقف کنید و استراحت کنید. اگر این اتفاق تکرار می‌شود، به پزشک بگویید." }
+    ],
+    "en": [
+      { "h": "What does the evidence say?" },
+      { "p": "Regular exercise can reduce period pain and some PMS symptoms and improve mood. The World Health Organization advises adults to do at least 150 to 300 minutes of moderate aerobic activity a week plus muscle-strengthening on two days. There is no reason to stop exercising during your period unless you do not feel well." },
+      { "h": "Match it to how you feel today" },
+      { "ul": [
+        "Days with cramps or tiredness: an easy walk, gentle stretching, light yoga or an easy swim.",
+        "Days with lots of energy (often before ovulation): strength training or harder cardio.",
+        "Days before your period: moderate movement, stretching and deep breathing to ease tension and help sleep."
+      ] },
+      { "h": "A few simple stretches" },
+      { "ul": [
+        "Child’s pose: 30 to 60 seconds with slow breathing.",
+        "Cat–cow: 8 to 10 slow repeats for the lower back.",
+        "Supine spinal twist: about 30 seconds each side.",
+        "Knees to chest, lying on your back: about 30 seconds."
+      ] },
+      { "h": "When to stop" },
+      { "p": "If pain becomes severe, you feel dizzy or weak, or bleeding is very heavy, stop and rest. If this keeps happening, tell a doctor." }
+    ],
+    "de": [
+      { "h": "Was sagt die Studienlage?" },
+      { "p": "Regelmäßige Bewegung kann Regelschmerzen und manche PMS-Beschwerden verringern und die Stimmung verbessern. Die Weltgesundheitsorganisation empfiehlt Erwachsenen mindestens 150 bis 300 Minuten moderate Ausdaueraktivität pro Woche sowie Krafttraining an zwei Tagen. Es gibt keinen Grund, während der Periode mit dem Sport aufzuhören, es sei denn, du fühlst dich nicht gut." },
+      { "h": "Passend zum heutigen Befinden" },
+      { "ul": [
+        "Tage mit Krämpfen oder Müdigkeit: ein ruhiger Spaziergang, sanftes Dehnen, leichtes Yoga oder lockeres Schwimmen.",
+        "Tage mit viel Energie (oft vor dem Eisprung): Krafttraining oder intensiveres Ausdauertraining.",
+        "Tage vor der Periode: mäßige Bewegung, Dehnen und tiefes Atmen gegen Anspannung und für besseren Schlaf."
+      ] },
+      { "h": "Ein paar einfache Dehnübungen" },
+      { "ul": [
+        "Kindhaltung: 30 bis 60 Sekunden bei ruhiger Atmung.",
+        "Katze–Kuh: 8 bis 10 langsame Wiederholungen für den unteren Rücken.",
+        "Liegende Rumpfdrehung: etwa 30 Sekunden pro Seite.",
+        "Knie zur Brust in Rückenlage: etwa 30 Sekunden."
+      ] },
+      { "h": "Wann aufhören?" },
+      { "p": "Werden die Schmerzen stark, ist dir schwindelig oder schwach oder ist die Blutung sehr stark, hör auf und ruh dich aus. Passiert das öfter, sag es deiner Ärztin bzw. deinem Arzt." }
+    ]
+  },
+  "sources": [
+    { "title": "Physical activity", "org": "World Health Organization", "url": "https://www.who.int/news-room/fact-sheets/detail/physical-activity" },
+    { "title": "Physical activity and your menstrual cycle", "org": "Office on Women’s Health (U.S. HHS)", "url": "https://womenshealth.gov/getting-active/physical-activity-menstrual-cycle" },
+    { "title": "Dysmenorrhea: Painful Periods", "org": "ACOG", "url": "https://www.acog.org/womens-health/faqs/dysmenorrhea-painful-periods" }
+  ]
+}

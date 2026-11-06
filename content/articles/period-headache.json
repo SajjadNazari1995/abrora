@@ -1,0 +1,86 @@
+{
+  "id": "period-headache",
+  "status": "published",
+  "category": "pain",
+  "emoji": "🤕",
+  "tone": "rose",
+  "phases": ["menstrual", "pms"],
+  "signals": ["headache", "nausea"],
+  "moods": [],
+  "readMin": 3,
+  "order": 5,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "سردرد و میگرن اطراف پریود",
+    "en": "Headaches and migraine around your period",
+    "de": "Kopfschmerzen und Migräne rund um die Periode"
+  },
+  "summary": {
+    "fa": "افت استروژن پیش از پریود می‌تواند سردرد یا میگرن را برای بعضی‌ها بدتر کند. خواب و وعده‌های منظم، آب کافی و ثبت الگو کمک می‌کند؛ نشانه‌های هشدار را جدی بگیرید.",
+    "en": "The drop in estrogen before a period can bring on or worsen headaches and migraine for some people. Regular sleep and meals, enough water and tracking the pattern help; take warning signs seriously.",
+    "de": "Der Östrogenabfall vor der Periode kann bei manchen Kopfschmerzen oder Migräne auslösen oder verstärken. Regelmäßiger Schlaf und Mahlzeiten, genug Wasser und das Beobachten des Musters helfen; nimm Warnzeichen ernst."
+  },
+  "body": {
+    "fa": [
+      { "h": "چرا اطراف پریود سردرد می‌شود؟" },
+      { "p": "استروژن در روزهای پیش از پریود افت می‌کند و این افت می‌تواند سردرد را تحریک کند. میگرن‌هایی که درست پیش از پریود یا در حین آن رخ می‌دهند «میگرن قاعدگی» نام دارند و گاهی طولانی‌تر و شدیدتر از حمله‌های دیگرند." },
+      { "h": "چه چیزهایی کمک می‌کند؟" },
+      { "ul": [
+        "خواب با ساعت ثابت و وعده‌های غذایی منظم؛ نخوردن غذا می‌تواند محرک باشد.",
+        "نوشیدن آب کافی و کم‌کردن کافئین.",
+        "استراحت در اتاق آرام و کم‌نور و کیسه‌ی سرد روی پیشانی.",
+        "مسکن بدون نسخه طبق برچسب. مصرف مکرر مسکن می‌تواند خودش سردرد را بدتر کند؛ اگر مجبورید مرتب مسکن بخورید، به پزشک بگویید.",
+        "ثبت روزهای سردرد در برنامه کمک می‌کند الگو را ببینید و به پزشک نشان دهید."
+      ] },
+      { "h": "چه وقت کمک فوری بگیرید؟" },
+      { "ul": [
+        "سردرد ناگهانی و بسیار شدید.",
+        "مشکل در حرف‌زدن یا حافظه، از دست‌دادن بینایی، گیجی یا خواب‌آلودگی شدید، تشنج یا ضعف در یک طرف بدن: فوراً با اورژانس تماس بگیرید.",
+        "حمله‌ای که بیش از ۷۲ ساعت طول بکشد یا هاله‌ای که بیش از یک ساعت بماند: زود به پزشک مراجعه کنید."
+      ] },
+      { "p": "اگر میگرن همراه با هاله دارید (اختلال دید یا حس پیش از سردرد) و قرص یا روش پیشگیری حاوی استروژن مصرف می‌کنید یا می‌خواهید شروع کنید، حتماً با پزشک مشورت کنید." }
+    ],
+    "en": [
+      { "h": "Why do headaches show up around a period?" },
+      { "p": "Estrogen falls in the days before a period, and this drop can trigger headaches. Migraine attacks that happen just before or during a period are called menstrual migraines, and they are sometimes longer and more severe than other attacks." },
+      { "h": "What can help?" },
+      { "ul": [
+        "Sleep at regular times and eat regular meals; skipping meals can be a trigger.",
+        "Drink enough water and cut back on caffeine.",
+        "Rest in a quiet, dim room, with a cold pack on your forehead.",
+        "Over-the-counter pain relief as directed on the label. Taking pain relievers often can itself make headaches worse; if you need them regularly, tell a doctor.",
+        "Logging headache days in the app helps you see the pattern and show it to a doctor."
+      ] },
+      { "h": "When to get urgent help" },
+      { "ul": [
+        "A sudden, extremely painful headache.",
+        "Problems with speech or memory, loss of vision, confusion or heavy drowsiness, a seizure, or weakness on one side of the body: call emergency services immediately.",
+        "An attack lasting more than 72 hours, or an aura lasting more than an hour: see a doctor promptly."
+      ] },
+      { "p": "If you get migraine with aura (visual or sensory changes before the headache) and you use or want to start a contraceptive that contains estrogen, be sure to talk to a doctor first." }
+    ],
+    "de": [
+      { "h": "Warum gibt es Kopfschmerzen rund um die Periode?" },
+      { "p": "In den Tagen vor der Periode fällt das Östrogen ab, und dieser Abfall kann Kopfschmerzen auslösen. Migräneattacken kurz vor oder während der Periode nennt man menstruelle Migräne; sie sind manchmal länger und stärker als andere Attacken." },
+      { "h": "Was kann helfen?" },
+      { "ul": [
+        "Zu festen Zeiten schlafen und regelmäßig essen; ausgelassene Mahlzeiten können ein Auslöser sein.",
+        "Genug Wasser trinken und weniger Koffein.",
+        "In einem ruhigen, abgedunkelten Raum ausruhen, mit einem Kühlpack auf der Stirn.",
+        "Rezeptfreie Schmerzmittel nur nach Packungsbeilage. Häufige Einnahme kann selbst Kopfschmerzen verstärken; brauchst du sie regelmäßig, sag es deiner Ärztin bzw. deinem Arzt.",
+        "Wenn du Kopfschmerztage in der App einträgst, siehst du das Muster und kannst es in der Praxis zeigen."
+      ] },
+      { "h": "Wann sofort Hilfe holen?" },
+      { "ul": [
+        "Ein plötzlicher, extrem starker Kopfschmerz.",
+        "Sprach- oder Gedächtnisprobleme, Sehverlust, Verwirrtheit oder starke Benommenheit, ein Krampfanfall oder Schwäche auf einer Körperseite: sofort den Notruf wählen.",
+        "Eine Attacke, die länger als 72 Stunden dauert, oder eine Aura von mehr als einer Stunde: zeitnah zur Ärztin bzw. zum Arzt."
+      ] },
+      { "p": "Wenn du Migräne mit Aura hast (Seh- oder Gefühlsstörungen vor dem Kopfschmerz) und ein östrogenhaltiges Verhütungsmittel nimmst oder beginnen möchtest, sprich unbedingt vorher mit einer Ärztin bzw. einem Arzt." }
+    ]
+  },
+  "sources": [
+    { "title": "Migraine", "org": "NHS", "url": "https://www.nhs.uk/conditions/migraine/" }
+  ]
+}

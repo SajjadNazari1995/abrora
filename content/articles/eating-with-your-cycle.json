@@ -1,0 +1,87 @@
+{
+  "id": "eating-with-your-cycle",
+  "status": "published",
+  "category": "nutrition",
+  "emoji": "🥗",
+  "tone": "mint",
+  "phases": ["menstrual", "luteal", "pms"],
+  "signals": ["cravings", "bloating", "nausea", "fatigue"],
+  "moods": [],
+  "readMin": 4,
+  "order": 7,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "تغذیه در طول چرخه",
+    "en": "Eating through your cycle",
+    "de": "Ernährung im Laufe des Zyklus"
+  },
+  "summary": {
+    "fa": "رژیم جادویی برای چرخه وجود ندارد، اما چند عادت ساده می‌تواند کمک کند: آهن کافی، آب، فیبر، وعده‌های منظم و اعتدال در کافئین، الکل و نمک. هوس غذا هم در این دوره کاملاً شایع است.",
+    "en": "There is no magic diet for your cycle, but a few simple habits can help: enough iron, water, fiber, regular meals and moderation with caffeine, alcohol and salt. Food cravings are very common too.",
+    "de": "Es gibt keine Wunderdiät für den Zyklus, aber ein paar einfache Gewohnheiten helfen: genug Eisen, Wasser, Ballaststoffe, regelmäßige Mahlzeiten und Maß bei Koffein, Alkohol und Salz. Heißhunger ist ebenfalls sehr häufig."
+  },
+  "body": {
+    "fa": [
+      { "h": "اصل کلی" },
+      { "p": "شواهد علمی برای «رژیم‌های مخصوص هر مرحله‌ی چرخه» محدود است. بهترین توصیه همان الگوی غذایی متعادل است: سبزی و میوه، غلات کامل، پروتئین کافی، حبوبات، مغزها و چربی‌های سالم." },
+      { "h": "در روزهای پریود" },
+      { "ul": [
+        "آهن: گوشت، مرغ و ماهی، حبوبات، سبزی‌های برگ‌تیره و غلات غنی‌شده، همراه با یک منبع ویتامین C.",
+        "آب و مایعات گرم کافی؛ نوشیدنی گرم برای بسیاری آرامش‌بخش است.",
+        "اگر اشتها کم است، غذاهای سبک و مقوی."
+      ] },
+      { "h": "در روزهای پیش از پریود" },
+      { "ul": [
+        "وعده‌های منظم و فیبر کافی کمک می‌کنند قند خون و نفخ ثابت‌تر بماند.",
+        "کمتر کردن نمک، کافئین و الکل می‌تواند نفخ، حساسیت پستان و بی‌خوابی را کم کند.",
+        "منابع منیزیم مثل مغزها، دانه‌ها، غلات کامل و حبوبات بخشی از یک رژیم متعادل‌اند."
+      ] },
+      { "h": "هوس غذا" },
+      { "p": "میل بیشتر به شیرینی یا غذاهای پرانرژی در نیمه‌ی دوم چرخه شایع است و اشکالی ندارد. اجازه‌دادن به مقدار کوچکی از غذای دلخواه معمولاً بهتر از ممنوع‌کردن کامل آن است." },
+      { "p": "اگر کاهش وزن ناخواسته یا هوس‌های شدید و بی‌اختیار دارید، یا خوردن برایتان نگرانی شده، با پزشک یا متخصص تغذیه صحبت کنید." }
+    ],
+    "en": [
+      { "h": "The general idea" },
+      { "p": "Scientific evidence for “cycle-specific diets” is limited. The best advice is still a balanced eating pattern: vegetables and fruit, whole grains, enough protein, legumes, nuts and healthy fats." },
+      { "h": "During your period" },
+      { "ul": [
+        "Iron: meat, poultry and fish, beans and lentils, dark leafy greens and fortified cereals, together with a source of vitamin C.",
+        "Enough water and warm drinks; a warm drink is soothing for many people.",
+        "Light but nourishing food if your appetite is low."
+      ] },
+      { "h": "In the days before your period" },
+      { "ul": [
+        "Regular meals and enough fiber help keep blood sugar and bloating steadier.",
+        "Cutting back on salt, caffeine and alcohol can ease bloating, breast tenderness and poor sleep.",
+        "Magnesium sources such as nuts, seeds, whole grains and legumes are part of a balanced diet."
+      ] },
+      { "h": "Food cravings" },
+      { "p": "A stronger pull toward sweet or energy-dense food in the second half of the cycle is common and nothing to worry about. Allowing a small amount of what you crave usually works better than banning it completely." },
+      { "p": "If you have unintended weight loss or intense, uncontrollable cravings, or eating has become a worry, talk to a doctor or a dietitian." }
+    ],
+    "de": [
+      { "h": "Die Grundidee" },
+      { "p": "Die wissenschaftliche Grundlage für „Zyklusdiäten“ ist begrenzt. Der beste Rat bleibt eine ausgewogene Ernährung: Gemüse und Obst, Vollkorn, ausreichend Eiweiß, Hülsenfrüchte, Nüsse und gesunde Fette." },
+      { "h": "In den Tagen der Periode" },
+      { "ul": [
+        "Eisen: Fleisch, Geflügel und Fisch, Bohnen und Linsen, dunkles Blattgemüse und angereicherte Frühstücksflocken, zusammen mit einer Vitamin-C-Quelle.",
+        "Genug Wasser und warme Getränke; ein warmes Getränk tut vielen gut.",
+        "Leichte, aber nahrhafte Speisen, wenn der Appetit gering ist."
+      ] },
+      { "h": "In den Tagen vor der Periode" },
+      { "ul": [
+        "Regelmäßige Mahlzeiten und genug Ballaststoffe halten Blutzucker und Blähbauch stabiler.",
+        "Weniger Salz, Koffein und Alkohol kann Blähbauch, Brustspannen und schlechten Schlaf lindern.",
+        "Magnesiumquellen wie Nüsse, Samen, Vollkorn und Hülsenfrüchte gehören zu einer ausgewogenen Ernährung."
+      ] },
+      { "h": "Heißhunger" },
+      { "p": "Mehr Lust auf Süßes oder energiereiche Speisen in der zweiten Zyklushälfte ist häufig und kein Grund zur Sorge. Eine kleine Portion des Gewünschten zu erlauben funktioniert meist besser, als es ganz zu verbieten." },
+      { "p": "Bei ungewolltem Gewichtsverlust, starkem unkontrollierbarem Heißhunger oder wenn dir das Essen Sorgen macht, sprich mit einer Ärztin bzw. einem Arzt oder einer Ernährungsberatung." }
+    ]
+  },
+  "sources": [
+    { "title": "PMS (premenstrual syndrome)", "org": "NHS", "url": "https://www.nhs.uk/conditions/pre-menstrual-syndrome/" },
+    { "title": "Iron", "org": "NHS", "url": "https://www.nhs.uk/conditions/vitamins-and-minerals/iron/" }
+  ]
+}

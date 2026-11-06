@@ -1,0 +1,379 @@
+{
+ "schema": 1,
+ "version": "2026.11.05.10",
+ "updated": "2026-11-05",
+ "categories": [
+  {
+   "id": "basics",
+   "emoji": "📅",
+   "name": {
+    "fa": "شناخت چرخه",
+    "en": "Cycle basics",
+    "de": "Zyklus-Grundlagen"
+   }
+  },
+  {
+   "id": "pain",
+   "emoji": "🫖",
+   "name": {
+    "fa": "درد و گرفتگی",
+    "en": "Pain relief",
+    "de": "Schmerzen"
+   }
+  },
+  {
+   "id": "pms",
+   "emoji": "🌦️",
+   "name": {
+    "fa": "PMS و خلق‌وخو",
+    "en": "PMS & mood",
+    "de": "PMS & Stimmung"
+   }
+  },
+  {
+   "id": "nutrition",
+   "emoji": "🥗",
+   "name": {
+    "fa": "تغذیه",
+    "en": "Nutrition",
+    "de": "Ernährung"
+   }
+  },
+  {
+   "id": "movement",
+   "emoji": "🧘",
+   "name": {
+    "fa": "حرکت و یوگا",
+    "en": "Movement & yoga",
+    "de": "Bewegung & Yoga"
+   }
+  },
+  {
+   "id": "fertility",
+   "emoji": "🌱",
+   "name": {
+    "fa": "باروری",
+    "en": "Fertility",
+    "de": "Fruchtbarkeit"
+   }
+  },
+  {
+   "id": "health",
+   "emoji": "🩺",
+   "name": {
+    "fa": "سلامت و پزشک",
+    "en": "Health & doctors",
+    "de": "Gesundheit & Praxis"
+   }
+  }
+ ],
+ "articles": [
+  {
+   "id": "normal-cycle",
+   "status": "published",
+   "category": "basics",
+   "emoji": "📅",
+   "tone": "lilac",
+   "phases": [
+    "any",
+    "follicular"
+   ],
+   "signals": [],
+   "moods": [],
+   "readMin": 3,
+   "order": 1,
+   "updated": "2026-11-05",
+   "file": "articles/normal-cycle.json",
+   "title": {
+    "fa": "چرخه‌ی طبیعی چند روز است؟",
+    "en": "What is a normal cycle?",
+    "de": "Was ist ein normaler Zyklus?"
+   },
+   "summary": {
+    "fa": "چرخه از روز اول یک پریود تا روز قبل از پریود بعدی است. برای بزرگسالان ۲۱ تا ۳۵ روز معمول است و چند روز تفاوت از ماهی به ماه دیگر کاملاً طبیعی است.",
+    "en": "Your cycle runs from the first day of one period to the day before the next. In adults, 21 to 35 days is typical, and a few days of difference from month to month is normal.",
+    "de": "Dein Zyklus reicht vom ersten Tag einer Periode bis zum Tag vor der nächsten. Bei Erwachsenen sind 21 bis 35 Tage typisch, und ein paar Tage Unterschied von Monat zu Monat sind normal."
+   }
+  },
+  {
+   "id": "cycle-phases",
+   "status": "published",
+   "category": "basics",
+   "emoji": "🌗",
+   "tone": "rose",
+   "phases": [
+    "any"
+   ],
+   "signals": [],
+   "moods": [],
+   "readMin": 3,
+   "order": 2,
+   "updated": "2026-11-05",
+   "file": "articles/cycle-phases.json",
+   "title": {
+    "fa": "چهار مرحله‌ی چرخه",
+    "en": "The four phases of your cycle",
+    "de": "Die vier Phasen deines Zyklus"
+   },
+   "summary": {
+    "fa": "چرخه چهار مرحله دارد: پریود، پیش از تخمک‌گذاری، تخمک‌گذاری و پیش از پریود بعدی. هورمون‌ها در هر مرحله فرق می‌کنند و به همین دلیل حال و انرژی شما هم می‌تواند فرق کند.",
+    "en": "A cycle has four phases: period, the time before ovulation, ovulation, and the time before the next period. Hormones differ in each phase, which is why your mood and energy can change too.",
+    "de": "Ein Zyklus hat vier Phasen: Periode, Zeit vor dem Eisprung, Eisprung und Zeit vor der nächsten Periode. Die Hormone unterscheiden sich in jeder Phase, deshalb können auch Stimmung und Energie schwanken."
+   }
+  },
+  {
+   "id": "period-cramps",
+   "status": "published",
+   "category": "pain",
+   "emoji": "🫖",
+   "tone": "butter",
+   "phases": [
+    "menstrual"
+   ],
+   "signals": [
+    "cramps",
+    "backache"
+   ],
+   "moods": [],
+   "readMin": 4,
+   "order": 3,
+   "updated": "2026-11-05",
+   "file": "articles/period-cramps.json",
+   "title": {
+    "fa": "درد و گرفتگی پریود: چه کار می‌شود کرد؟",
+    "en": "Period cramps: what can help?",
+    "de": "Regelschmerzen: was kann helfen?"
+   },
+   "summary": {
+    "fa": "گرفتگی پریود شایع است و معمولاً با گرما، حرکت ملایم، استراحت و در صورت مناسب‌بودن مسکن بدون نسخه کم می‌شود. اگر درد شدید است یا زندگی روزمره را مختل می‌کند، حتماً به پزشک بگویید.",
+    "en": "Period cramps are common and often ease with warmth, gentle movement, rest and, if suitable for you, an over-the-counter pain reliever. If the pain is severe or disrupts daily life, tell a doctor.",
+    "de": "Regelschmerzen sind häufig und lassen oft mit Wärme, sanfter Bewegung, Ruhe und – wenn für dich geeignet – einem rezeptfreien Schmerzmittel nach. Sind die Schmerzen stark oder beeinträchtigen den Alltag, sprich mit einer Ärztin bzw. einem Arzt."
+   }
+  },
+  {
+   "id": "pms-and-mood",
+   "status": "published",
+   "category": "pms",
+   "emoji": "🌦️",
+   "tone": "sky",
+   "phases": [
+    "pms",
+    "luteal"
+   ],
+   "signals": [
+    "bloating",
+    "breast",
+    "fatigue",
+    "cravings",
+    "acne"
+   ],
+   "moods": [
+    "irritable",
+    "sad",
+    "anxious",
+    "sensitive"
+   ],
+   "readMin": 4,
+   "order": 4,
+   "updated": "2026-11-05",
+   "file": "articles/pms-and-mood.json",
+   "title": {
+    "fa": "PMS و نوسان خلق‌وخو",
+    "en": "PMS and mood swings",
+    "de": "PMS und Stimmungsschwankungen"
+   },
+   "summary": {
+    "fa": "در یکی دو هفته‌ی پیش از پریود، بسیاری از افراد نفخ، خستگی، حساسیت یا تغییر خلق را حس می‌کنند. این الگو معمولاً با شروع پریود تمام می‌شود. خواب، حرکت و غذای متعادل کمک می‌کند.",
+    "en": "In the week or two before a period, many people notice bloating, tiredness, sensitivity or mood changes. The pattern usually ends once the period starts. Sleep, movement and balanced meals can help.",
+    "de": "In ein bis zwei Wochen vor der Periode bemerken viele Blähbauch, Müdigkeit, Empfindlichkeit oder Stimmungswechsel. Das Muster endet meist mit Beginn der Periode. Schlaf, Bewegung und ausgewogene Mahlzeiten können helfen."
+   }
+  },
+  {
+   "id": "period-headache",
+   "status": "published",
+   "category": "pain",
+   "emoji": "🤕",
+   "tone": "rose",
+   "phases": [
+    "menstrual",
+    "pms"
+   ],
+   "signals": [
+    "headache",
+    "nausea"
+   ],
+   "moods": [],
+   "readMin": 3,
+   "order": 5,
+   "updated": "2026-11-05",
+   "file": "articles/period-headache.json",
+   "title": {
+    "fa": "سردرد و میگرن اطراف پریود",
+    "en": "Headaches and migraine around your period",
+    "de": "Kopfschmerzen und Migräne rund um die Periode"
+   },
+   "summary": {
+    "fa": "افت استروژن پیش از پریود می‌تواند سردرد یا میگرن را برای بعضی‌ها بدتر کند. خواب و وعده‌های منظم، آب کافی و ثبت الگو کمک می‌کند؛ نشانه‌های هشدار را جدی بگیرید.",
+    "en": "The drop in estrogen before a period can bring on or worsen headaches and migraine for some people. Regular sleep and meals, enough water and tracking the pattern help; take warning signs seriously.",
+    "de": "Der Östrogenabfall vor der Periode kann bei manchen Kopfschmerzen oder Migräne auslösen oder verstärken. Regelmäßiger Schlaf und Mahlzeiten, genug Wasser und das Beobachten des Musters helfen; nimm Warnzeichen ernst."
+   }
+  },
+  {
+   "id": "heavy-bleeding-iron",
+   "status": "published",
+   "category": "health",
+   "emoji": "🩸",
+   "tone": "rose",
+   "phases": [
+    "menstrual"
+   ],
+   "signals": [
+    "fatigue"
+   ],
+   "moods": [],
+   "readMin": 4,
+   "order": 6,
+   "updated": "2026-11-05",
+   "file": "articles/heavy-bleeding-iron.json",
+   "title": {
+    "fa": "خونریزی زیاد و کم‌خونی فقر آهن",
+    "en": "Heavy bleeding and iron deficiency",
+    "de": "Starke Blutung und Eisenmangel"
+   },
+   "summary": {
+    "fa": "اگر مدام پد یا تامپون خیس می‌شود یا پریود بیش از هفت روز طول می‌کشد، این خونریزی زیاد است و ارزیابی می‌خواهد. از دست‌رفتن خون می‌تواند آهن بدن را کم کند و خستگی بیاورد.",
+    "en": "If you soak through pads or tampons very often, or your period lasts more than seven days, that is heavy bleeding and worth checking. Ongoing blood loss can lower your iron and leave you tired.",
+    "de": "Wenn du sehr oft Binden oder Tampons durchtränkst oder deine Periode länger als sieben Tage dauert, ist das eine starke Blutung und sollte abgeklärt werden. Anhaltender Blutverlust kann das Eisen senken und müde machen."
+   }
+  },
+  {
+   "id": "eating-with-your-cycle",
+   "status": "published",
+   "category": "nutrition",
+   "emoji": "🥗",
+   "tone": "mint",
+   "phases": [
+    "menstrual",
+    "luteal",
+    "pms"
+   ],
+   "signals": [
+    "cravings",
+    "bloating",
+    "nausea",
+    "fatigue"
+   ],
+   "moods": [],
+   "readMin": 4,
+   "order": 7,
+   "updated": "2026-11-05",
+   "file": "articles/eating-with-your-cycle.json",
+   "title": {
+    "fa": "تغذیه در طول چرخه",
+    "en": "Eating through your cycle",
+    "de": "Ernährung im Laufe des Zyklus"
+   },
+   "summary": {
+    "fa": "رژیم جادویی برای چرخه وجود ندارد، اما چند عادت ساده می‌تواند کمک کند: آهن کافی، آب، فیبر، وعده‌های منظم و اعتدال در کافئین، الکل و نمک. هوس غذا هم در این دوره کاملاً شایع است.",
+    "en": "There is no magic diet for your cycle, but a few simple habits can help: enough iron, water, fiber, regular meals and moderation with caffeine, alcohol and salt. Food cravings are very common too.",
+    "de": "Es gibt keine Wunderdiät für den Zyklus, aber ein paar einfache Gewohnheiten helfen: genug Eisen, Wasser, Ballaststoffe, regelmäßige Mahlzeiten und Maß bei Koffein, Alkohol und Salz. Heißhunger ist ebenfalls sehr häufig."
+   }
+  },
+  {
+   "id": "gentle-movement",
+   "status": "published",
+   "category": "movement",
+   "emoji": "🧘",
+   "tone": "mint",
+   "phases": [
+    "menstrual",
+    "follicular",
+    "luteal"
+   ],
+   "signals": [
+    "fatigue",
+    "cramps",
+    "backache",
+    "bloating"
+   ],
+   "moods": [
+    "sad",
+    "anxious",
+    "irritable"
+   ],
+   "readMin": 4,
+   "order": 8,
+   "updated": "2026-11-05",
+   "file": "articles/gentle-movement.json",
+   "title": {
+    "fa": "حرکت ملایم، کشش و یوگا در طول چرخه",
+    "en": "Gentle movement, stretching and yoga through your cycle",
+    "de": "Sanfte Bewegung, Dehnen und Yoga im Laufe des Zyklus"
+   },
+   "summary": {
+    "fa": "لازم نیست در پریود ورزش را کنار بگذارید؛ حرکت ملایم می‌تواند گرفتگی و خلق را بهتر کند. به بدنتان گوش بدهید و شدت را با انرژی همان روز تنظیم کنید.",
+    "en": "You do not have to stop exercising during your period; gentle movement can ease cramps and lift your mood. Listen to your body and match the intensity to your energy that day.",
+    "de": "Du musst während der Periode nicht auf Sport verzichten; sanfte Bewegung kann Krämpfe lindern und die Stimmung heben. Hör auf deinen Körper und passe die Intensität an deine Energie an diesem Tag an."
+   }
+  },
+  {
+   "id": "ovulation-fertile-window",
+   "status": "published",
+   "category": "fertility",
+   "emoji": "🌱",
+   "tone": "mint",
+   "phases": [
+    "fertile",
+    "follicular"
+   ],
+   "signals": [],
+   "moods": [
+    "energetic"
+   ],
+   "readMin": 3,
+   "order": 9,
+   "updated": "2026-11-05",
+   "file": "articles/ovulation-fertile-window.json",
+   "title": {
+    "fa": "تخمک‌گذاری و روزهای باروری",
+    "en": "Ovulation and the fertile window",
+    "de": "Eisprung und fruchtbare Tage"
+   },
+   "summary": {
+    "fa": "تخمک‌گذاری معمولاً حدود دو هفته پیش از پریود بعدی رخ می‌دهد و پنجره‌ی باروری حدود شش روز است. پیش‌بینی برنامه تخمینی است و برای پیشگیری از بارداری قابل اتکا نیست.",
+    "en": "Ovulation usually happens about two weeks before your next period, and the fertile window lasts about six days. The app’s prediction is an estimate and cannot be relied on to prevent pregnancy.",
+    "de": "Der Eisprung findet meist etwa zwei Wochen vor der nächsten Periode statt, und das fruchtbare Fenster dauert rund sechs Tage. Die Vorhersage der App ist eine Schätzung und nicht zur Verhütung geeignet."
+   }
+  },
+  {
+   "id": "when-to-see-a-doctor",
+   "status": "published",
+   "category": "health",
+   "emoji": "🩺",
+   "tone": "sky",
+   "phases": [
+    "any",
+    "late"
+   ],
+   "signals": [
+    "cramps",
+    "headache"
+   ],
+   "moods": [],
+   "readMin": 3,
+   "order": 10,
+   "updated": "2026-11-05",
+   "file": "articles/when-to-see-a-doctor.json",
+   "title": {
+    "fa": "چه زمانی به پزشک مراجعه کنیم؟",
+    "en": "When to talk to a doctor",
+    "de": "Wann zur Ärztin oder zum Arzt?"
+   },
+   "summary": {
+    "fa": "بیشتر تغییرات چرخه بی‌خطرند، اما چند نشانه ارزیابی پزشکی می‌خواهند: چرخه‌ی خیلی کوتاه یا بلند، پریود بیش از هفت روز، خونریزی زیاد، درد شدید یا قطع‌شدن پریود. اینجا فهرست روشنی از آن‌ها آمده است.",
+    "en": "Most cycle changes are harmless, but some signs need a medical check: a cycle that is very short or long, a period over seven days, heavy bleeding, severe pain or missed periods. Here is a clear list.",
+    "de": "Die meisten Zyklusveränderungen sind harmlos, einige Zeichen sollten aber ärztlich abgeklärt werden: ein sehr kurzer oder langer Zyklus, eine Periode über sieben Tage, starke Blutung, starke Schmerzen oder ausbleibende Perioden. Hier steht eine klare Liste."
+   }
+  }
+ ]
+}

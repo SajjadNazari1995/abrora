@@ -345,7 +345,84 @@
     'weekday.6': ['شنبه', 'Saturday', 'Samstag'],
     'lang.fa': ['فارسی', 'فارسی', 'فارسی'],
     'lang.en': ['English', 'English', 'English'],
-    'lang.de': ['Deutsch', 'Deutsch', 'Deutsch']
+    'lang.de': ['Deutsch', 'Deutsch', 'Deutsch'],
+
+    /* ---- v1.3: name, calendar, lock, articles, pain ---- */
+    'g.hello': [function (n) { return 'سلام، ' + n; }, function (n) { return 'Hi, ' + n; }, function (n) { return 'Hallo, ' + n; }],
+    'o.name_l': ['اسم شما', 'Your name', 'Dein Name'],
+    'o.name_ph': ['مثلاً سارا', 'e.g. Sara', 'z. B. Sara'],
+    'o.name_h': ['اختیاری است و فقط روی همین گوشی می‌ماند.', 'Optional, and it stays on this phone only.', 'Optional – und er bleibt nur auf diesem Handy.'],
+    'o.lang_l': ['زبان', 'Language', 'Sprache'],
+    'o.cal_l': ['نوع تقویم', 'Calendar', 'Kalender'],
+    'cal.gregorian': ['میلادی', 'Gregorian', 'Gregorianisch'],
+    'cal.jalali': ['شمسی', 'Persian', 'Persisch'],
+    'st.profile': ['پروفایل', 'Profile', 'Profil'],
+    'st.name': ['اسم', 'Name', 'Name'],
+    'st.calendar': ['تقویم', 'Calendar', 'Kalender'],
+    'st.cal_hint': ['فقط شکل نمایش تاریخ‌ها عوض می‌شود. چیزی از اطلاعات ثبت‌شده‌ی شما تغییر نمی‌کند.',
+                    'Only the way dates are shown changes. Nothing you logged is touched.',
+                    'Nur die Darstellung der Daten ändert sich. Nichts von dem, was du eingetragen hast, wird verändert.'],
+
+    'lock.title': ['قفل برنامه', 'App lock', 'App-Sperre'],
+    'lock.row': ['قفل با قفل گوشی', 'Lock with your phone’s screen lock', 'Mit der Displaysperre sperren'],
+    'lock.desc': ['ابرورا با Face ID، اثر انگشت یا رمز گوشی شما قفل می‌شود. این قفل فقط ورود به برنامه را می‌بندد؛ اطلاعات ذخیره‌شده روی گوشی رمزگذاری نمی‌شوند.',
+                  'Abrora locks with Face ID, your fingerprint or your phone’s passcode. The lock only closes the way into the app; the data saved on your phone is not encrypted.',
+                  'Abrora wird mit Face ID, Fingerabdruck oder dem Code deines Handys gesperrt. Die Sperre schließt nur den Zugang zur App; die auf dem Handy gespeicherten Daten werden nicht verschlüsselt.'],
+    'lock.none': ['این گوشی یا مرورگر قفل صفحه‌ی فعال ندارد یا از قفل برنامه پشتیبانی نمی‌کند. ابتدا در تنظیمات گوشی یک رمز، Face ID یا اثر انگشت فعال کنید.',
+                  'This phone or browser has no active screen lock, or it does not support app lock. First turn on a passcode, Face ID or fingerprint in your phone settings.',
+                  'Dieses Handy oder dieser Browser hat keine aktive Displaysperre oder unterstützt keine App-Sperre. Aktiviere zuerst in den Handy-Einstellungen einen Code, Face ID oder Fingerabdruck.'],
+    'lock.on': ['قفل برنامه روشن شد', 'App lock is on', 'App-Sperre ist an'],
+    'lock.off': ['قفل برنامه خاموش شد', 'App lock is off', 'App-Sperre ist aus'],
+    'lock.fail': ['قفل فعال نشد. دوباره امتحان کنید.', 'Could not turn on the lock. Try again.', 'Die Sperre konnte nicht aktiviert werden. Versuche es erneut.'],
+    'lock.off_fail': ['قفل خاموش نشد.', 'Could not turn the lock off.', 'Die Sperre konnte nicht ausgeschaltet werden.'],
+    'lock.locked': ['ابرورا قفل است', 'Abrora is locked', 'Abrora ist gesperrt'],
+    'lock.unlock': ['باز کردن قفل', 'Unlock', 'Entsperren'],
+    'lock.retry': ['قفل باز نشد. دوباره امتحان کنید.', 'Not unlocked. Try again.', 'Nicht entsperrt. Versuche es erneut.'],
+    'lock.help': ['مشکل دارید؟', 'Trouble unlocking?', 'Probleme beim Entsperren?'],
+    'lock.reset_t': ['قفل از نو راه‌اندازی شود؟', 'Reset the lock?', 'Sperre zurücksetzen?'],
+    'lock.reset_d': ['اگر قفل گوشی عوض شده یا باز نمی‌شود، تنها راه برداشتن این قفل پاک‌کردن اطلاعات ابرورا روی همین گوشی است. اگر پشتیبان دارید، بعداً می‌توانید بازیابی کنید.',
+                     'If your phone’s lock changed or will not open, the only way to remove this lock is to erase Abrora’s data on this phone. If you have a backup, you can restore it afterwards.',
+                     'Wenn sich die Sperre deines Handys geändert hat oder nicht aufgeht, lässt sich diese Sperre nur entfernen, indem die Daten von Abrora auf diesem Handy gelöscht werden. Hast du ein Backup, kannst du es danach wiederherstellen.'],
+    'lock.reset_yes': ['پاک کردن و برداشتن قفل', 'Erase and remove lock', 'Löschen und Sperre entfernen'],
+
+    'art.recommended': ['پیشنهاد برای امروز', 'Picked for today', 'Für heute ausgewählt'],
+    'art.all': ['همه', 'All', 'Alle'],
+    'art.saved': ['ذخیره‌شده‌ها', 'Saved', 'Gespeichert'],
+    'art.search': ['جست‌وجو در مقاله‌ها', 'Search articles', 'Artikel durchsuchen'],
+    'art.min': [function (n) { return num(n) + ' دقیقه مطالعه'; }, function (n) { return n + ' min read'; }, function (n) { return n + ' Min. Lesezeit'; }],
+    'art.read_full': ['مشاهده‌ی کامل مقاله', 'Read the full article', 'Ganzen Artikel lesen'],
+    'art.back': ['بازگشت به خلاصه', 'Back to summary', 'Zurück zur Zusammenfassung'],
+    'art.save': ['ذخیره', 'Save', 'Speichern'],
+    'art.unsave': ['برداشتن ذخیره', 'Remove from saved', 'Aus Gespeichert entfernen'],
+    'art.sources': ['منابع', 'Sources', 'Quellen'],
+    'art.updated': [function (d) { return 'آخرین بروزرسانی: ' + d; }, function (d) { return 'Last updated: ' + d; }, function (d) { return 'Zuletzt aktualisiert: ' + d; }],
+    'art.loading': ['در حال بارگذاری…', 'Loading…', 'Wird geladen …'],
+    'art.fail': ['مقاله باز نشد. اتصال اینترنت را بررسی کنید و دوباره امتحان کنید.',
+                 'The article could not be opened. Check your connection and try again.',
+                 'Der Artikel konnte nicht geöffnet werden. Prüfe deine Verbindung und versuche es erneut.'],
+    'art.retry': ['تلاش دوباره', 'Try again', 'Erneut versuchen'],
+    'art.none': ['مقاله‌ای پیدا نشد.', 'No articles found.', 'Keine Artikel gefunden.'],
+    'art.none_saved': ['هنوز مقاله‌ای ذخیره نکرده‌اید.', 'You have not saved any articles yet.', 'Du hast noch keine Artikel gespeichert.'],
+    'art.unavailable': ['مقاله‌ها هنوز بارگذاری نشده‌اند. یک بار برنامه را با اینترنت باز کنید تا برای استفاده‌ی آفلاین ذخیره شوند.',
+                        'Articles have not loaded yet. Open the app once with an internet connection so they are saved for offline use.',
+                        'Die Artikel sind noch nicht geladen. Öffne die App einmal mit Internetverbindung, damit sie für die Offline-Nutzung gespeichert werden.'],
+    'art.why.symptom': ['برای علائم امروز', 'For today’s symptoms', 'Für deine Beschwerden heute'],
+    'art.why.mood': ['برای حال امروز', 'For how you feel', 'Für deine Stimmung'],
+    'art.why.phase': ['مناسب این مرحله', 'Fits this phase', 'Passt zu dieser Phase'],
+    'art.disclaimer': ['این متن برای آگاهی است و جایگزین مشورت پزشک نیست.', 'This text is for information and is not a substitute for medical advice.', 'Dieser Text dient der Information und ersetzt keine ärztliche Beratung.'],
+    'art.see_all': ['همه‌ی مقاله‌ها', 'All articles', 'Alle Artikel'],
+    'h.recommended': ['مقاله‌ی پیشنهادی', 'Suggested read', 'Lesetipp'],
+
+    'pain.btn': ['امروز درد دارم', 'I have pain today', 'Ich habe heute Schmerzen'],
+    'pain.title': ['امروز چه دردی دارید؟', 'What hurts today?', 'Was tut dir heute weh?'],
+    'pain.desc': ['انتخاب شما در ثبت امروز هم ذخیره می‌شود و مقاله‌های مفید را بالا می‌آورد.',
+                  'Your choice is saved in today’s log too and brings up helpful articles.',
+                  'Deine Auswahl wird auch im heutigen Eintrag gespeichert und bringt hilfreiche Artikel nach oben.'],
+    'pain.for': ['مقاله‌های مفید برای امروز', 'Helpful reads for today', 'Hilfreiche Artikel für heute'],
+    'pain.warn': ['اگر درد ناگهانی و شدید است یا با تب، غش یا خونریزی زیاد همراه است، فوراً به پزشک یا اورژانس مراجعه کنید.',
+                  'If the pain is sudden and severe, or comes with fever, fainting or heavy bleeding, get medical help right away.',
+                  'Sind die Schmerzen plötzlich und stark oder kommen Fieber, Ohnmacht oder starke Blutung dazu, such sofort ärztliche Hilfe.'],
+    'pain.pick': ['برای دیدن مقاله‌ها، نوع درد را انتخاب کنید.', 'Pick what hurts to see articles.', 'Wähle aus, was weh tut, um Artikel zu sehen.']
   };
 
   /* ---------- tips & articles ---------- */
@@ -409,80 +486,43 @@
     ]
   };
 
-  // articles: title + paragraphs per language
-  var ARTICLES = [
-    { id: 'normal', e: '📅', tone: 'lilac',
-      fa: ['چرخه‌ی طبیعی چند روز است؟', [
-        'چرخه از روز اول یک پریود شروع می‌شود و تا روز قبل از شروع پریود بعدی ادامه دارد.',
-        'در بزرگسالان معمولاً بین ۲۱ تا ۳۵ روز طبیعی است و پریود هم معمولاً ۲ تا ۷ روز طول می‌کشد.',
-        'چند روز تفاوت از ماهی به ماه دیگر عادی است. هرچه پریودهای بیشتری ثبت کنید، پیش‌بینی برنامه دقیق‌تر می‌شود.']],
-      en: ['What is a normal cycle?', [
-        'A cycle starts on the first day of one period and lasts until the day before the next one begins.',
-        'In adults, 21 to 35 days is typical, and a period usually lasts 2 to 7 days.',
-        'A few days of variation from month to month is normal. The more periods you log, the sharper the predictions get.']],
-      de: ['Was ist ein normaler Zyklus?', [
-        'Ein Zyklus beginnt am ersten Tag einer Periode und dauert bis zum Tag vor Beginn der nächsten.',
-        'Bei Erwachsenen sind 21 bis 35 Tage typisch, die Periode dauert meist 2 bis 7 Tage.',
-        'Ein paar Tage Unterschied von Monat zu Monat sind normal. Je mehr Perioden du einträgst, desto genauer werden die Vorhersagen.']] },
-    { id: 'phases', e: '🌗', tone: 'rose',
-      fa: ['چهار مرحله‌ی چرخه', [
-        'پریود: لایه‌ی داخلی رحم همراه با خونریزی دفع می‌شود.',
-        'بعد از پریود: هورمون‌ها بالا می‌روند، رحم دوباره آماده می‌شود و انرژی معمولاً بیشتر می‌شود.',
-        'تخمک‌گذاری: تخمدان یک تخمک آزاد می‌کند. این اتفاق معمولاً حدود ۱۴ روز مانده به پریود بعدی رخ می‌دهد.',
-        'پیش از پریود: اگر بارداری رخ ندهد، هورمون‌ها افت می‌کنند. در این مرحله ممکن است علائم PMS مثل خستگی، نفخ یا حساسیت را حس کنید.']],
-      en: ['The four phases of your cycle', [
-        'Period: the lining of the uterus is shed with bleeding.',
-        'After your period: hormones rise, the lining builds up again and energy often improves.',
-        'Ovulation: an ovary releases an egg. This usually happens about 14 days before the next period.',
-        'Before your period: if there is no pregnancy, hormones drop. You may notice PMS signs such as tiredness, bloating or sensitivity.']],
-      de: ['Die vier Phasen deines Zyklus', [
-        'Periode: Die Gebärmutterschleimhaut wird mit der Blutung abgestoßen.',
-        'Nach der Periode: Die Hormone steigen, die Schleimhaut baut sich wieder auf und die Energie wird oft besser.',
-        'Eisprung: Ein Eierstock gibt eine Eizelle ab. Das passiert meist etwa 14 Tage vor der nächsten Periode.',
-        'Vor der Periode: Ohne Schwangerschaft sinken die Hormone. Du bemerkst vielleicht PMS-Zeichen wie Müdigkeit, Blähbauch oder Sensibilität.']] },
-    { id: 'fertile', e: '🌱', tone: 'mint',
-      fa: ['روزهای باروری را بهتر بشناسید', [
-        'اسپرم تا حدود ۵ روز در بدن می‌ماند و تخمک حدود ۱۲ تا ۲۴ ساعت پس از تخمک‌گذاری قابل لقاح است. به همین دلیل پنجره‌ی باروری حدود ۶ روز است.',
-        'این برنامه تخمک‌گذاری را حدود ۱۴ روز (مقدار قابل تنظیم) قبل از پریود بعدی تخمین می‌زند. در عمل زمان تخمک‌گذاری در هر چرخه می‌تواند جابه‌جا شود.',
-        'بنابراین این پیش‌بینی‌ها برای پیشگیری از بارداری قابل اتکا نیستند.']],
-      en: ['Understanding the fertile window', [
-        'Sperm can survive up to about 5 days, and an egg can be fertilised for roughly 12 to 24 hours after ovulation. That makes the fertile window about 6 days long.',
-        'The app estimates ovulation about 14 days (adjustable) before your next period. In real life the timing can shift from cycle to cycle.',
-        'That’s why these predictions can’t be relied on to prevent pregnancy.']],
-      de: ['Die fruchtbaren Tage verstehen', [
-        'Spermien überleben bis zu etwa 5 Tage, eine Eizelle ist nach dem Eisprung etwa 12 bis 24 Stunden befruchtbar. Das fruchtbare Fenster dauert deshalb rund 6 Tage.',
-        'Die App schätzt den Eisprung etwa 14 Tage (einstellbar) vor der nächsten Periode. In Wirklichkeit kann sich der Zeitpunkt von Zyklus zu Zyklus verschieben.',
-        'Deshalb sind diese Vorhersagen nicht zur Verhütung geeignet.']] },
-    { id: 'relief', e: '🫖', tone: 'butter',
-      fa: ['کم کردن PMS و گرفتگی', [
-        'گرما، حرکت ملایم، خواب کافی و آب فراوان معمولاً کمک می‌کنند. کم کردن کافئین، الکل و غذاهای خیلی شور هم برای بعضی‌ها مؤثر است.',
-        'مسکن‌های بدون نسخه را فقط طبق برچسب دارو و در صورتی استفاده کنید که برای شما مناسب باشند. اگر مطمئن نیستید از داروساز یا پزشک بپرسید.',
-        'ثبت علائم در این برنامه کمک می‌کند الگوی خود را ببینید و در صورت نیاز به پزشک نشان بدهید.']],
-      en: ['Easing PMS and cramps', [
-        'Warmth, gentle movement, enough sleep and plenty of water usually help. Cutting back on caffeine, alcohol and very salty food works for some people.',
-        'Use over-the-counter pain relief only as directed on the label and only if it is suitable for you. If you’re unsure, ask a pharmacist or doctor.',
-        'Logging symptoms here helps you see your pattern and show it to a doctor if needed.']],
-      de: ['PMS und Krämpfe lindern', [
-        'Wärme, sanfte Bewegung, genug Schlaf und viel Wasser helfen meist. Weniger Koffein, Alkohol und sehr salzige Speisen tun manchen gut.',
-        'Rezeptfreie Schmerzmittel nur nach Packungsbeilage und nur, wenn sie für dich geeignet sind. Frag im Zweifel in der Apotheke oder bei deiner Ärztin bzw. deinem Arzt.',
-        'Wenn du Symptome hier einträgst, erkennst du dein Muster und kannst es bei Bedarf in der Praxis zeigen.']] },
-    { id: 'doctor', e: '🩺', tone: 'sky',
-      fa: ['چه زمانی به پزشک سر بزنیم؟', [
-        'اگر چرخه‌هایتان مدام کوتاه‌تر از ۲۱ یا بلندتر از ۳۵ روز است، یا از ماهی به ماه دیگر خیلی تغییر می‌کند.',
-        'اگر پریود بیش از ۷ روز طول می‌کشد، یا چند ساعت پشت‌سرهم هر ساعت نوار یا تامپون کاملاً خیس می‌شود.',
-        'اگر دردی دارید که زندگی روزمره را مختل می‌کند، خونریزی بین دو پریود یا بعد از رابطه دارید، یا بیش از ۳ ماه پریود نشده‌اید (و باردار نیستید).',
-        'در صورت غش، سرگیجه‌ی شدید یا درد ناگهانی و شدید فوراً به اورژانس مراجعه کنید.']],
-      en: ['When to talk to a doctor', [
-        'Your cycles are regularly shorter than 21 or longer than 35 days, or they vary a lot from month to month.',
-        'Your period lasts longer than 7 days, or you soak through a pad or tampon every hour for several hours.',
-        'You have pain that gets in the way of daily life, bleeding between periods or after sex, or no period for more than 3 months (and you’re not pregnant).',
-        'Seek urgent care for fainting, severe dizziness or sudden, severe pain.']],
-      de: ['Wann zur Ärztin oder zum Arzt?', [
-        'Deine Zyklen sind dauerhaft kürzer als 21 oder länger als 35 Tage oder schwanken stark von Monat zu Monat.',
-        'Deine Periode dauert länger als 7 Tage, oder du durchtränkst mehrere Stunden lang jede Stunde eine Binde oder einen Tampon.',
-        'Du hast Schmerzen, die den Alltag beeinträchtigen, Blutungen zwischen den Perioden oder nach dem Sex, oder länger als 3 Monate keine Periode (und bist nicht schwanger).',
-        'Bei Ohnmacht, starkem Schwindel oder plötzlichen, starken Schmerzen such sofort ärztliche Hilfe.']] }
-  ];
+  /* A short kind line for the home screen. One is picked per day (see I18N.kind). */
+  var KIND = {
+    menstrual: [
+      { fa: 'امروز را آرام‌تر بگذرانید. نوشیدنی گرم و کمی استراحت حق شماست.', en: 'Take today a little slower. A warm drink and some rest are well deserved.', de: 'Geh den Tag etwas ruhiger an. Ein warmes Getränk und etwas Ruhe hast du dir verdient.' },
+      { fa: 'اگر انرژی کمتری دارید، طبیعی است؛ بدنتان دارد کار مهمی انجام می‌دهد.', en: 'If your energy is lower, that is normal; your body is doing important work.', de: 'Wenn du weniger Energie hast, ist das normal; dein Körper leistet gerade viel.' },
+      { fa: 'با خودتان مهربان باشید. هر قدر که امروز از پسش برمی‌آیید، کافی است.', en: 'Be kind to yourself. Whatever you manage today is enough.', de: 'Sei lieb zu dir. Was immer du heute schaffst, ist genug.' }
+    ],
+    follicular: [
+      { fa: 'انرژی کم‌کم بالا می‌رود؛ زمان خوبی برای شروع کارهای تازه است.', en: 'Your energy is slowly rising, a good time to start something new.', de: 'Deine Energie steigt langsam – eine gute Zeit, etwas Neues zu beginnen.' },
+      { fa: 'یک پیاده‌روی کوتاه می‌تواند روزتان را سبک‌تر کند.', en: 'A short walk can make your day feel lighter.', de: 'Ein kurzer Spaziergang kann deinen Tag leichter machen.' },
+      { fa: 'امروز از حال‌وهوای بهترتان لذت ببرید و به خودتان وقت بدهید.', en: 'Enjoy feeling a bit brighter today and give yourself some time.', de: 'Genieß es, dich heute etwas besser zu fühlen, und nimm dir Zeit für dich.' }
+    ],
+    fertile: [
+      { fa: 'در این روزها بسیاری انرژی و اجتماعی‌بودن بیشتری حس می‌کنند.', en: 'Many people feel more energetic and sociable around now.', de: 'Viele fühlen sich in diesen Tagen energiegeladener und kontaktfreudiger.' },
+      { fa: 'به بدنتان گوش بدهید؛ هر کس حال خودش را دارد.', en: 'Listen to your body; everyone feels different.', de: 'Hör auf deinen Körper; jeder fühlt sich anders.' },
+      { fa: 'آب کافی بنوشید و برای خودتان وقت بگذارید.', en: 'Drink enough water and make time for yourself.', de: 'Trink genug Wasser und nimm dir Zeit für dich.' }
+    ],
+    luteal: [
+      { fa: 'ممکن است زودتر خسته شوید. اشکالی ندارد؛ سرعتتان را تنظیم کنید.', en: 'You may tire sooner. That is okay; adjust your pace.', de: 'Du wirst vielleicht schneller müde. Das ist okay; passe dein Tempo an.' },
+      { fa: 'یک وعده‌ی مقوی و خواب کافی امشب به شما کمک می‌کند.', en: 'A nourishing meal and enough sleep tonight will help.', de: 'Eine nahrhafte Mahlzeit und genug Schlaf heute Nacht helfen dir.' },
+      { fa: 'اگر خلقتان نوسان دارد، به چرخه مربوط است و موقتی است.', en: 'If your mood swings, it is linked to your cycle and it is temporary.', de: 'Wenn deine Stimmung schwankt, hängt das mit dem Zyklus zusammen und geht vorbei.' }
+    ],
+    pms: [
+      { fa: 'پریود نزدیک است. امروز با خودتان مهربان باشید و کارهای سنگین را سبک کنید.', en: 'Your period is close. Be kind to yourself today and lighten the heavy tasks.', de: 'Deine Periode ist nah. Sei heute lieb zu dir und mach die schweren Aufgaben leichter.' },
+      { fa: 'اگر حساس‌تر شده‌اید، تنها نیستید؛ در این روزها خیلی‌ها همین حس را دارند.', en: 'If you feel more sensitive, you are not alone; many people do around now.', de: 'Wenn du empfindlicher bist, bist du nicht allein; vielen geht es jetzt so.' },
+      { fa: 'کمی گرما، آب و استراحت؛ ساده‌ترین مراقبت برای امروز.', en: 'A little warmth, water and rest: the simplest care for today.', de: 'Etwas Wärme, Wasser und Ruhe: die einfachste Fürsorge für heute.' }
+    ],
+    late: [
+      { fa: 'پریود کمی دیر شده است. چند روز تغییر در چرخه پیش می‌آید؛ نگران نباشید.', en: 'Your period is a little late. A few days of change in the cycle happens; try not to worry.', de: 'Deine Periode ist etwas verspätet. Ein paar Tage Abweichung kommen vor; mach dir nicht zu viele Sorgen.' },
+      { fa: 'استرس و کم‌خوابی می‌تواند چرخه را جابه‌جا کند. به خودتان فشار نیاورید.', en: 'Stress and little sleep can shift your cycle. Do not put pressure on yourself.', de: 'Stress und wenig Schlaf können den Zyklus verschieben. Setz dich nicht unter Druck.' },
+      { fa: 'اگر دیرکرد ادامه پیدا کرد، یک بار با پزشک مشورت کنید.', en: 'If the delay continues, talk to a doctor once.', de: 'Wenn die Verspätung anhält, sprich einmal mit einer Ärztin bzw. einem Arzt.' }
+    ]
+  };
+  function kind(key, day) {
+    var a = KIND[key];
+    return a ? a[((day % a.length) + a.length) % a.length][lang] : '';
+  }
 
   var MOODS = [['happy', '😊'], ['calm', '😌'], ['energetic', '🤩'], ['sensitive', '🥺'], ['irritable', '😠'], ['anxious', '😰'], ['sad', '😢']];
   var SYMPTOMS = [['cramps', '😖'], ['headache', '🤕'], ['bloating', '🎈'], ['backache', '💢'], ['breast', '🍒'],
@@ -497,34 +537,41 @@
   }
   function pick(obj) { return obj[lang]; }
 
-  function dateParts(n) {
-    var d = new Date(n * 86400000);
-    return { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate(), wd: d.getUTCDay() };
-  }
+  /* Persian (Jalali) month names */
+  var JMONTHS = {
+    fa: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+    en: ['Farvardin', 'Ordibehesht', 'Khordad', 'Tir', 'Mordad', 'Shahrivar', 'Mehr', 'Aban', 'Azar', 'Dey', 'Bahman', 'Esfand'],
+    de: ['Farwardin', 'Ordibehescht', 'Chordad', 'Tir', 'Mordad', 'Schahriwar', 'Mehr', 'Aban', 'Asar', 'Dei', 'Bahman', 'Esfand']
+  };
+  var cal = 'gregorian';
+  function names(c) { return (c || cal) === 'jalali' ? JMONTHS : MONTHS; }
+  function namesShort(c) { return (c || cal) === 'jalali' ? JMONTHS : MONTHS_S; }
+  function dateParts(n, c) { return Cal.fromN(c || cal, n); }
+
   var fmt = {
-    dayMonth: function (n) {
-      var p = dateParts(n);
-      if (lang === 'fa') return num(p.d) + ' ' + MONTHS.fa[p.m];
-      if (lang === 'en') return MONTHS_S.en[p.m] + ' ' + p.d;
-      return p.d + '. ' + MONTHS_S.de[p.m];
+    dayMonth: function (n, c) {
+      var p = dateParts(n, c);
+      if (lang === 'fa') return num(p.d) + ' ' + names(c).fa[p.m];
+      if (lang === 'en') return namesShort(c).en[p.m] + ' ' + p.d;
+      return p.d + '. ' + namesShort(c).de[p.m];
     },
-    full: function (n) {
-      var p = dateParts(n);
-      if (lang === 'fa') return num(p.d) + ' ' + MONTHS.fa[p.m] + ' ' + num(p.y);
-      if (lang === 'en') return MONTHS_S.en[p.m] + ' ' + p.d + ', ' + p.y;
-      return p.d + '. ' + MONTHS_S.de[p.m] + ' ' + p.y;
+    full: function (n, c) {
+      var p = dateParts(n, c);
+      if (lang === 'fa') return num(p.d) + ' ' + names(c).fa[p.m] + ' ' + num(p.y);
+      if (lang === 'en') return namesShort(c).en[p.m] + ' ' + p.d + ', ' + p.y;
+      return p.d + '. ' + namesShort(c).de[p.m] + ' ' + p.y;
     },
-    weekdayLong: function (n) {
-      var p = dateParts(n);
+    weekdayLong: function (n, c) {
+      var p = dateParts(n, c);
       var wd = WD[lang][p.wd];
-      if (lang === 'fa') return wd + '، ' + num(p.d) + ' ' + MONTHS.fa[p.m];
-      if (lang === 'en') return wd + ', ' + MONTHS.en[p.m] + ' ' + p.d;
-      return wd + ', ' + p.d + '. ' + MONTHS.de[p.m];
+      if (lang === 'fa') return wd + '، ' + num(p.d) + ' ' + names(c).fa[p.m];
+      if (lang === 'en') return wd + ', ' + names(c).en[p.m] + ' ' + p.d;
+      return wd + ', ' + p.d + '. ' + names(c).de[p.m];
     },
-    monthYear: function (y, m) {
-      if (lang === 'fa') return MONTHS.fa[m] + ' ' + num(y);
-      return MONTHS.en && lang === 'en' ? MONTHS.en[m] + ' ' + y : MONTHS.de[m] + ' ' + y;
-    }
+    monthYear: function (y, m, c) {
+      return names(c)[lang][m] + ' ' + num(y);
+    },
+    monthOf: function (n, c) { return dateParts(n, c).m; }
   };
 
   root.I18N = {
@@ -533,9 +580,12 @@
     getLang: function () { return lang; },
     isRTL: function () { return lang === 'fa'; },
     t: t, num: num, pick: pick, fmt: fmt,
+    setCalendar: function (c) { cal = c === 'jalali' ? 'jalali' : 'gregorian'; },
+    getCalendar: function () { return cal; },
     weekdayShort: function (wd) { return WD_S[lang][wd]; },
-    monthShort: function (m) { return MONTHS_S[lang][m]; },
+    monthShort: function (m, c) { return namesShort(c)[lang][m]; },
     weekdayName: function (wd) { return WD[lang][wd]; },
-    TIPS: TIPS, ARTICLES: ARTICLES, MOODS: MOODS, SYMPTOMS: SYMPTOMS
+    kind: kind,
+    TIPS: TIPS, MOODS: MOODS, SYMPTOMS: SYMPTOMS
   };
 })(typeof self !== 'undefined' ? self : this);

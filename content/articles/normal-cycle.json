@@ -1,0 +1,72 @@
+{
+  "id": "normal-cycle",
+  "status": "published",
+  "category": "basics",
+  "emoji": "📅",
+  "tone": "lilac",
+  "phases": ["any", "follicular"],
+  "signals": [],
+  "moods": [],
+  "readMin": 3,
+  "order": 1,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "چرخه‌ی طبیعی چند روز است؟",
+    "en": "What is a normal cycle?",
+    "de": "Was ist ein normaler Zyklus?"
+  },
+  "summary": {
+    "fa": "چرخه از روز اول یک پریود تا روز قبل از پریود بعدی است. برای بزرگسالان ۲۱ تا ۳۵ روز معمول است و چند روز تفاوت از ماهی به ماه دیگر کاملاً طبیعی است.",
+    "en": "Your cycle runs from the first day of one period to the day before the next. In adults, 21 to 35 days is typical, and a few days of difference from month to month is normal.",
+    "de": "Dein Zyklus reicht vom ersten Tag einer Periode bis zum Tag vor der nächsten. Bei Erwachsenen sind 21 bis 35 Tage typisch, und ein paar Tage Unterschied von Monat zu Monat sind normal."
+  },
+  "body": {
+    "fa": [
+      { "h": "چرخه را چطور حساب می‌کنیم؟" },
+      { "p": "طول چرخه از اولین روز خونریزی یک پریود تا روز قبل از شروع پریود بعدی شمرده می‌شود. هورمون‌هایی مثل استروژن و پروژسترون کل این چرخه را هماهنگ می‌کنند." },
+      { "h": "چه محدوده‌ای طبیعی است؟" },
+      { "ul": [
+        "طول چرخه در بزرگسالان معمولاً بین ۲۱ تا ۳۵ روز است.",
+        "خونریزی معمولاً ۲ تا ۷ روز طول می‌کشد.",
+        "در نوجوانان چرخه‌های بلندتر (تا حدود ۴۵ روز) هم می‌تواند طبیعی باشد. نامنظمی در سال‌های اول پس از اولین پریود و در سال‌های پیش از یائسگی بیشتر دیده می‌شود."
+      ] },
+      { "h": "چرا هر ماه کمی فرق می‌کند؟" },
+      { "p": "تخمک‌گذاری هر ماه دقیقاً در یک روز رخ نمی‌دهد. استرس، بیماری، کم‌خوابی، سفر یا تغییر وزن می‌تواند چرخه را چند روز جابه‌جا کند. چند روز تفاوت بین چرخه‌ها معمولاً نشانه‌ی مشکل نیست." },
+      { "h": "ثبت کردن چه کمکی می‌کند؟" },
+      { "p": "هرچه پریودهای بیشتری ثبت کنید، برنامه میانگین چرخه‌ی خودتان را دقیق‌تر حساب می‌کند و پیش‌بینی پریود بعدی بهتر می‌شود. اگر چرخه‌هایتان مدام بیرون از محدوده‌ی بالا هستند، با پزشک صحبت کنید." }
+    ],
+    "en": [
+      { "h": "How is a cycle counted?" },
+      { "p": "Cycle length is counted from the first day of bleeding of one period to the day before the next period starts. Hormones such as estrogen and progesterone coordinate the whole cycle." },
+      { "h": "What is the typical range?" },
+      { "ul": [
+        "In adults, cycles usually last between 21 and 35 days.",
+        "Bleeding usually lasts 2 to 7 days.",
+        "In teenagers, cycles of up to about 45 days can still be normal. Irregular cycles are also more common in the first years after the first period and in the years before menopause."
+      ] },
+      { "h": "Why does it change a little every month?" },
+      { "p": "Ovulation does not happen on exactly the same day in every cycle. Stress, illness, poor sleep, travel or weight changes can shift a cycle by several days. A few days of difference between cycles is usually not a sign of a problem." },
+      { "h": "How does tracking help?" },
+      { "p": "The more periods you log, the more accurately the app can work out your personal average and predict your next period. If your cycles are often outside the range above, talk to a doctor." }
+    ],
+    "de": [
+      { "h": "Wie wird ein Zyklus gezählt?" },
+      { "p": "Die Zykluslänge wird vom ersten Blutungstag einer Periode bis zum Tag vor Beginn der nächsten Periode gezählt. Hormone wie Östrogen und Progesteron steuern den gesamten Zyklus." },
+      { "h": "Was ist der übliche Bereich?" },
+      { "ul": [
+        "Bei Erwachsenen dauert ein Zyklus meist 21 bis 35 Tage.",
+        "Die Blutung dauert meist 2 bis 7 Tage.",
+        "Bei Jugendlichen können auch Zyklen von bis zu etwa 45 Tagen normal sein. Unregelmäßige Zyklen sind außerdem in den ersten Jahren nach der ersten Periode und in den Jahren vor den Wechseljahren häufiger."
+      ] },
+      { "h": "Warum ändert er sich jeden Monat ein wenig?" },
+      { "p": "Der Eisprung findet nicht in jedem Zyklus am genau gleichen Tag statt. Stress, Krankheit, wenig Schlaf, Reisen oder Gewichtsveränderungen können einen Zyklus um mehrere Tage verschieben. Ein paar Tage Unterschied zwischen den Zyklen sind meist kein Zeichen für ein Problem." },
+      { "h": "Wie hilft das Eintragen?" },
+      { "p": "Je mehr Perioden du einträgst, desto genauer kann die App deinen persönlichen Durchschnitt berechnen und die nächste Periode vorhersagen. Liegen deine Zyklen häufig außerhalb des Bereichs oben, sprich mit einer Ärztin bzw. einem Arzt." }
+    ]
+  },
+  "sources": [
+    { "title": "Your menstrual cycle", "org": "Office on Women’s Health (U.S. HHS)", "url": "https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle" },
+    { "title": "Irregular periods", "org": "NHS", "url": "https://www.nhs.uk/symptoms/irregular-periods/" }
+  ]
+}

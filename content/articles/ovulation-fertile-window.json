@@ -1,0 +1,75 @@
+{
+  "id": "ovulation-fertile-window",
+  "status": "published",
+  "category": "fertility",
+  "emoji": "🌱",
+  "tone": "mint",
+  "phases": ["fertile", "follicular"],
+  "signals": [],
+  "moods": ["energetic"],
+  "readMin": 3,
+  "order": 9,
+  "updated": "2026-11-05",
+  "reviewed": "",
+  "title": {
+    "fa": "تخمک‌گذاری و روزهای باروری",
+    "en": "Ovulation and the fertile window",
+    "de": "Eisprung und fruchtbare Tage"
+  },
+  "summary": {
+    "fa": "تخمک‌گذاری معمولاً حدود دو هفته پیش از پریود بعدی رخ می‌دهد و پنجره‌ی باروری حدود شش روز است. پیش‌بینی برنامه تخمینی است و برای پیشگیری از بارداری قابل اتکا نیست.",
+    "en": "Ovulation usually happens about two weeks before your next period, and the fertile window lasts about six days. The app’s prediction is an estimate and cannot be relied on to prevent pregnancy.",
+    "de": "Der Eisprung findet meist etwa zwei Wochen vor der nächsten Periode statt, und das fruchtbare Fenster dauert rund sechs Tage. Die Vorhersage der App ist eine Schätzung und nicht zur Verhütung geeignet."
+  },
+  "body": {
+    "fa": [
+      { "h": "چه اتفاقی می‌افتد؟" },
+      { "p": "در تخمک‌گذاری، تخمدان یک تخمک آزاد می‌کند. تخمک حدود ۱۲ تا ۲۴ ساعت قابل لقاح است و اسپرم می‌تواند تا حدود ۵ روز در بدن بماند. بنابراین پنجره‌ی باروری حدود ۶ روز است: پنج روز پیش از تخمک‌گذاری تا خود آن روز. برنامه برای احتیاط یک روز بعد از آن را هم نشان می‌دهد." },
+      { "h": "نشانه‌های ممکن" },
+      { "ul": [
+        "ترشح شفاف و کشسان شبیه سفیده‌ی تخم‌مرغ.",
+        "افزایش جزئی دمای پایه‌ی بدن پس از تخمک‌گذاری.",
+        "درد خفیف و یک‌طرفه‌ی زیر شکم در بعضی افراد.",
+        "مثبت‌شدن تست‌های LH که افزایش هورمون لوتئینه‌کننده را نشان می‌دهند."
+      ] },
+      { "h": "محدودیت‌ها" },
+      { "p": "زمان تخمک‌گذاری در هر چرخه می‌تواند جابه‌جا شود. استرس، بیماری یا تغییر خواب آن را جلو یا عقب می‌برد. پس تاریخ‌هایی که برنامه نشان می‌دهد تخمینی‌اند و برای پیشگیری از بارداری قابل اتکا نیستند. درباره‌ی روش‌های مطمئن پیشگیری با پزشک صحبت کنید." },
+      { "h": "اگر قصد بارداری دارید" },
+      { "p": "اگر زیر ۳۵ سال دارید و پس از حدود ۱۲ ماه تلاش منظم باردار نشده‌اید، یا ۳۵ سال و بیشتر دارید و ۶ ماه گذشته است، به پزشک مراجعه کنید." }
+    ],
+    "en": [
+      { "h": "What happens?" },
+      { "p": "At ovulation, an ovary releases an egg. The egg can be fertilized for about 12 to 24 hours, and sperm can survive for up to about 5 days. That makes the fertile window about 6 days: the five days before ovulation and the day itself. The app also marks one day after it, to be on the safe side." },
+      { "h": "Possible signs" },
+      { "ul": [
+        "Clear, stretchy discharge that looks like egg white.",
+        "A small rise in basal body temperature after ovulation.",
+        "Mild one-sided lower abdominal pain in some people.",
+        "A positive LH test, which shows the rise in luteinizing hormone."
+      ] },
+      { "h": "Limits" },
+      { "p": "The timing of ovulation can shift from cycle to cycle. Stress, illness or changes in sleep can move it earlier or later. So the dates the app shows are estimates and cannot be relied on to prevent pregnancy. Talk to a doctor about reliable contraception." },
+      { "h": "If you want to get pregnant" },
+      { "p": "If you are under 35 and have not conceived after about 12 months of regular trying, or you are 35 or older and 6 months have passed, see a doctor." }
+    ],
+    "de": [
+      { "h": "Was passiert?" },
+      { "p": "Beim Eisprung gibt ein Eierstock eine Eizelle ab. Die Eizelle ist etwa 12 bis 24 Stunden befruchtbar, Spermien können bis zu etwa 5 Tage überleben. Das fruchtbare Fenster dauert daher rund 6 Tage: die fünf Tage vor dem Eisprung und der Tag selbst. Die App markiert zur Sicherheit auch noch einen Tag danach." },
+      { "h": "Mögliche Anzeichen" },
+      { "ul": [
+        "Klarer, dehnbarer Ausfluss, der wie Eiweiß aussieht.",
+        "Ein leichter Anstieg der Basaltemperatur nach dem Eisprung.",
+        "Bei manchen ein leichter einseitiger Unterbauchschmerz.",
+        "Ein positiver LH-Test, der den Anstieg des luteinisierenden Hormons anzeigt."
+      ] },
+      { "h": "Grenzen" },
+      { "p": "Der Zeitpunkt des Eisprungs kann sich von Zyklus zu Zyklus verschieben. Stress, Krankheit oder veränderter Schlaf können ihn vor- oder zurückverlegen. Die Termine der App sind deshalb Schätzungen und nicht zur Verhütung geeignet. Sprich mit einer Ärztin bzw. einem Arzt über sichere Verhütung." },
+      { "h": "Wenn du schwanger werden möchtest" },
+      { "p": "Bist du unter 35 und nach etwa 12 Monaten regelmäßigen Versuchens nicht schwanger geworden, oder bist du 35 oder älter und es sind 6 Monate vergangen, such ärztlichen Rat." }
+    ]
+  },
+  "sources": [
+    { "title": "Your menstrual cycle", "org": "Office on Women’s Health (U.S. HHS)", "url": "https://womenshealth.gov/menstrual-cycle/your-menstrual-cycle" },
+    { "title": "Fertility Awareness-Based Methods of Family Planning", "org": "ACOG", "url": "" }
+  ]
+}

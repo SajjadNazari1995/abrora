@@ -25,7 +25,7 @@
     var s = j.settings || {};
     if (I.LANGS.indexOf(s.lang) >= 0) d.settings.lang = s.lang;
     if (THEMES.indexOf(s.theme) >= 0) d.settings.theme = s.theme;
-    if (s.font === 'iransans' || s.font === 'vazir') d.settings.font = s.font;
+    if (s.font === 'iransans' || s.font === 'vazir' || (typeof s.font === 'string' && /^srv-[a-z0-9][a-z0-9-]{0,59}$/.test(s.font))) d.settings.font = s.font;
     if ([0, 1, 6].indexOf(+s.weekStart) >= 0) d.settings.weekStart = +s.weekStart;
     if (s.calendar === 'jalali' || s.calendar === 'gregorian') d.settings.calendar = s.calendar;
     if (typeof s.name === 'string') d.settings.name = cleanName(s.name);
@@ -128,7 +128,31 @@
     h.lang = S.settings.lang;
     h.dir = I.isRTL() ? 'rtl' : 'ltr';
     document.title = t('app.name');
-    if (S.settings.font === 'iransans') h.setAttribute('data-font', 'iransans'); else h.removeAttribute('data-font');
+    applyFont();
+  }
+
+  /* Fonts that come from the server (srv-<id>). Until one is ready, or if it cannot be loaded, Vazir is used. */
+  var srvFonts = [], fontLoaded = {};
+  function applyFont() {
+    var h = document.documentElement, f = S.settings.font;
+    h.style.removeProperty('--font-fa');
+    if (f === 'iransans') { h.setAttribute('data-font', 'iransans'); return; }
+    h.removeAttribute('data-font');
+    if (f.indexOf('srv-') !== 0) return;
+    var sf = srvFonts.filter(function (x) { return 'srv-' + x.id === f; })[0];
+    if (!sf) return;
+    var fam = 'AbSrv ' + sf.id.replace(/-/g, ' ');
+    if (!fontLoaded[sf.id] && self.FontFace) {
+      fontLoaded[sf.id] = 1;
+      var faces = [new FontFace(fam, 'url(' + sf.url + ')', { weight: sf.urlBold ? '400 500' : '400 700', display: 'swap' })];
+      if (sf.urlBold) faces.push(new FontFace(fam, 'url(' + sf.urlBold + ')', { weight: '600 800', display: 'swap' }));
+      Promise.all(faces.map(function (ff) { return ff.load(); })).then(function (list) {
+        list.forEach(function (ff) { document.fonts.add(ff); });
+        h.style.setProperty('--font-fa', '"' + fam + '", var(--font-vazir)');
+      }, function () { fontLoaded[sf.id] = 0; });
+    } else if (fontLoaded[sf.id]) {
+      h.style.setProperty('--font-fa', '"' + fam + '", var(--font-vazir)');
+    }
   }
 
   /* ============ derived state ============ */
@@ -234,6 +258,12 @@
       case 'none': return '';
       default: return ST.phase === 'luteal' ? 'luteal' : 'follicular';
     }
+  }
+  /* Tips for today: the phase's tips, with tips for what was logged today moved to the top. */
+  function phaseTips(ph) { return (I.TIPS[ph] || I.TIPS.follicular).map(function (tp, i) { tp.id = ph + '-' + i; return tp; }); }
+  function todaysTips(n) {
+    var c = recCtx();
+    return self.Tips ? self.Tips.pick(phaseTips(ST.phase), c, n) : phaseTips(ST.phase).slice(0, n);
   }
   function greetHTML() {
     var nm = S.settings.name, key = kindKey(), msg = key ? I.kind(key, today) : '';
@@ -385,6 +415,8 @@
   }
   function loadContent(force) {
     contentAt = Date.now();
+    CT.messages().then(function (m) { if (m) { I.setKind(m); if (!ui.sheet && S.settings.onboarded && ui.view === 'home') renderView(); } });
+    CT.fonts().then(function (f) { srvFonts = f; applyFont(); if (ui.view === 'settings' && !ui.sheet) renderView(); });
     return CT.load(force).then(function () { afterContent(); return CT.prefetch(); }, function () { afterContent(); });
   }
   function refreshContent() { if (Date.now() - contentAt > 3600000) loadContent(true); }
@@ -409,9 +441,9 @@
     h += todayPill();
     h += '<button class="pain-pill" data-act="pain"><span class="pe" aria-hidden="true">🩹</span><span class="txt">' + esc(t('pain.btn')) + '</span>' + icon('chev', 'chev flip') + '</button>';
     h += '<h2 class="section-title">' + esc(t('h.tips')) + '</h2><div class="carousel">';
-    (I.TIPS[ST.phase] || I.TIPS.follicular).forEach(function (tp, i) {
+    todaysTips(3).forEach(function (tp) {
       var tx = I.pick(tp);
-      h += '<button class="tip tone-' + tp.tone + '" data-act="tip" data-phase="' + ST.phase + '" data-i="' + i + '"><b>' + esc(tx[0]) + '</b><span class="em" aria-hidden="true">' + tp.e + '</span></button>';
+      h += '<button class="tip tone-' + tp.tone + '" data-act="tip" data-id="' + tp.id + '"><b>' + esc(tx[0]) + '</b><span class="em" aria-hidden="true">' + tp.e + '</span></button>';
     });
     h += '</div>';
     var rec = recommendedHTML(2, 'h.recommended');
@@ -499,7 +531,7 @@
     var ph = ST.phase, tone = { menstrual: 'rose', follicular: 'mint', fertile: 'mint', luteal: 'butter' }[ph] || 'lilac';
     var h = '<div class="page-head"><h1 class="page-title">' + esc(t('tips.title')) + '</h1></div>';
     h += '<section class="phase-card tone-' + tone + '"><div class="small" style="opacity:.8">' + esc(t('tips.now')) + '</div><h2>' + esc(t('phase.' + ph)) + '</h2><p>' + esc(t('phase.' + ph + '.d')) + '</p></section>';
-    (I.TIPS[ph] || []).forEach(function (tp, i) {
+    todaysTips(5).forEach(function (tp) {
       var tx = I.pick(tp);
       h += '<div class="tip-row tone-' + tp.tone + '"><span class="em" aria-hidden="true">' + tp.e + '</span><div><b>' + esc(tx[0]) + '</b><span>' + esc(tx[1]) + '</span></div></div>';
     });
@@ -570,7 +602,7 @@
     h += '<section class="group"><h3>' + esc(t('st.profile')) + '</h3><label class="lbl" for="nameField">' + esc(t('st.name')) + '</label><input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(s.name) + '"></section>';
     h += '<section class="group"><h3>' + esc(t('st.calendar')) + '</h3>' + seg([['gregorian', t('cal.gregorian')], ['jalali', t('cal.jalali')]], s.calendar, 'set-cal') + '<p class="hint">' + esc(t('st.cal_hint')) + '</p></section>';
     h += '<section class="group"><h3>' + esc(t('st.language')) + '</h3>' + seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang') + '</section>';
-    h += '<section class="group"><h3>' + esc(t('st.font')) + '</h3>' + seg([['vazir', t('st.font.vazir')], ['iransans', t('st.font.iransans')]], s.font, 'set-font') + '</section>';
+    h += '<section class="group"><h3>' + esc(t('st.font')) + '</h3>' + seg([['vazir', t('st.font.vazir')], ['iransans', t('st.font.iransans')]].concat(srvFonts.filter(function (x) { return x.scripts !== 'latin'; }).map(function (x) { return ['srv-' + x.id, x.label]; })), s.font, 'set-font') + '</section>';
     h += '<section class="group"><h3>' + esc(t('st.theme')) + '</h3>' + seg(THEMES.map(function (x) { return [x, t('st.theme.' + x)]; }), s.theme, 'set-theme') + '<p class="hint">' + esc(t('st.theme.hint')) + '</p></section>';
     h += '<section class="group"><h3>' + esc(t('st.week')) + '</h3>' + seg([[6, t('weekday.6')], [0, t('weekday.0')], [1, t('weekday.1')]], s.weekStart, 'set-week') + '</section>';
     h += '<section class="group"><h3>' + esc(t('st.defaults')) + '</h3><p class="hint">' + esc(t('st.defaults_hint')) + '</p>' +
@@ -655,7 +687,7 @@
     var sh = ui.sheet;
     if (sh.type === 'day') return daySheet(sh.n);
     if (sh.type === 'tip') {
-      var tp = I.TIPS[sh.phase][sh.i], tx = I.pick(tp);
+      var tp = (self.Tips && self.Tips.byId(sh.id, phaseTips(ST.phase))) || phaseTips(ST.phase)[0], tx = I.pick(tp);
       return '<div class="big-em" aria-hidden="true">' + tp.e + '</div><h2>' + esc(tx[0]) + '</h2><p class="body">' + esc(tx[1]) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
     }
     if (sh.type === 'article') return articleSheet(sh);
@@ -771,7 +803,7 @@
     'cal-next': function () { ui.cal = shiftMonth(ui.cal, 1); renderView(); },
     'cal-today': function () { ui.cal = monthOf(today); renderView(); },
     day: function (el) { openSheet({ type: 'day', n: +el.dataset.n }); },
-    tip: function (el) { openSheet({ type: 'tip', phase: el.dataset.phase, i: +el.dataset.i }); },
+    tip: function (el) { openSheet({ type: 'tip', id: el.dataset.id }); },
     article: function (el) { openSheet({ type: 'article', id: el.dataset.id, full: false }); },
     'article-full': function () {
       var sh = ui.sheet;
@@ -848,7 +880,7 @@
     mood: function (el) { var id = el.dataset.id; updLog(ui.sheet.n, function (l) { l.mood = toggleIn(l.mood, id); }); render(); },
     sym: function (el) { var id = el.dataset.id; updLog(ui.sheet.n, function (l) { l.sym = toggleIn(l.sym, id); }); render(); },
     'set-lang': function (el) { S.settings.lang = el.dataset.v; save(); render(); },
-    'set-font': function (el) { S.settings.font = el.dataset.v; save(); render(); },
+    'set-font': function (el) { S.settings.font = el.dataset.v; save(); applyFont(); render(); },
     'set-theme': function (el) { S.settings.theme = el.dataset.v; save(); render(); },
     'set-week': function (el) { S.settings.weekStart = +el.dataset.v; save(); render(); },
     step: function (el) {

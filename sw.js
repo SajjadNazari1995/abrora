@@ -12,7 +12,7 @@ const VERSION = 'abrora-v' + self.ABRORA_RELEASE.version;
 const CONTENT = 'abrora-content';   // survives app updates on purpose
 const CORE = [
   './', 'index.html', 'manifest.webmanifest',
-  'css/app.css', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/lock.js',
+  'css/app.css', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/tips.js', 'js/lock.js',
   'content/index.json', 'js/update.js', 'js/sync.js', 'js/config.js', 'js/app.js',
   'icons/logo.svg', 'icons/splash-bg.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
   'icons/apple-touch-icon.png', 'icons/favicon.png',
@@ -64,7 +64,12 @@ async function contentFetch(req) {
 
 self.addEventListener('fetch', event => {
   const req = event.request, url = new URL(req.url);
-  if (req.method !== 'GET' || url.origin !== self.location.origin) return;
+  if (req.method !== 'GET') return;
+  // your server's content API and font files (another address) are kept for offline use the same way
+  if (url.origin !== self.location.origin) {
+    if (url.protocol === 'https:' && (url.pathname.includes('/wp-json/abrora/v1/') || /\/wp-content\/uploads\/.+\.(woff2?|ttf|otf)$/i.test(url.pathname))) { event.respondWith(contentFetch(req)); }
+    return;
+  }
   if (url.pathname.includes('/content/')) { event.respondWith(contentFetch(req)); return; }
   event.respondWith((async () => {
     const cache = await caches.open(VERSION);

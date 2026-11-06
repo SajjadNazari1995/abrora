@@ -16,10 +16,13 @@
   var PHASES = ['menstrual', 'follicular', 'fertile', 'luteal', 'pms', 'late', 'any'];
   var TONES = ['rose', 'mint', 'lilac', 'butter', 'sky'];
   var PAIN = ['cramps', 'headache', 'backache', 'breast'];
+  var KINDS = ['menstrual', 'follicular', 'fertile', 'luteal', 'pms', 'late'];
 
   var cfgBase = (typeof self !== 'undefined' && self.ABRORA_CONFIG && self.ABRORA_CONFIG.contentBase) || 'content/';
   var base = /\/$/.test(cfgBase) ? cfgBase : cfgBase + '/';
-  var idx = null, loading = null, bodies = {}, failed = false;
+  var cfgApi = (typeof self !== 'undefined' && self.ABRORA_CONFIG && self.ABRORA_CONFIG.contentApi) || '';
+  var api = /^https:\/\//.test(cfgApi) ? (/\/$/.test(cfgApi) ? cfgApi : cfgApi + '/') : '';
+  var idx = null, loading = null, bodies = {}, failed = false, useApi = false, msgP = null, fontP = null;
 
   /* ---------- small helpers ---------- */
   function str(v, max) { return typeof v === 'string' ? v.slice(0, max || 4000) : ''; }
@@ -102,19 +105,42 @@
       return r.json();
     });
   }
+  /* The server. Gives up after 6 s so a slow or missing server never holds the app back. */
+  function getApi(path) {
+    if (!api) return Promise.reject(new Error('no api'));
+    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 6000);
+    return fetch(api + path, { cache: 'no-cache', credentials: 'omit', signal: ctl ? ctl.signal : undefined }).then(function (r) {
+      clearTimeout(timer);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }, function (e) { clearTimeout(timer); throw e; });
+  }
   function load(force) {
     if (idx && !force) return Promise.resolve(idx);
     if (loading && !force) return loading;
-    loading = getJSON('index.json').then(function (j) {
-      idx = normIndex(j); failed = false; loading = null; return idx;
-    }, function (e) { failed = true; loading = null; throw e; });
+    // server first; if it is down, empty or not set up yet, the articles that ship with the app are used
+    var first = api ? getApi('index').then(function (j) {
+      var n = normIndex(j);
+      if (!n.articles.length) throw new Error('server has no articles yet');
+      useApi = true; return n;
+    }) : Promise.reject(new Error('no api'));
+    loading = first.catch(function () {
+      useApi = false;
+      return getJSON('index.json').then(normIndex);
+    }).then(function (n) { idx = n; failed = false; loading = null; return idx; },
+      function (e) { failed = true; loading = null; throw e; });
     return loading;
   }
+  function bundledPath(it) { return 'articles/' + it.id + '.json'; }
   function get(id) {
     if (bodies[id]) return Promise.resolve(bodies[id]);
     var it = idx && idx.articles.filter(function (a) { return a.id === id; })[0];
     if (!it) return Promise.reject(new Error('unknown article'));
-    return getJSON(it.file).then(function (j) { return (bodies[id] = normBody(j)); });
+    var src = useApi
+      ? getApi('articles/' + id).catch(function () { return getJSON(bundledPath(it)); })
+      : getJSON(bundledPath(it));
+    return src.then(function (j) { return (bodies[id] = normBody(j)); });
   }
   /* Quietly fetch every article once so the service worker has them all for offline reading. */
   function prefetch() {
@@ -122,6 +148,33 @@
     return idx.articles.reduce(function (p, a) {
       return p.then(function () { return get(a.id).catch(function () { }); });
     }, Promise.resolve());
+  }
+
+  /* ---------- daily messages and fonts that live on the server (both optional) ---------- */
+  function messages() {
+    if (!api) return Promise.resolve(null);
+    return msgP || (msgP = getApi('messages').then(function (j) {
+      var out = {}, any = false;
+      KINDS.forEach(function (k) {
+        out[k] = (Array.isArray(j && j[k]) ? j[k] : []).map(function (m) { return tri(m, 400); }).filter(Boolean).slice(0, 60);
+        if (out[k].length) any = true;
+      });
+      return any ? out : null;
+    }).catch(function () { msgP = null; return null; }));
+  }
+  function fonts() {
+    if (!api) return Promise.resolve([]);
+    return fontP || (fontP = getApi('fonts').then(function (j) {
+      var origin = api.replace(/^(https:\/\/[^/]+).*$/, '$1');
+      return (Array.isArray(j) ? j : []).map(function (f) {
+        var id = str(f && f.id, 60), family = str(f && f.family, 60).replace(/[^A-Za-z0-9 ]/g, ''), label = str(f && f.label, 60);
+        var url = str(f && f.url, 400), bold = str(f && f.urlBold, 400);
+        // only files from the server itself are accepted
+        function ok(u) { return /^https:\/\//.test(u) && u.indexOf(origin + '/') === 0; }
+        if (!/^[a-z0-9][a-z0-9-]*$/.test(id) || !family || !label || !ok(url)) return null;
+        return { id: id, family: family, label: label, url: url, urlBold: ok(bold) ? bold : '', scripts: str(f.scripts, 8) || 'both' };
+      }).filter(Boolean).slice(0, 12);
+    }).catch(function () { fontP = null; return []; }));
   }
 
   /* ---------- "what to read today" ---------- */
@@ -179,7 +232,7 @@
   }
 
   return {
-    load: load, get: get, prefetch: prefetch, recommend: recommend, forPain: forPain, search: search,
+    load: load, get: get, prefetch: prefetch, messages: messages, fonts: fonts, usingServer: function () { return useApi; }, recommend: recommend, forPain: forPain, search: search,
     index: function () { return idx; }, failed: function () { return failed; },
     normIndex: normIndex, normBody: normBody, PAIN: PAIN, base: base
   };

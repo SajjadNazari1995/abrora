@@ -5,5 +5,8 @@ self.ABRORA_CONFIG = {
   googleClientId: '',
   /* Where the articles come from. 'content/' = the files inside this app (GitHub).
      When you move to your own server, put its address here (it must end with the same file layout). */
-  contentBase: 'content/'
+  contentBase: 'content/',
+  /* Your own server (the WordPress plugin "Abrora Content API"). The app asks it first; if it cannot be reached,
+     it uses contentBase above, so the app always has articles. Leave '' to use only the files inside the app. */
+  contentApi: 'https://abroraapi.nazaritechnologies.com/wp-json/abrora/v1/'
 };

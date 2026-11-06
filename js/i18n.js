@@ -348,7 +348,7 @@
     'lang.de': ['Deutsch', 'Deutsch', 'Deutsch'],
 
     /* ---- v1.3: name, calendar, lock, articles, pain ---- */
-    'g.hello': [function (n) { return 'سلام، ' + n; }, function (n) { return 'Hi, ' + n; }, function (n) { return 'Hallo, ' + n; }],
+    'g.hello': [function (n) { return 'سلام ' + n + ' جان'; }, function (n) { return 'Hi, ' + n; }, function (n) { return 'Hallo, ' + n; }],
     'o.name_l': ['اسم شما', 'Your name', 'Dein Name'],
     'o.name_ph': ['مثلاً سارا', 'e.g. Sara', 'z. B. Sara'],
     'o.name_h': ['اختیاری است و فقط روی همین گوشی می‌ماند.', 'Optional, and it stays on this phone only.', 'Optional – und er bleibt nur auf diesem Handy.'],
@@ -489,38 +489,41 @@
   /* A short kind line for the home screen. One is picked per day (see I18N.kind). */
   var KIND = {
     menstrual: [
-      { fa: 'امروز را آرام‌تر بگذرانید. نوشیدنی گرم و کمی استراحت حق شماست.', en: 'Take today a little slower. A warm drink and some rest are well deserved.', de: 'Geh den Tag etwas ruhiger an. Ein warmes Getränk und etwas Ruhe hast du dir verdient.' },
-      { fa: 'اگر انرژی کمتری دارید، طبیعی است؛ بدنتان دارد کار مهمی انجام می‌دهد.', en: 'If your energy is lower, that is normal; your body is doing important work.', de: 'Wenn du weniger Energie hast, ist das normal; dein Körper leistet gerade viel.' },
-      { fa: 'با خودتان مهربان باشید. هر قدر که امروز از پسش برمی‌آیید، کافی است.', en: 'Be kind to yourself. Whatever you manage today is enough.', de: 'Sei lieb zu dir. Was immer du heute schaffst, ist genug.' }
+      { fa: 'امروز آروم‌تر باش عزیزم؛ یه نوشیدنی گرم و کمی استراحت لازم داری.', en: 'Take today a little slower. A warm drink and some rest are well deserved.', de: 'Geh den Tag etwas ruhiger an. Ein warmes Getränk und etwas Ruhe hast du dir verdient.' },
+      { fa: 'اگه انرژیت کمه، طبیعیه عزیزم. بدنت داره کار مهمی انجام می‌ده.', en: 'If your energy is lower, that is normal; your body is doing important work.', de: 'Wenn du weniger Energie hast, ist das normal; dein Körper leistet gerade viel.' },
+      { fa: 'امروز با خودت مهربون باش. هر کاری که از دستت بربیاد کافیه.', en: 'Be kind to yourself. Whatever you manage today is enough.', de: 'Sei lieb zu dir. Was immer du heute schaffst, ist genug.' }
     ],
     follicular: [
-      { fa: 'انرژی کم‌کم بالا می‌رود؛ زمان خوبی برای شروع کارهای تازه است.', en: 'Your energy is slowly rising, a good time to start something new.', de: 'Deine Energie steigt langsam – eine gute Zeit, etwas Neues zu beginnen.' },
-      { fa: 'یک پیاده‌روی کوتاه می‌تواند روزتان را سبک‌تر کند.', en: 'A short walk can make your day feel lighter.', de: 'Ein kurzer Spaziergang kann deinen Tag leichter machen.' },
-      { fa: 'امروز از حال‌وهوای بهترتان لذت ببرید و به خودتان وقت بدهید.', en: 'Enjoy feeling a bit brighter today and give yourself some time.', de: 'Genieß es, dich heute etwas besser zu fühlen, und nimm dir Zeit für dich.' }
+      { fa: 'انرژیت داره کم‌کم برمی‌گرده؛ وقت خوبیه برای یه شروع تازه.', en: 'Your energy is slowly rising, a good time to start something new.', de: 'Deine Energie steigt langsam – eine gute Zeit, etwas Neues zu beginnen.' },
+      { fa: 'یه پیاده‌روی کوتاه می‌تونه روزت رو سبک‌تر کنه.', en: 'A short walk can make your day feel lighter.', de: 'Ein kurzer Spaziergang kann deinen Tag leichter machen.' },
+      { fa: 'از حال بهترت لذت ببر و یه کم وقت بذار برای خودت.', en: 'Enjoy feeling a bit brighter today and give yourself some time.', de: 'Genieß es, dich heute etwas besser zu fühlen, und nimm dir Zeit für dich.' }
     ],
     fertile: [
-      { fa: 'در این روزها بسیاری انرژی و اجتماعی‌بودن بیشتری حس می‌کنند.', en: 'Many people feel more energetic and sociable around now.', de: 'Viele fühlen sich in diesen Tagen energiegeladener und kontaktfreudiger.' },
-      { fa: 'به بدنتان گوش بدهید؛ هر کس حال خودش را دارد.', en: 'Listen to your body; everyone feels different.', de: 'Hör auf deinen Körper; jeder fühlt sich anders.' },
-      { fa: 'آب کافی بنوشید و برای خودتان وقت بگذارید.', en: 'Drink enough water and make time for yourself.', de: 'Trink genug Wasser und nimm dir Zeit für dich.' }
+      { fa: 'تو این روزها خیلی‌ها انرژی و حال اجتماعی بیشتری دارن؛ شاید تو هم همین‌طور باشی.', en: 'Many people feel more energetic and sociable around now.', de: 'Viele fühlen sich in diesen Tagen energiegeladener und kontaktfreudiger.' },
+      { fa: 'به بدنت گوش بده عزیزم؛ هر کسی حال خودش رو داره.', en: 'Listen to your body; everyone feels different.', de: 'Hör auf deinen Körper; jeder fühlt sich anders.' },
+      { fa: 'آب کافی بخور و برای خودت وقت بذار.', en: 'Drink enough water and make time for yourself.', de: 'Trink genug Wasser und nimm dir Zeit für dich.' }
     ],
     luteal: [
-      { fa: 'ممکن است زودتر خسته شوید. اشکالی ندارد؛ سرعتتان را تنظیم کنید.', en: 'You may tire sooner. That is okay; adjust your pace.', de: 'Du wirst vielleicht schneller müde. Das ist okay; passe dein Tempo an.' },
-      { fa: 'یک وعده‌ی مقوی و خواب کافی امشب به شما کمک می‌کند.', en: 'A nourishing meal and enough sleep tonight will help.', de: 'Eine nahrhafte Mahlzeit und genug Schlaf heute Nacht helfen dir.' },
-      { fa: 'اگر خلقتان نوسان دارد، به چرخه مربوط است و موقتی است.', en: 'If your mood swings, it is linked to your cycle and it is temporary.', de: 'Wenn deine Stimmung schwankt, hängt das mit dem Zyklus zusammen und geht vorbei.' }
+      { fa: 'ممکنه زودتر خسته بشی و اشکالی نداره؛ سرعتت رو با خودت تنظیم کن.', en: 'You may tire sooner. That is okay; adjust your pace.', de: 'Du wirst vielleicht schneller müde. Das ist okay; passe dein Tempo an.' },
+      { fa: 'یه وعده‌ی مقوی و خواب خوب امشب حسابی کمکت می‌کنه.', en: 'A nourishing meal and enough sleep tonight will help.', de: 'Eine nahrhafte Mahlzeit und genug Schlaf heute Nacht helfen dir.' },
+      { fa: 'اگه حال و هوات بالا پایین می‌شه، به چرخه‌ات ربط داره و موقتیه.', en: 'If your mood swings, it is linked to your cycle and it is temporary.', de: 'Wenn deine Stimmung schwankt, hängt das mit dem Zyklus zusammen und geht vorbei.' }
     ],
     pms: [
-      { fa: 'پریود نزدیک است. امروز با خودتان مهربان باشید و کارهای سنگین را سبک کنید.', en: 'Your period is close. Be kind to yourself today and lighten the heavy tasks.', de: 'Deine Periode ist nah. Sei heute lieb zu dir und mach die schweren Aufgaben leichter.' },
-      { fa: 'اگر حساس‌تر شده‌اید، تنها نیستید؛ در این روزها خیلی‌ها همین حس را دارند.', en: 'If you feel more sensitive, you are not alone; many people do around now.', de: 'Wenn du empfindlicher bist, bist du nicht allein; vielen geht es jetzt so.' },
-      { fa: 'کمی گرما، آب و استراحت؛ ساده‌ترین مراقبت برای امروز.', en: 'A little warmth, water and rest: the simplest care for today.', de: 'Etwas Wärme, Wasser und Ruhe: die einfachste Fürsorge für heute.' }
+      { fa: 'پریودت نزدیکه. امروز با خودت مهربون باش و کارهای سنگین رو سبک کن عزیزم.', en: 'Your period is close. Be kind to yourself today and lighten the heavy tasks.', de: 'Deine Periode ist nah. Sei heute lieb zu dir und mach die schweren Aufgaben leichter.' },
+      { fa: 'اگه حساس‌تر شدی تنها نیستی؛ تو این روزها خیلی‌ها همین حس رو دارن.', en: 'If you feel more sensitive, you are not alone; many people do around now.', de: 'Wenn du empfindlicher bist, bist du nicht allein; vielen geht es jetzt so.' },
+      { fa: 'یه کم گرما، آب و استراحت؛ ساده‌ترین مراقبت برای امروز.', en: 'A little warmth, water and rest: the simplest care for today.', de: 'Etwas Wärme, Wasser und Ruhe: die einfachste Fürsorge für heute.' }
     ],
     late: [
-      { fa: 'پریود کمی دیر شده است. چند روز تغییر در چرخه پیش می‌آید؛ نگران نباشید.', en: 'Your period is a little late. A few days of change in the cycle happens; try not to worry.', de: 'Deine Periode ist etwas verspätet. Ein paar Tage Abweichung kommen vor; mach dir nicht zu viele Sorgen.' },
-      { fa: 'استرس و کم‌خوابی می‌تواند چرخه را جابه‌جا کند. به خودتان فشار نیاورید.', en: 'Stress and little sleep can shift your cycle. Do not put pressure on yourself.', de: 'Stress und wenig Schlaf können den Zyklus verschieben. Setz dich nicht unter Druck.' },
-      { fa: 'اگر دیرکرد ادامه پیدا کرد، یک بار با پزشک مشورت کنید.', en: 'If the delay continues, talk to a doctor once.', de: 'Wenn die Verspätung anhält, sprich einmal mit einer Ärztin bzw. einem Arzt.' }
+      { fa: 'پریودت یه کم دیر کرده. چند روز جابه‌جایی تو چرخه پیش میاد؛ نگران نباش.', en: 'Your period is a little late. A few days of change in the cycle happens; try not to worry.', de: 'Deine Periode ist etwas verspätet. Ein paar Tage Abweichung kommen vor; mach dir nicht zu viele Sorgen.' },
+      { fa: 'استرس و کم‌خوابی می‌تونه چرخه رو جابه‌جا کنه. به خودت فشار نیار.', en: 'Stress and little sleep can shift your cycle. Do not put pressure on yourself.', de: 'Stress und wenig Schlaf können den Zyklus verschieben. Setz dich nicht unter Druck.' },
+      { fa: 'اگه دیرکرد ادامه پیدا کرد، یه بار با پزشک مشورت کن.', en: 'If the delay continues, talk to a doctor once.', de: 'Wenn die Verspätung anhält, sprich einmal mit einer Ärztin bzw. einem Arzt.' }
     ]
   };
+  /* Daily messages written on the server replace the built-in ones for the keys that have any. */
+  var SERVER_KIND = null;
+  function setKind(map) { SERVER_KIND = map && typeof map === 'object' ? map : null; }
   function kind(key, day) {
-    var a = KIND[key];
+    var a = (SERVER_KIND && SERVER_KIND[key] && SERVER_KIND[key].length) ? SERVER_KIND[key] : KIND[key];
     return a ? a[((day % a.length) + a.length) % a.length][lang] : '';
   }
 
@@ -585,7 +588,7 @@
     weekdayShort: function (wd) { return WD_S[lang][wd]; },
     monthShort: function (m, c) { return namesShort(c)[lang][m]; },
     weekdayName: function (wd) { return WD[lang][wd]; },
-    kind: kind,
+    kind: kind, setKind: setKind,
     TIPS: TIPS, MOODS: MOODS, SYMPTOMS: SYMPTOMS
   };
 })(typeof self !== 'undefined' ? self : this);

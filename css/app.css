@@ -386,7 +386,7 @@ html.lock, html.lock body { overflow: hidden; }
 .btn:disabled { opacity: .55; }
 
 /* ===== v1.3: greeting, articles, name field, app lock ===== */
-.greet { position: relative; z-index: 1; margin: 6px 4px 2px; }
+.greet { position: relative; z-index: 1; margin: 6px 4px 2px; text-align: center; }
 .greet h1 { font-size: 22px; line-height: 1.5; font-weight: 700; }
 .greet p { margin-top: 2px; color: var(--ink2); font-size: 15px; line-height: 1.85; text-wrap: balance; }
 
@@ -421,6 +421,8 @@ html.lock, html.lock body { overflow: hidden; }
 
 .fchips { display: flex; gap: 8px; overflow-x: auto; margin: 10px -20px 12px; padding: 2px 20px 6px; scrollbar-width: none; }
 .fchips::-webkit-scrollbar { display: none; }
+.fchips { -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%); }
+.fchip { scroll-snap-align: center; }
 .fchip { flex: none; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--surface); border: 1.5px solid var(--line); font-size: 14.5px; font-weight: 500; white-space: nowrap; }
 .fchip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
 .empty-note { text-align: center; color: var(--ink2); padding: 22px 10px; font-size: 15px; line-height: 1.8; }

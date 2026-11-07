@@ -1,5 +1,6 @@
 import datetime, json
 from playwright.sync_api import sync_playwright
+from helpers import gate, cat, cat_back
 d=datetime.date.today()
 OLD={"settings":{"lang":"fa","font":"vazir","theme":"auto","weekStart":1,"cycleLen":28,"periodLen":5,"lutealLen":14,"onboarded":True,"name":"سارا"},"periods":[{"s":(d-datetime.timedelta(days=20)).isoformat(),"e":(d-datetime.timedelta(days=16)).isoformat()}],"logs":{}}
 # a fake native plugin, to prove what the app schedules
@@ -16,15 +17,16 @@ with sync_playwright() as p:
     b=p.chromium.launch(); 
     # 1) browser: no native -> hint only
     c=b.new_context(viewport={'width':402,'height':874},locale='fa-IR'); pg=c.new_page(); errs=[]; pg.on('pageerror',lambda e: errs.append(str(e)))
-    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); pg.wait_for_timeout(3000)
-    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); gate(pg); pg.wait_for_timeout(3000)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300); cat(pg,'notify')
     ok('browser: hint, no toggle', pg.locator('[data-act=notify-toggle]').count()==0 and 'اندروید' in pg.inner_text('body'))
+    cat_back(pg); cat(pg,'about')
     ok('privacy button opens policy', (pg.click('[data-act=privacy]') or True) and (pg.wait_for_timeout(500) or True) and 'IP' in pg.inner_text('.sheet'))
     c.close()
     # 2) phone app: fake plugin
     c=b.new_context(viewport={'width':402,'height':874},locale='fa-IR'); c.add_init_script(FAKE); pg=c.new_page(); pg.on('pageerror',lambda e: errs.append(str(e)))
-    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); pg.wait_for_timeout(3000)
-    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); gate(pg); pg.wait_for_timeout(3000)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300); cat(pg,'notify')
     ok('phone: toggle present', pg.locator('[data-act=notify-toggle]').count()==2)
     pg.click('[data-act=notify-toggle][data-v=on]'); pg.wait_for_timeout(1800)
     s=pg.evaluate("window.__sched"); print('scheduled:',[(x['id'],x['title'],x['body'],x['schedule']['at']) for x in s][:2], len(s))

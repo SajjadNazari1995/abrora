@@ -1,5 +1,6 @@
 import datetime, json
 from playwright.sync_api import sync_playwright
+from helpers import gate
 OUT='/tmp/claude-0/-home-claude/18c509e7-1926-53a8-acb9-60fa937e1357/scratchpad/shots/'
 d=datetime.date.today()
 OLD={"settings":{"lang":"fa","font":"vazir","theme":"auto","weekStart":1,"cycleLen":28,"periodLen":5,"lutealLen":14,"onboarded":True,"name":"سارا"},"periods":[{"s":(d-datetime.timedelta(days=1)).isoformat(),"e":(d-datetime.timedelta(days=1)).isoformat(),"open":True}],"logs":{}}
@@ -8,7 +9,7 @@ def ok(n,c,x=''): res.append(c); print(('PASS ' if c else 'FAIL ')+n,'' if c els
 with sync_playwright() as p:
     b=p.chromium.launch(); c=b.new_context(viewport={'width':402,'height':874},locale='fa-IR'); pg=c.new_page(); errs=[]
     pg.on('pageerror',lambda e: errs.append(str(e)))
-    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); pg.wait_for_timeout(3500)
+    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); gate(pg); pg.wait_for_timeout(3500)
     pg.click('[data-act=tab][data-v=tips]'); pg.wait_for_timeout(400)
     pg.click('[data-act=tips-tab][data-v=move]'); pg.wait_for_timeout(1200)
     pg.screenshot(path=OUT+'30_move.png')

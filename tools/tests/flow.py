@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+from helpers import gate, cat, cat_back
 import json
 OUT='/tmp/claude-0/-home-claude/18c509e7-1926-53a8-acb9-60fa937e1357/scratchpad/shots/'
 U='http://localhost:8765/index.html'
@@ -11,7 +12,8 @@ with sync_playwright() as p:
     pg=c.new_page(); errs=[]
     pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
     pg.on('pageerror',lambda e: errs.append('PAGEERR '+str(e)))
-    pg.goto(U); pg.wait_for_timeout(3500)
+    pg.goto(U); gate(pg); pg.wait_for_timeout(3500)
+    pg.click('[data-act=set-lang][data-v=fa]'); pg.wait_for_timeout(200)
     # onboarding: name first, jalali
     ok('name field is first input', pg.evaluate("document.querySelector('.onb input, .onb button, .onb [data-act]') && document.querySelector('.onb input') !== null"))
     pg.fill('#nameField','سارا')
@@ -40,7 +42,7 @@ with sync_playwright() as p:
     ok('full view has sources', pg.locator('.src').count()>=1)
     ok('disclaimer in full view', 'پزشک' in pg.inner_text('.sheet'))
     pg.click('[data-act=article-save]'); pg.wait_for_timeout(200)
-    saved=pg.evaluate("JSON.parse(localStorage['abrora:v1']).saved")
+    saved=pg.evaluate("Store.load('main').then(d=>d.saved)")
     ok('save persists', len(saved)==1, saved)
     pg.keyboard.press('Escape'); pg.evaluate("document.querySelector('[data-act=close],[data-act=sheet-close],.scrim')&&document.querySelector('[data-act=close],[data-act=sheet-close],.scrim').click()")
     pg.wait_for_timeout(400)
@@ -61,11 +63,11 @@ with sync_playwright() as p:
     ok('category filter', pg.locator('#art-list .art-row').count()==1)
     # english/german switch
     pg.click('[data-act=tab][data-v=home]'); pg.wait_for_timeout(300)
-    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300); cat(pg,'look')
     pg.screenshot(path=OUT+'07b_settings.png')
     pg.click('[data-act=set-lang][data-v=de]'); pg.wait_for_timeout(300)
     ok('german rtl off', pg.evaluate("document.documentElement.dir")=='ltr')
-    pg.click('[data-act=settings-back]'); pg.wait_for_timeout(300)
+    cat_back(pg)
     pg.click('[data-act=tab][data-v=tips]'); pg.wait_for_timeout(400)
     ok('german article titles', 'Zyklus' in pg.inner_text('#art-list') or 'Bewegung' in pg.inner_text('#art-list'))
     pg.screenshot(path=OUT+'08_de.png')

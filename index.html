@@ -1,21 +1,23 @@
 <!doctype html>
-<html lang="fa" dir="rtl" data-theme="light" class="splashing">
+<html lang="en" dir="ltr" data-theme="light" data-skin="calm" class="splashing">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ابرورا</title>
-<meta name="description" content="Abrora — ابرورا: ردیاب خصوصی و آفلاین چرخه‌ی قاعدگی">
+<title>Abra</title>
+<meta name="description" content="Abra — a private, offline-first cycle tracker. Estimates, not certainty.">
 <meta name="theme-color" content="#fbf6ff">
 <meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="ابرورا">
+<meta name="apple-mobile-web-app-title" content="Abra">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="format-detection" content="telephone=no">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icons/favicon.png">
 <link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/abra.css">
+<link rel="stylesheet" href="css/brands.css">
 <link rel="apple-touch-startup-image" href="splash/launch-1320x2868.jpg" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/launch-1206x2622.jpg" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/launch-1290x2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
@@ -27,21 +29,24 @@
 <link rel="apple-touch-startup-image" href="splash/launch-828x1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/launch-1242x2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/launch-750x1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-<link rel="preload" as="image" href="icons/splash-bg.svg">
+<link rel="preload" as="image" href="icons/splash-clouds.svg">
 <link rel="preload" as="font" type="font/woff2" href="fonts/Vazir-Bold.woff2" crossorigin>
 <style>
 /* Opening screen (shown instantly, before any script runs) */
 html.splashing, html.splashing body { background: #070522; overflow: hidden; }
 #splash { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; overflow: hidden;
-  background: #1c1360 url("icons/splash-bg.svg") center / cover no-repeat;
+  background: #7d5bd6 url("icons/splash-clouds.svg") center / cover no-repeat;
   transition: opacity .7s ease, transform .9s cubic-bezier(.2, .8, .2, 1), visibility 0s linear .9s; }
+#splash[data-brand="aurora"] { background: #0d4a4a url("icons/splash-aurora.svg") center / cover no-repeat; }
+#splash[data-brand="abrora"] { background: #2b5a86 url("icons/splash-abrora.svg") center / cover no-repeat; }
 #splash.out { opacity: 0; transform: scale(1.06); visibility: hidden; pointer-events: none; }
 #splash .sp-center { display: flex; flex-direction: column; align-items: center; gap: 26px; margin-top: -4vh; }
 #splash .sp-logo { position: relative; width: 148px; height: 148px; animation: spPop .9s cubic-bezier(.2, 1.2, .3, 1) both, spFloat 5s ease-in-out 1s infinite; }
 #splash .sp-logo::before { content: ""; position: absolute; inset: -34px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 170, 220, .55), rgba(150, 120, 255, .25) 55%, transparent); animation: spPulse 3.2s ease-in-out infinite; }
 #splash .sp-logo img { position: relative; width: 100%; height: 100%; border-radius: 38px; display: block; box-shadow: 0 18px 50px rgba(20, 8, 70, .55), 0 0 0 1.5px rgba(255, 255, 255, .28); }
-#splash .sp-name { font-family: "Vazir", system-ui, -apple-system, "Geeza Pro", sans-serif; font-weight: 700; font-size: 46px; line-height: 1.4; color: #fff; direction: rtl;
+#splash .sp-name { font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif; font-weight: 700; font-size: 48px; letter-spacing: .5px; line-height: 1.2; color: #fff; direction: ltr;
   text-shadow: 0 2px 22px rgba(255, 150, 215, .65), 0 0 2px rgba(255, 255, 255, .6); animation: spName 1s cubic-bezier(.2, .8, .2, 1) .35s both; }
+#splash .sp-tag { font-family: "Vazir", system-ui, -apple-system, "Geeza Pro", sans-serif; font-size: 17px; color: rgba(255,255,255,.9); margin-top: -14px; text-align: center; padding: 0 28px; animation: spName 1s cubic-bezier(.2, .8, .2, 1) .6s both; }
 @keyframes spPop { from { opacity: 0; transform: scale(.55) translateY(24px); } to { opacity: 1; transform: none; } }
 @keyframes spFloat { 50% { transform: translateY(-9px); } }
 @keyframes spPulse { 50% { transform: scale(1.12); opacity: .75; } }
@@ -49,36 +54,45 @@ html.splashing, html.splashing body { background: #070522; overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { #splash .sp-logo, #splash .sp-logo::before, #splash .sp-name { animation: none; } }
 </style>
 <script>
-/* Apply saved language and theme before first paint so nothing flashes. */
+/* Apply the last chosen language, theme and look before first paint, so the opening screen shows in the language
+   the person last picked (V2). Only non-health preferences are read here; health data stays in the encrypted store. */
 (function () {
-  try {
-    var s = (JSON.parse(localStorage.getItem('abrora:v1') || '{}') || {}).settings || {};
-    var l = ['fa', 'en', 'de'].indexOf(s.lang) >= 0 ? s.lang : 'fa', h = document.documentElement;
-    h.lang = l; h.dir = l === 'fa' ? 'rtl' : 'ltr';
-    if (s.font === 'iransans') h.setAttribute('data-font', 'iransans');
-    var th = s.theme || 'auto';
-    var dark = th === 'dark' || (th === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
-    h.setAttribute('data-theme', dark ? 'dark' : 'light');
-  } catch (e) {
-    try { if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.setAttribute('data-theme', 'dark'); } catch (e2) {}
-  }
+  var TAG = { fa: 'همراه خصوصی چرخه‌ی تو', en: 'Your private cycle companion', de: 'Deine private Zyklus-Begleiterin' };
+  var NAME = { abra: 'Abra', aurora: 'Aurora', abrora: 'Abrora' };
+  var h = document.documentElement, p = {};
+  try { p = JSON.parse(localStorage.getItem('abra:prefs') || '{}') || {}; } catch (e) { }
+  if (!p.lang) { try { p = { lang: ((JSON.parse(localStorage.getItem('abrora:v1') || '{}') || {}).settings || {}).lang }; } catch (e) { } }   // first launch after upgrading
+  var l = ['fa', 'en', 'de'].indexOf(p.lang) >= 0 ? p.lang : 'en';
+  h.lang = l; h.dir = l === 'fa' ? 'rtl' : 'ltr';
+  if (p.font === 'iransans') h.setAttribute('data-font', 'iransans');
+  if (p.skin === 'glass') h.setAttribute('data-skin', 'glass');
+  var br = NAME[p.brand] ? p.brand : 'abra';
+  h.setAttribute('data-brand', br);
+  (function () { var sfx = br === 'abra' ? '' : '-' + br, a = document.querySelector('link[rel="icon"]'), b = document.querySelector('link[rel="apple-touch-icon"]'); if (a) a.href = 'icons/favicon' + sfx + '.png'; if (b) b.href = 'icons/apple-touch-icon' + sfx + '.png'; })();
+  var th = p.theme || 'auto', dark = false;
+  try { dark = th === 'dark' || (th === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); } catch (e) { }
+  h.setAttribute('data-theme', dark ? 'dark' : 'light');
+  self.__splash = { name: NAME[p.brand] || 'Abra', tag: TAG[l], brand: NAME[p.brand] ? p.brand : 'abra' };
+  document.title = self.__splash.name;
 })();
 </script>
 </head>
 <body>
-<div id="splash" aria-hidden="true"><div class="sp-center"><div class="sp-logo"><img src="icons/logo.svg" alt="" width="148" height="148"></div><div class="sp-name">اَبرورا</div></div></div>
+<div id="splash" aria-hidden="true"><div class="sp-center"><div class="sp-logo"><img id="spLogo" src="icons/abra.svg" alt="" width="148" height="148"></div><div class="sp-name" id="spName">Abra</div><div class="sp-tag" id="spTag"></div></div></div>
 <div id="app"></div>
-<noscript>Abrora needs JavaScript. / ابرورا به جاوااسکریپت نیاز دارد.</noscript>
+<noscript>Abra needs JavaScript.</noscript>
 <script>
 /* Keep the opening screen up for a moment (so it can be enjoyed), then fade it out once the app is ready. */
 (function () {
+  var sn = document.getElementById('spName'), st = document.getElementById('spTag');
+  if (sn && self.__splash) { sn.textContent = self.__splash.name; st.textContent = self.__splash.tag; document.getElementById('splash').setAttribute('data-brand', self.__splash.brand); var sl = document.getElementById('spLogo'); if (sl) sl.src = 'icons/' + self.__splash.brand + '.svg'; }
   var t0 = Date.now(), MIN = 2000, done = false, still = /[?&]still\b/.test(location.search), meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', '#1c1360');
   self.hideSplash = function () {
     if (done || still) return; done = true;
     setTimeout(function () {
       var el = document.getElementById('splash');
-      document.dispatchEvent(new Event('abrora:splash-end'));
+      document.dispatchEvent(new Event('abra:splash-end'));
       document.documentElement.classList.remove('splashing');
       if (!el) return;
       el.classList.add('out');
@@ -92,7 +106,14 @@ html.splashing, html.splashing body { background: #070522; overflow: hidden; }
 <script src="js/config.js"></script>
 <script src="js/calendar.js"></script>
 <script src="js/engine.js"></script>
+<script src="js/brand.js"></script>
+<script src="js/store.js"></script>
 <script src="js/i18n.js"></script>
+<script src="js/i18n-v2.js"></script>
+<script src="js/i18n-v3.js"></script>
+<script src="js/core.js"></script>
+<script src="js/qr.js"></script>
+<script src="js/pair.js"></script>
 <script src="js/content.js"></script>
 <script src="js/tips.js"></script>
 <script src="js/privacy.js"></script>
@@ -100,6 +121,7 @@ html.splashing, html.splashing body { background: #070522; overflow: hidden; }
 <script src="js/lock.js"></script>
 <script src="js/update.js"></script>
 <script src="js/sync.js"></script>
+<script src="js/together.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

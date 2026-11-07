@@ -8,13 +8,13 @@
      cache, so new articles reach phones WITHOUT an app update, and old ones still open offline. */
 importScripts('js/version.js');
 
-const VERSION = 'abrora-v' + self.ABRORA_RELEASE.version;
+const VERSION = 'abra-v' + self.ABRORA_RELEASE.version;
 const CONTENT = 'abrora-content';   // survives app updates on purpose
 const CORE = [
   './', 'index.html', 'manifest.webmanifest',
-  'css/app.css', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/tips.js', 'js/privacy.js', 'js/notify.js', 'js/lock.js',
+  'css/app.css', 'css/abra.css', 'css/brands.css', 'js/brand.js', 'js/store.js', 'js/i18n-v2.js', 'js/core.js', 'js/qr.js', 'js/pair.js', 'js/i18n-v3.js', 'js/together.js', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/tips.js', 'js/privacy.js', 'js/notify.js', 'js/lock.js',
   'content/index.json', 'content/workouts.json', 'js/update.js', 'js/sync.js', 'js/config.js', 'js/app.js',
-  'icons/logo.svg', 'icons/splash-bg.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
+  'icons/logo.svg', 'icons/abra.svg', 'icons/aurora.svg', 'icons/abrora.svg', 'icons/favicon-aurora.png', 'icons/favicon-abrora.png', 'icons/apple-touch-icon-aurora.png', 'icons/apple-touch-icon-abrora.png', 'icons/splash-clouds.svg', 'icons/splash-aurora.svg', 'icons/splash-abrora.svg', 'icons/nazari-full.png', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
   'icons/apple-touch-icon.png', 'icons/favicon.png',
   'fonts/Vazir-Regular.woff2', 'fonts/Vazir-Medium.woff2', 'fonts/Vazir-Bold.woff2',
   'fonts/IRANSans-Regular.woff2', 'fonts/IRANSans-Regular.woff'
@@ -38,7 +38,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k => k !== VERSION && k !== CONTENT && k.startsWith('abrora-')).map(k => caches.delete(k)));
+    await Promise.all(keys.filter(k => k !== VERSION && k !== CONTENT && (k.startsWith('abrora-') || k.startsWith('abra-'))).map(k => caches.delete(k)));
     await self.clients.claim();
   })());
 });

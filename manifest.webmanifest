@@ -1,19 +1,34 @@
 {
-  "name": "ابرورا — Abrora",
-  "short_name": "ابرورا",
-  "description": "ردیاب خصوصی و آفلاین چرخه‌ی قاعدگی / Private offline cycle tracker",
+  "name": "Abra",
+  "short_name": "Abra",
+  "description": "Private, offline-first cycle tracker. Estimates, not certainty.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "lang": "fa",
-  "dir": "rtl",
-  "background_color": "#1c1360",
+  "lang": "en",
+  "dir": "auto",
+  "background_color": "#7d5bd6",
   "theme_color": "#fbf6ff",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

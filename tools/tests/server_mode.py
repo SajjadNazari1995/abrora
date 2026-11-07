@@ -1,5 +1,6 @@
 import json, os, base64
 from playwright.sync_api import sync_playwright
+from helpers import gate, cat, cat_back
 A='/tmp/claude-0/-home-claude/18c509e7-1926-53a8-acb9-60fa937e1357/scratchpad/api/'
 API='https://abroraapi.nazaritechnologies.com/wp-json/abrora/v1/'
 FONT=open('fonts/'+[f for f in os.listdir('fonts') if f.endswith('.woff2')][0],'rb').read()
@@ -29,7 +30,7 @@ with sync_playwright() as p:
     b=p.chromium.launch(); c=b.new_context(viewport={'width':402,'height':874},locale='fa-IR',service_workers='block')
     c.route('https://abroraapi.nazaritechnologies.com/**',handler)
     pg=c.new_page(); errs=[]; pg.on('pageerror',lambda e: errs.append(str(e)))
-    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); pg.wait_for_timeout(4000)
+    pg.goto('http://localhost:8765/index.html'); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); gate(pg); pg.wait_for_timeout(4000)
     ok('server index used', pg.evaluate("Content.usingServer()"))
     pg.click('[data-act=tab][data-v=tips]'); pg.wait_for_timeout(500)
     ok('server title shown', 'عنوان از سرور' in pg.inner_text('#art-list'))
@@ -40,11 +41,11 @@ with sync_playwright() as p:
     pg.click('[data-act=tab][data-v=home]'); pg.wait_for_timeout(300)
     print('GREET:',pg.inner_text('.greet').replace(chr(10),' | '), '| kind=', pg.evaluate("document.body.getAttribute('data-phase')"))
     ok('server message on home', 'پیام سرور' in pg.inner_text('.greet'))
-    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300); cat(pg,'look')
     ok('server font offered (evil host rejected)', pg.locator('[data-act=set-font][data-v=srv-sahel]').count()==1 and pg.locator('[data-act=set-font][data-v=srv-evil]').count()==0)
     pg.click('[data-act=set-font][data-v=srv-sahel]'); pg.wait_for_timeout(1200)
     ok('server font applied', 'AbSrv sahel' in pg.evaluate("document.documentElement.style.getPropertyValue('--font-fa')"), pg.evaluate("document.documentElement.style.getPropertyValue('--font-fa')"))
-    ok('font persists in settings', pg.evaluate("JSON.parse(localStorage['abrora:v1']).settings.font")=='srv-sahel')
+    ok('font persists in settings', pg.evaluate("JSON.parse(localStorage['abra:prefs']).font")=='srv-sahel')
     # server down -> bundled
     state['down']=True
     pg2=c.new_page(); pg2.goto('http://localhost:8765/index.html'); pg2.wait_for_timeout(4500)

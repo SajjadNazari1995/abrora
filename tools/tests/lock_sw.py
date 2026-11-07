@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+from helpers import gate, cat, cat_back
 OUT='/tmp/claude-0/-home-claude/18c509e7-1926-53a8-acb9-60fa937e1357/scratchpad/shots/'
 U='http://localhost:8765/index.html'
 res=[]
@@ -15,7 +16,7 @@ with sync_playwright() as p:
     cdp.send('WebAuthn.enable')
     auth=cdp.send('WebAuthn.addVirtualAuthenticator',{'options':{'protocol':'ctap2','transport':'internal','hasResidentKey':True,'hasUserVerification':True,'isUserVerified':True,'automaticPresenceSimulation':True}})
     # v1.2.0-style data migration
-    pg.goto(U); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); pg.wait_for_timeout(3500)
+    pg.goto(U); pg.evaluate("k=>localStorage.setItem('abrora:v1',JSON.stringify(k))",OLD); pg.reload(); gate(pg); pg.wait_for_timeout(3500)
     ok('old data migrates (no onboarding)', pg.locator('.onb').count()==0 and pg.locator('.art-row').count()>=1)
     # SW + offline
     pg.wait_for_timeout(1500)
@@ -30,11 +31,11 @@ with sync_playwright() as p:
     c.set_offline(False)
     # lock
     pg.reload(); pg.wait_for_timeout(3500)
-    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300); cat(pg,'privacy')
     ok('lock row visible', pg.locator('[data-act=lock-toggle]').count()==1)
     pg.click('[data-act=lock-toggle]'); pg.wait_for_timeout(1200)
     ok('lock enabled', pg.evaluate("!!localStorage.getItem('abrora:lock')"))
-    ok('lock excluded from data key', 'abrora:lock' not in pg.evaluate("localStorage.getItem('abrora:v1')"))
+    ok('lock excluded from data store', 'abrora:lock' not in (pg.evaluate("localStorage.getItem('abra:s:main')") or ''))
     pg.reload(); pg.wait_for_timeout(4000)
     pg.screenshot(path=OUT+'10_after_reload_lock.png')
     locked=pg.evaluate("document.documentElement.classList.contains('is-locked')")

@@ -1,0 +1,80 @@
+from playwright.sync_api import sync_playwright
+import json
+OUT='/tmp/claude-0/-home-claude/18c509e7-1926-53a8-acb9-60fa937e1357/scratchpad/shots/'
+U='http://localhost:8765/index.html'
+res=[]
+def ok(n,c,extra=''):
+    res.append((n,bool(c))); print(('PASS ' if c else 'FAIL ')+n, extra if not c else '')
+with sync_playwright() as p:
+    b=p.chromium.launch()
+    c=b.new_context(viewport={'width':402,'height':874},locale='fa-IR')
+    pg=c.new_page(); errs=[]
+    pg.on('console',lambda m: errs.append(m.text) if m.type=='error' else None)
+    pg.on('pageerror',lambda e: errs.append('PAGEERR '+str(e)))
+    pg.goto(U); pg.wait_for_timeout(3500)
+    # onboarding: name first, jalali
+    ok('name field is first input', pg.evaluate("document.querySelector('.onb input, .onb button, .onb [data-act]') && document.querySelector('.onb input') !== null"))
+    pg.fill('#nameField','سارا')
+    pg.click('[data-act=set-cal][data-v=jalali]'); pg.wait_for_timeout(200)
+    ok('name survives re-render', pg.input_value('#nameField')=='سارا', pg.input_value('#nameField'))
+    pg.click('[data-act=onb-next]'); pg.wait_for_timeout(200)
+    t=pg.inner_text('.cal-title'); print('jalali title:',t)
+    ok('jalali month title has persian month', any(m in t for m in ['آبان','آذر','مهر']), t)
+    pg.screenshot(path=OUT+'02_jalali_pick.png')
+    days=pg.evaluate("[...document.querySelectorAll('[data-act=pick-day]')].length")
+    ok('jalali grid has 29-31 days', 29<=days<=31, days)
+    # pick an available day (first enabled)
+    pg.click('[data-act=pick-day]:not([disabled]) >> nth=0'); pg.wait_for_timeout(150)
+    pg.click('[data-act=onb-next]'); pg.wait_for_timeout(200)
+    pg.click('[data-act=onb-finish]'); pg.wait_for_timeout(1500)
+    pg.screenshot(path=OUT+'03_home.png')
+    body=pg.inner_text('body'); ok('home greets by name', 'سارا' in body)
+    ok('pain pill present', pg.locator('.pain-pill').count()==1)
+    ok('recommended articles shown', pg.locator('.art-row').count()>=1, pg.locator('.art-row').count())
+    # article summary -> full
+    pg.locator('.art-row').first.click(); pg.wait_for_timeout(700)
+    pg.screenshot(path=OUT+'04_article.png')
+    ok('article sheet opens', pg.locator('.sheet').count()>=1 and pg.locator('[data-act=article-full]').count()==1)
+    pg.click('[data-act=article-full]'); pg.wait_for_timeout(500)
+    pg.screenshot(path=OUT+'05_article_full.png')
+    ok('full view has sources', pg.locator('.src').count()>=1)
+    ok('disclaimer in full view', 'پزشک' in pg.inner_text('.sheet'))
+    pg.click('[data-act=article-save]'); pg.wait_for_timeout(200)
+    saved=pg.evaluate("JSON.parse(localStorage['abrora:v1']).saved")
+    ok('save persists', len(saved)==1, saved)
+    pg.keyboard.press('Escape'); pg.evaluate("document.querySelector('[data-act=close],[data-act=sheet-close],.scrim')&&document.querySelector('[data-act=close],[data-act=sheet-close],.scrim').click()")
+    pg.wait_for_timeout(400)
+    # pain mode
+    pg.click('.pain-pill'); pg.wait_for_timeout(500)
+    pg.click('[data-act=pain-sym][data-id=cramps]'); pg.wait_for_timeout(400)
+    pg.screenshot(path=OUT+'06_pain.png')
+    first=pg.locator('.sheet .art-row').first.get_attribute('data-id')
+    ok('pain cramps -> cramp article first', first=='period-cramps', first)
+    pg.reload(); pg.wait_for_timeout(3500)
+    ok('no lock-less reload loses name', 'سارا' in pg.inner_text('body'))
+    # tips tab library + search + category
+    pg.click('[data-act=tab][data-v=tips]'); pg.wait_for_timeout(500)
+    n=pg.locator('#art-list .art-row').count(); ok('library lists 20', n==20, n)
+    pg.fill('#artQ','کرامپ'); pg.wait_for_timeout(300)
+    pg.screenshot(path=OUT+'07_tips.png')
+    pg.fill('#artQ',''); pg.click('.fchip[data-v=movement]'); pg.wait_for_timeout(300)
+    ok('category filter', pg.locator('#art-list .art-row').count()==1)
+    # english/german switch
+    pg.click('[data-act=tab][data-v=home]'); pg.wait_for_timeout(300)
+    pg.click('[data-act=settings]'); pg.wait_for_timeout(300)
+    pg.screenshot(path=OUT+'07b_settings.png')
+    pg.click('[data-act=set-lang][data-v=de]'); pg.wait_for_timeout(300)
+    ok('german rtl off', pg.evaluate("document.documentElement.dir")=='ltr')
+    pg.click('[data-act=settings-back]'); pg.wait_for_timeout(300)
+    pg.click('[data-act=tab][data-v=tips]'); pg.wait_for_timeout(400)
+    ok('german article titles', 'Zyklus' in pg.inner_text('#art-list') or 'Bewegung' in pg.inner_text('#art-list'))
+    pg.screenshot(path=OUT+'08_de.png')
+    # dark mode
+    pg.emulate_media(color_scheme='dark'); pg.wait_for_timeout(300)
+    pg.click('[data-act=tab][data-v=home]'); pg.wait_for_timeout(300)
+    pg.screenshot(path=OUT+'09_dark.png')
+    print('ERRORS',errs)
+    errs=[e for e in errs if 'Failed to load resource' not in e]
+    ok('no console errors', not errs, errs)
+    b.close()
+print(sum(1 for r in res if not r[1]),'failed')

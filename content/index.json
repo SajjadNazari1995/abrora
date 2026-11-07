@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "version": "2026.11.05.10",
- "updated": "2026-11-05",
+ "version": "2026.11.07.20",
+ "updated": "2026-11-07",
  "categories": [
   {
    "id": "basics",
@@ -373,6 +373,303 @@
     "fa": "بیشتر تغییرات چرخه بی‌خطرند، اما چند نشانه ارزیابی پزشکی می‌خواهند: چرخه‌ی خیلی کوتاه یا بلند، پریود بیش از هفت روز، خونریزی زیاد، درد شدید یا قطع‌شدن پریود. اینجا فهرست روشنی از آن‌ها آمده است.",
     "en": "Most cycle changes are harmless, but some signs need a medical check: a cycle that is very short or long, a period over seven days, heavy bleeding, severe pain or missed periods. Here is a clear list.",
     "de": "Die meisten Zyklusveränderungen sind harmlos, einige Zeichen sollten aber ärztlich abgeklärt werden: ein sehr kurzer oder langer Zyklus, eine Periode über sieben Tage, starke Blutung, starke Schmerzen oder ausbleibende Perioden. Hier steht eine klare Liste."
+   }
+  },
+  {
+   "id": "sleep-and-cycle",
+   "status": "published",
+   "category": "health",
+   "emoji": "🌙",
+   "tone": "sky",
+   "phases": [
+    "luteal",
+    "pms",
+    "menstrual"
+   ],
+   "signals": [
+    "sleep",
+    "fatigue"
+   ],
+   "moods": [
+    "irritable",
+    "anxious"
+   ],
+   "readMin": 3,
+   "order": 11,
+   "updated": "2026-11-07",
+   "file": "articles/sleep-and-cycle.json",
+   "title": {
+    "fa": "چرا قبل و حین پریود بد می‌خوابم؟",
+    "en": "Why do I sleep badly around my period?",
+    "de": "Warum schlafe ich rund um die Periode schlecht?"
+   },
+   "summary": {
+    "fa": "در نیمه‌ی دوم چرخه و روزهای اول پریود خواب بسیاری از افراد سبک‌تر یا بریده‌بریده می‌شود. تغییر هورمون‌ها، کمی بالا رفتن دمای بدن و درد دلیل‌های رایج‌اند، و عادت‌های ساده‌ی خواب کمک می‌کنند.",
+    "en": "In the second half of the cycle and the first days of a period, many people sleep lighter or wake more often. Changing hormones, a slightly higher body temperature and pain are common reasons, and simple sleep habits can help.",
+    "de": "In der zweiten Zyklushälfte und an den ersten Periodentagen schlafen viele leichter oder wachen öfter auf. Wechselnde Hormone, eine etwas höhere Körpertemperatur und Schmerzen sind häufige Gründe – einfache Schlafgewohnheiten helfen."
+   }
+  },
+  {
+   "id": "period-products",
+   "status": "published",
+   "category": "basics",
+   "emoji": "🩸",
+   "tone": "rose",
+   "phases": [
+    "menstrual"
+   ],
+   "signals": [],
+   "moods": [],
+   "readMin": 3,
+   "order": 12,
+   "updated": "2026-11-07",
+   "file": "articles/period-products.json",
+   "title": {
+    "fa": "پد، تامپون یا کاپ؟ انتخاب و استفاده‌ی ایمن",
+    "en": "Pads, tampons or cups? Choosing and using them safely",
+    "de": "Binden, Tampons oder Tassen? Auswahl und sichere Anwendung"
+   },
+   "summary": {
+    "fa": "هیچ انتخاب «درستی» برای همه وجود ندارد. مهم این است که محصول را به‌موقع عوض کنید و جذب مناسب بردارید. نشانه‌های نادر ولی جدی عفونت (شوک سمی) را بشناسید.",
+    "en": "There is no single right choice for everyone. What matters is changing products on time and using the lowest absorbency that works. Know the rare but serious signs of toxic shock syndrome.",
+    "de": "Für alle gibt es nicht die eine richtige Wahl. Wichtig ist, Produkte rechtzeitig zu wechseln und die niedrigste passende Saugstärke zu nehmen. Kenne die seltenen, aber ernsten Zeichen eines toxischen Schocksyndroms."
+   }
+  },
+  {
+   "id": "spotting-between-periods",
+   "status": "published",
+   "category": "health",
+   "emoji": "🔎",
+   "tone": "butter",
+   "phases": [
+    "any",
+    "fertile"
+   ],
+   "signals": [],
+   "moods": [],
+   "readMin": 3,
+   "order": 13,
+   "updated": "2026-11-07",
+   "file": "articles/spotting-between-periods.json",
+   "title": {
+    "fa": "لکه‌بینی بین دو پریود",
+    "en": "Spotting between periods",
+    "de": "Schmierblutungen zwischen den Perioden"
+   },
+   "summary": {
+    "fa": "لکه‌بینی سبک گاهی طبیعی است، مثلاً هنگام تخمک‌گذاری یا در ماه‌های اول قرص. اما اگر تکرار شود، بعد از رابطه رخ دهد یا همراه درد باشد، باید بررسی شود.",
+    "en": "Light spotting can be normal, for example around ovulation or in the first months of the pill. But if it keeps happening, follows sex or comes with pain, it should be checked.",
+    "de": "Leichte Schmierblutungen sind manchmal normal, etwa um den Eisprung oder in den ersten Monaten der Pille. Wenn sie sich wiederholen, nach dem Sex auftreten oder mit Schmerzen einhergehen, sollten sie abgeklärt werden."
+   }
+  },
+  {
+   "id": "pcos-pmos-basics",
+   "status": "published",
+   "category": "health",
+   "emoji": "🧩",
+   "tone": "lilac",
+   "phases": [
+    "any"
+   ],
+   "signals": [
+    "acne"
+   ],
+   "moods": [],
+   "readMin": 3,
+   "order": 14,
+   "updated": "2026-11-07",
+   "file": "articles/pcos-pmos-basics.json",
+   "title": {
+    "fa": "سندرم تخمدان پلی‌کیستیک (PCOS)",
+    "en": "Polycystic ovary syndrome (PCOS)",
+    "de": "Polyzystisches Ovarsyndrom (PCOS)"
+   },
+   "summary": {
+    "fa": "PCOS یک اختلال هورمونی شایع است که می‌تواند باعث پریودهای نامنظم، آکنه یا رشد موی زیاد شود. تشخیص با پزشک است و درمان و سبک زندگی کمک بزرگی می‌کنند. در بریتانیا نام آن به PMOS تغییر کرده است.",
+    "en": "PCOS is a common hormonal condition that can cause irregular periods, acne or extra hair growth. A doctor makes the diagnosis, and treatment and lifestyle changes help a lot. In the UK it is now being renamed PMOS.",
+    "de": "PCOS ist eine häufige hormonelle Störung, die unregelmäßige Perioden, Akne oder vermehrten Haarwuchs verursachen kann. Die Diagnose stellt die Praxis; Behandlung und Lebensstil helfen viel. In Großbritannien wird sie inzwischen in PMOS umbenannt."
+   }
+  },
+  {
+   "id": "endometriosis-signs",
+   "status": "published",
+   "category": "health",
+   "emoji": "🩺",
+   "tone": "rose",
+   "phases": [
+    "menstrual"
+   ],
+   "signals": [
+    "cramps",
+    "backache"
+   ],
+   "moods": [],
+   "readMin": 4,
+   "order": 15,
+   "updated": "2026-11-07",
+   "file": "articles/endometriosis-signs.json",
+   "title": {
+    "fa": "اندومتریوز: وقتی درد پریود «عادی» نیست",
+    "en": "Endometriosis: when period pain is not \"just normal\"",
+    "de": "Endometriose: wenn Periodenschmerzen nicht „normal“ sind"
+   },
+   "summary": {
+    "fa": "در اندومتریوز بافتی شبیه لایه‌ی داخلی رحم بیرون از رحم رشد می‌کند و می‌تواند درد شدید ایجاد کند. بسیاری از افراد سال‌ها دیر تشخیص می‌گیرند. درد شدیدی که زندگی را مختل می‌کند باید بررسی شود.",
+    "en": "In endometriosis, tissue similar to the lining of the womb grows outside it and can cause severe pain. Many people wait years for a diagnosis. Pain that disrupts your life deserves to be checked.",
+    "de": "Bei Endometriose wächst Gewebe, das der Gebärmutterschleimhaut ähnelt, außerhalb der Gebärmutter und kann starke Schmerzen verursachen. Viele warten Jahre auf die Diagnose. Schmerzen, die den Alltag stören, sollten abgeklärt werden."
+   }
+  },
+  {
+   "id": "stress-and-cycle",
+   "status": "published",
+   "category": "pms",
+   "emoji": "🌿",
+   "tone": "mint",
+   "phases": [
+    "luteal",
+    "pms",
+    "late"
+   ],
+   "signals": [
+    "sleep"
+   ],
+   "moods": [
+    "anxious",
+    "irritable",
+    "sensitive"
+   ],
+   "readMin": 3,
+   "order": 16,
+   "updated": "2026-11-07",
+   "file": "articles/stress-and-cycle.json",
+   "title": {
+    "fa": "استرس و چرخه‌ی قاعدگی",
+    "en": "Stress and your cycle",
+    "de": "Stress und Zyklus"
+   },
+   "summary": {
+    "fa": "استرس شدید یا طولانی می‌تواند تخمک‌گذاری را عقب بیندازد و پریود را دیر یا نامنظم کند. بدن شما نشان می‌دهد زیر فشار است؛ چند عادت ساده کمک می‌کند.",
+    "en": "Intense or long-lasting stress can delay ovulation and make a period late or irregular. Your body is showing you it is under pressure, and a few simple habits help.",
+    "de": "Starker oder lang anhaltender Stress kann den Eisprung verzögern und die Periode verspäten oder unregelmäßig machen. Dein Körper zeigt dir, dass er unter Druck steht – ein paar einfache Gewohnheiten helfen."
+   }
+  },
+  {
+   "id": "ovulation-signs",
+   "status": "published",
+   "category": "fertility",
+   "emoji": "🔍",
+   "tone": "mint",
+   "phases": [
+    "fertile",
+    "follicular"
+   ],
+   "signals": [],
+   "moods": [
+    "energetic"
+   ],
+   "readMin": 3,
+   "order": 17,
+   "updated": "2026-11-07",
+   "file": "articles/ovulation-signs.json",
+   "title": {
+    "fa": "نشانه‌های تخمک‌گذاری در بدن",
+    "en": "Signs of ovulation in your body",
+    "de": "Körperzeichen für den Eisprung"
+   },
+   "summary": {
+    "fa": "ترشح شفاف و کشسان، درد خفیف یک‌طرفه، و بالا رفتن دمای پایه از نشانه‌های رایج تخمک‌گذاری‌اند. این نشانه‌ها راهنما هستند، نه تضمین، و برای پیشگیری از بارداری قابل اتکا نیستند.",
+    "en": "Clear, stretchy discharge, mild one-sided pain and a rise in basal temperature are common signs of ovulation. They are a guide, not a guarantee, and not reliable for avoiding pregnancy.",
+    "de": "Klarer, dehnbarer Ausfluss, leichter einseitiger Schmerz und ein Anstieg der Basaltemperatur sind häufige Zeichen des Eisprungs. Sie sind ein Anhaltspunkt, keine Garantie, und nicht verlässlich zur Verhütung."
+   }
+  },
+  {
+   "id": "bloating-and-water",
+   "status": "published",
+   "category": "nutrition",
+   "emoji": "💧",
+   "tone": "sky",
+   "phases": [
+    "luteal",
+    "pms",
+    "menstrual"
+   ],
+   "signals": [
+    "bloating"
+   ],
+   "moods": [],
+   "readMin": 3,
+   "order": 18,
+   "updated": "2026-11-07",
+   "file": "articles/bloating-and-water.json",
+   "title": {
+    "fa": "نفخ قبل پریود: چه کنیم؟",
+    "en": "Bloating before your period: what helps?",
+    "de": "Blähbauch vor der Periode: Was hilft?"
+   },
+   "summary": {
+    "fa": "قبل از پریود هورمون‌ها می‌توانند باعث نگه‌داشتن آب و کندی روده شوند و شکم باد کند. کم‌کردن نمک، نوشیدن آب، حرکت و غذای آرام کمک می‌کند. نفخ مداوم باید بررسی شود.",
+    "en": "Before a period, hormones can make you hold fluid and slow your gut, so your belly swells. Less salt, enough water, movement and calm eating help. Bloating that does not go away should be checked.",
+    "de": "Vor der Periode können Hormone dazu führen, dass der Körper Wasser einlagert und der Darm träger wird, sodass der Bauch anschwillt. Weniger Salz, genug Wasser, Bewegung und ruhiges Essen helfen. Anhaltender Blähbauch sollte abgeklärt werden."
+   }
+  },
+  {
+   "id": "acne-and-cycle",
+   "status": "published",
+   "category": "pms",
+   "emoji": "🧴",
+   "tone": "butter",
+   "phases": [
+    "luteal",
+    "pms"
+   ],
+   "signals": [
+    "acne"
+   ],
+   "moods": [
+    "sensitive"
+   ],
+   "readMin": 3,
+   "order": 19,
+   "updated": "2026-11-07",
+   "file": "articles/acne-and-cycle.json",
+   "title": {
+    "fa": "جوش‌های قبل از پریود",
+    "en": "Breakouts before your period",
+    "de": "Pickel vor der Periode"
+   },
+   "summary": {
+    "fa": "در هفته‌ی پیش از پریود تغییر هورمون‌ها چربی پوست را بیشتر می‌کند و جوش‌ها را بدتر. مراقبت ملایم و صبور بهتر از شست‌وشوی شدید است؛ اگر جوش شدید است یا جای زخم می‌گذارد، از داروساز یا پزشک کمک بگیرید.",
+    "en": "In the week before a period, hormone changes make skin oilier and breakouts worse. Gentle, patient care beats harsh scrubbing; if acne is severe or scarring, ask a pharmacist or doctor.",
+    "de": "In der Woche vor der Periode machen Hormonschwankungen die Haut fettiger und Pickel schlimmer. Sanfte, geduldige Pflege ist besser als kräftiges Schrubben; bei starker oder vernarbender Akne hilft die Apotheke oder Praxis."
+   }
+  },
+  {
+   "id": "late-period-causes",
+   "status": "published",
+   "category": "health",
+   "emoji": "⏳",
+   "tone": "lilac",
+   "phases": [
+    "late",
+    "luteal"
+   ],
+   "signals": [],
+   "moods": [
+    "anxious"
+   ],
+   "readMin": 3,
+   "order": 20,
+   "updated": "2026-11-07",
+   "file": "articles/late-period-causes.json",
+   "title": {
+    "fa": "چرا پریودم دیر شده؟",
+    "en": "Why is my period late?",
+    "de": "Warum ist meine Periode verspätet?"
+   },
+   "summary": {
+    "fa": "بارداری شایع‌ترین علت دیرکرد در کسانی است که رابطه داشته‌اند، اما استرس، تغییر وزن، ورزش سنگین، شیردهی و مشکلات هورمونی هم می‌توانند دلیل باشند. چند روز تأخیر معمولاً نگران‌کننده نیست.",
+    "en": "Pregnancy is the most common reason for a late period in people who have had sex, but stress, weight change, heavy exercise, breastfeeding and hormonal problems can also be behind it. A few days’ delay is usually nothing to worry about.",
+    "de": "Eine Schwangerschaft ist bei Menschen mit Geschlechtsverkehr der häufigste Grund für eine verspätete Periode, aber auch Stress, Gewichtsveränderungen, intensiver Sport, Stillen und hormonelle Probleme können dahinterstecken. Ein paar Tage Verspätung sind meist kein Grund zur Sorge."
    }
   }
  ]

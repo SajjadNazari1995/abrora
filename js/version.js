@@ -3,10 +3,10 @@
    - Changing it makes phones notice a new version and show the update button.
    - `notes` is shown inside the "new version" card (keep it short). */
 self.ABRORA_RELEASE = {
-  version: '1.4.0',
+  version: '1.5.1',
   notes: {
-    fa: ['مقاله‌ها، پیام‌های روزانه و فونت‌ها حالا از سرور خودتان می‌آیند (و آفلاین هم کار می‌کنند)', 'نکات امروز بر اساس حال امروز شما تغییر می‌کند', 'تیتر خوش‌آمد دوستانه‌تر و دسته‌های مقاله قابل اسکرول'],
-    en: ['Articles, daily messages and fonts now come from your own server (and still work offline)', 'Today’s tips follow how you feel today', 'A friendlier greeting and scrollable article categories'],
-    de: ['Artikel, tägliche Nachrichten und Schriften kommen jetzt von deinem eigenen Server (und funktionieren weiter offline)', 'Die Tipps des Tages richten sich nach deinem Befinden', 'Freundlichere Begrüßung und scrollbare Artikel-Kategorien']
+    fa: ['۱۰ مقاله‌ی جدید: خواب، محصولات پریود، لکه‌بینی، PCOS، اندومتریوز، استرس، نشانه‌های تخمک‌گذاری، نفخ، جوش و دیرکرد پریود'],
+    en: ['10 new articles: sleep, period products, spotting, PCOS, endometriosis, stress, ovulation signs, bloating, acne and late periods'],
+    de: ['10 neue Artikel: Schlaf, Periodenprodukte, Schmierblutungen, PCOS, Endometriose, Stress, Eisprungzeichen, Blähbauch, Akne und verspätete Periode']
   }
 };

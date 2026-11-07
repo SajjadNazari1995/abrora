@@ -14,7 +14,7 @@
   function defaults() {
     return {
       v: 1,
-      settings: { lang: 'fa', font: 'vazir', theme: 'auto', weekStart: 1, calendar: 'gregorian', name: '', cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
+      settings: { lang: 'fa', font: 'vazir', theme: 'auto', weekStart: 1, calendar: 'gregorian', name: '', notify: { on: false, time: '09:00', pre: 2 }, cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
       periods: [], logs: {}, reads: {}, saved: []
     };
   }
@@ -29,6 +29,7 @@
     if ([0, 1, 6].indexOf(+s.weekStart) >= 0) d.settings.weekStart = +s.weekStart;
     if (s.calendar === 'jalali' || s.calendar === 'gregorian') d.settings.calendar = s.calendar;
     if (typeof s.name === 'string') d.settings.name = cleanName(s.name);
+    if (self.Notify) d.settings.notify = self.Notify.cleanSettings(s.notify);
     d.settings.cycleLen = clamp(s.cycleLen, 20, 60, 28);
     d.settings.periodLen = clamp(s.periodLen, 1, 12, 5);
     d.settings.lutealLen = clamp(s.lutealLen, 8, 18, 14);
@@ -74,7 +75,7 @@
   var today = E.todayN(), A = null, ST = null;
   var ui = {
     view: 'home', prev: 'home', sheet: null, sheetShown: false, intro: true,
-    cal: null, onb: null, lib: { cat: 'all', q: '' },
+    cal: null, onb: null, lib: { cat: 'all', q: '' }, tipsTab: 'read', wk: { cat: 'all', state: 'idle' },
     locked: false, lockMsg: '', lockHelp: false, lockOk: null, unlocking: false,
     upd: null, updHidden: false, updStatus: '', installEvt: null
   };
@@ -161,6 +162,30 @@
     E.normalize(S, today);
     A = E.analyze(S, today);
     ST = E.status(A, today);
+    syncNotify();
+  }
+
+  /* Reminders live on the phone app only. Re-planned whenever the data changes, a moment later so a burst of edits counts once. */
+  var notifyTimer = 0;
+  function syncNotify() {
+    if (!self.Notify || !Notify.available()) return;
+    clearTimeout(notifyTimer);
+    notifyTimer = setTimeout(function () {
+      var n = S.settings.notify, list = (S.settings.onboarded && !A.empty && ST.nextStart)
+        ? Notify.plan({ nextStart: E.toISO(ST.nextStart), cycleLen: A.L, lang: S.settings.lang, settings: n }) : [];
+      Notify.apply(list);
+    }, 800);
+  }
+  function notifyGroup() {
+    var n = S.settings.notify || {}, ok = self.Notify && Notify.available();
+    var h = '<section class="group"><h3>' + esc(t('nt.title')) + '</h3>';
+    if (!ok) return h + '<p class="hint">' + esc(t('nt.web')) + '</p></section>';
+    h += seg([['on', t('nt.on')], ['off', t('nt.off')]], n.on ? 'on' : 'off', 'notify-toggle');
+    if (n.on) {
+      h += '<label class="lbl" for="notifyTime">' + esc(t('nt.time')) + '</label><input class="field" id="notifyTime" type="time" value="' + esc(n.time) + '">';
+      h += '<label class="lbl">' + esc(t('nt.pre')) + '</label>' + seg([[0, t('nt.pre0')], [1, t('nt.pre1')], [2, t('nt.pre2')], [3, t('nt.pre3')]], n.pre, 'notify-pre');
+    }
+    return h + '<p class="hint">' + esc(t('nt.hint')) + '</p></section>';
   }
 
   /* ============ ring ============ */
@@ -535,9 +560,83 @@
       var tx = I.pick(tp);
       h += '<div class="tip-row tone-' + tp.tone + '"><span class="em" aria-hidden="true">' + tp.e + '</span><div><b>' + esc(tx[0]) + '</b><span>' + esc(tx[1]) + '</span></div></div>';
     });
+    h += seg([['read', t('tips.read')], ['move', t('tips.move')]], ui.tipsTab, 'tips-tab');
+    if (ui.tipsTab === 'move') return h + workoutsHTML();
     h += recommendedHTML(3, 'art.recommended');
     h += libraryHTML();
     return h;
+  }
+
+  /* ---------- workouts ---------- */
+  var WK_EM = { stretch: '🤸', yoga: '🧘', strength: '🏋️', cardio: '🚶‍♀️', mobility: '🌿' };
+  var WK_TONE = { stretch: 'mint', yoga: 'lilac', strength: 'rose', cardio: 'sky', mobility: 'butter' };
+  var wkList = null;
+  function loadWorkouts() {
+    if (wkList || ui.wk.state === 'loading') return;
+    ui.wk.state = 'loading';
+    CT.workouts().then(function (l) { wkList = l; ui.wk.state = 'ready'; }, function () { ui.wk.state = 'fail'; })
+      .then(function () { if (ui.view === 'tips' && !ui.sheet) renderView(); });
+  }
+  /* "3x10", "45s", "30s/side", "2min" -> readable text in the current language */
+  function amountText(a) {
+    var m = /^([0-9]{1,3})(?:x([0-9]{1,3}))?(s|min|x)?(\/side)?$/.exec(a || '');
+    if (!m) return '';
+    var lg = I.getLang(), U = { s: ['ثانیه', 'sec', 'Sek.'], min: ['دقیقه', 'min', 'Min.'], x: ['تکرار', 'reps', 'Wdh.'] };
+    var li = { fa: 0, en: 1, de: 2 }[lg], unit = U[m[3] || 'x'][li], out;
+    if (m[2]) out = num(m[1]) + ' ' + ['ست', 'sets', 'Sätze'][li] + ' × ' + num(m[2]) + ' ' + unit;
+    else out = num(m[1]) + ' ' + unit;
+    if (m[4]) out += ' (' + ['هر طرف', 'each side', 'pro Seite'][li] + ')';
+    return out;
+  }
+  function wkRow(w, why) {
+    var lg = I.getLang();
+    return '<button class="art-row" data-act="workout" data-id="' + w.id + '"><span class="tile tone-' + WK_TONE[w.kind] + '" aria-hidden="true">' + WK_EM[w.kind] + '</span>' +
+      '<span class="art-t"><b>' + esc(w.title[lg]) + '</b><small>' + esc(t('wk.kind.' + w.kind) + ' · ' + t('wk.min', w.minutes) + ' · ' + t('wk.level.' + w.level) + ' · ' + t('wk.where.' + w.where)) + '</small>' +
+      (why ? '<em class="why">' + esc(t('wk.why.' + why)) + '</em>' : '') + '</span>' + icon('chev', 'flip') + '</button>';
+  }
+  function workoutsHTML() {
+    loadWorkouts();
+    if (!wkList) {
+      return '<div class="empty-note"><p>' + esc(t(ui.wk.state === 'fail' ? 'wk.fail' : 'wk.loading')) + '</p>' +
+        (ui.wk.state === 'fail' ? '<button class="btn soft" data-act="wk-retry">' + esc(t('art.retry')) + '</button>' : '') + '</div>';
+    }
+    var c = recCtx(), rec = CT.recommendWorkouts(wkList, c, 3), kinds = {};
+    wkList.forEach(function (w) { kinds[w.kind] = 1; });
+    var h = '<h2 class="section-title">' + esc(t('wk.recommended')) + '</h2><div class="art-list">' + rec.map(function (w) {
+      var why = w.signals.some(function (x) { return c.sym.indexOf(x) >= 0; }) ? 'symptom' : (w.phases.indexOf(c.phase) >= 0 || w.phases.indexOf(c.kind) >= 0 ? 'phase' : null);
+      return wkRow(w, why);
+    }).join('') + '</div>';
+    var chips = [['all', t('wk.all')]].concat(Object.keys(WK_EM).filter(function (k) { return kinds[k]; }).map(function (k) { return [k, t('wk.kind.' + k)]; }));
+    h += '<h2 class="section-title">' + esc(t('wk.library')) + '</h2><div class="fchips" role="group">' + chips.map(function (x) {
+      return '<button class="fchip" data-act="wk-cat" data-v="' + x[0] + '" aria-pressed="' + (ui.wk.cat === x[0]) + '">' + esc(x[1]) + '</button>';
+    }).join('') + '</div><div class="art-list">';
+    var items = wkList.filter(function (w) { return ui.wk.cat === 'all' || w.kind === ui.wk.cat; });
+    h += items.length ? items.map(function (w) { return wkRow(w); }).join('') : '<p class="empty-note">' + esc(t('wk.none')) + '</p>';
+    return h + '</div><p class="sub art-disc">' + esc(t('wk.safety')) + '</p>';
+  }
+  function workoutSheet(sh) {
+    var lg = I.getLang(), w = sh.w, close = '<div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
+    var meta = wkList && wkList.filter(function (x) { return x.id === sh.id; })[0];
+    if (!w) {
+      return '<div class="big-em" aria-hidden="true">' + (meta ? WK_EM[meta.kind] : '🤸') + '</div><h2 class="sheet-title">' + esc(meta ? meta.title[lg] : '') + '</h2>' +
+        '<p class="body">' + esc(t(sh.st === 'fail' ? 'wk.fail' : 'wk.loading')) + '</p>' +
+        (sh.st === 'fail' ? '<div class="actions"><button class="btn primary block" data-act="workout" data-id="' + sh.id + '">' + esc(t('art.retry')) + '</button></div>' : '') + close;
+    }
+    var h = '<div class="big-em" aria-hidden="true">' + WK_EM[w.kind] + '</div><h2 class="sheet-title">' + esc(w.title[lg]) + '</h2>' +
+      '<div class="art-meta">' + esc(t('wk.kind.' + w.kind) + ' · ' + t('wk.min', w.minutes) + ' · ' + t('wk.level.' + w.level) + ' · ' + t('wk.where.' + w.where)) + '</div>' +
+      '<p class="body">' + esc(w.summary[lg]) + '</p><div class="reader"><div class="rh">' + esc(t('wk.steps')) + '</div><p class="sub">' + esc(t('wk.tap')) + '</p>';
+    w.steps.forEach(function (st, i) {
+      var d = st.detail, open = sh.open === i;
+      h += '<button class="wk-step" data-act="wk-step" data-i="' + i + '" aria-expanded="' + open + '"><span class="wk-n">' + num(i + 1) + '</span><span class="wk-t"><b>' + esc(d.name[lg]) + '</b>' +
+        (amountText(st.amount) ? '<small>' + esc(amountText(st.amount)) + '</small>' : '') + '</span>' + icon('chev', 'chev ' + (open ? 'up' : 'dn')) + '</button>';
+      if (open) {
+        h += '<div class="wk-how">' + (d.image ? '<img src="' + esc(d.image) + '" alt="" loading="lazy">' : '') + '<div class="rl">' + esc(t('wk.how')) + '</div><ol>' +
+          d.how[lg].map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>' +
+          (st.note ? '<p class="sub">' + esc(st.note) + '</p>' : '') + (d.note[lg] ? '<p class="sub">⚠️ ' + esc(d.note[lg]) + '</p>' : '') +
+          (d.equipment && d.equipment !== 'none' ? '<p class="sub">' + esc(t('wk.equipment') + ': ' + d.equipment) + '</p>' : '') + '</div>';
+      }
+    });
+    return h + '</div><p class="sub art-disc">' + esc(t('wk.safety')) + '</p>' + close;
   }
 
   function seg(items, current, act, key) {
@@ -608,7 +707,7 @@
     h += '<section class="group"><h3>' + esc(t('st.defaults')) + '</h3><p class="hint">' + esc(t('st.defaults_hint')) + '</p>' +
       stepper(t('st.cycle_len'), 'cycleLen', s.cycleLen) + stepper(t('st.period_len'), 'periodLen', s.periodLen) + stepper(t('st.luteal'), 'lutealLen', s.lutealLen) +
       '<p class="hint">' + esc(t('st.luteal_hint')) + '</p></section>';
-    h += lockGroup() + cloudGroup() + updateGroup();
+    h += lockGroup() + notifyGroup() + cloudGroup() + updateGroup();
     h += '<section class="group"><h3>' + esc(t('st.data')) + '</h3><p class="hint">' + esc(t('st.private')) + '</p><div class="stack">' +
       '<button class="btn soft block" data-act="export">' + esc(t('st.export')) + '</button>' +
       '<button class="btn soft block" data-act="import">' + esc(t('st.import')) + '</button>' +
@@ -616,6 +715,7 @@
       '<button class="btn danger block" data-act="erase">' + esc(t('st.erase')) + '</button></div><p class="hint">' + esc(t('st.backup_hint')) + '</p></section>';
     h += '<section class="group"><h3>' + esc(t('st.install')) + '</h3><p class="hint">' + esc(t('st.install_d')) + '</p></section>';
     h += '<section class="group"><h3>' + esc(t('st.about')) + '</h3><p class="hint">' + esc(t('st.disclaimer')) + '</p></section>';
+    h += '<button class="btn soft block" data-act="privacy">' + esc(t('st.privacy')) + '</button>';
     h += '<div class="ver">' + esc(t('app.name')) + ' · ' + esc(t('st.version')) + ' ' + esc(num(VERSION)) + '</div>';
     return h;
   }
@@ -691,6 +791,12 @@
       return '<div class="big-em" aria-hidden="true">' + tp.e + '</div><h2>' + esc(tx[0]) + '</h2><p class="body">' + esc(tx[1]) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
     }
     if (sh.type === 'article') return articleSheet(sh);
+    if (sh.type === 'workout') return workoutSheet(sh);
+    if (sh.type === 'privacy') {
+      var PV = self.Privacy, pl = I.getLang();
+      return '<h2 class="sheet-title">' + esc(PV.title[pl]) + '</h2><div class="reader">' + PV.sections.map(function (s) { return '<div class="rh">' + esc(s.h[pl]) + '</div><p class="body">' + esc(s.p[pl]) + '</p>'; }).join('') +
+        '</div><p class="sub art-disc">' + esc(PV.who[pl] + ' · ' + PV.updatedLabel[pl] + ': ' + PV.updated) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
+    }
     if (sh.type === 'pain') return painSheet();
     if (sh.type === 'pick') {
       return '<h2>' + esc(t('o.last_t')) + '</h2><div class="sub">' + esc(t('o.last_d')) + '</div><div class="cal-card" style="margin-top:14px"><div class="cal-head"><button class="cal-nav" data-act="pick-prev" aria-label="' + esc(t('cal.prev')) + '">' + icon('chev', 'flip-back') + '</button><div class="cal-title">' + esc(I.fmt.monthYear(sh.c.y, sh.c.m)) + '</div><button class="cal-nav" data-act="pick-next" aria-label="' + esc(t('cal.next')) + '">' + icon('chev', 'flip') + '</button></div>' + monthGrid(sh.c, 'pick') + '</div>' +
@@ -737,7 +843,7 @@
     var root = $('#sheet-root'), docEl = document.documentElement;
     if (!ui.sheet) { root.innerHTML = ''; docEl.classList.remove('lock'); ui.sheetShown = false; return; }
     var old = root.querySelector('.sheet'), sc = old ? old.scrollTop : 0, first = !ui.sheetShown;
-    root.innerHTML = '<div class="scrim' + (first ? '' : ' open') + '" data-act="sheet-close"></div><div class="sheet' + (first ? '' : ' open') + (ui.sheet.type === 'article' || ui.sheet.type === 'pain' ? ' tall' : '') + '" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>' + sheetContent() + '</div>';
+    root.innerHTML = '<div class="scrim' + (first ? '' : ' open') + '" data-act="sheet-close"></div><div class="sheet' + (first ? '' : ' open') + (ui.sheet.type === 'article' || ui.sheet.type === 'pain' || ui.sheet.type === 'workout' || ui.sheet.type === 'privacy' ? ' tall' : '') + '" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>' + sheetContent() + '</div>';
     docEl.classList.add('lock');
     var sh = root.querySelector('.sheet');
     if (first) {
@@ -791,6 +897,7 @@
   }
   /* Forget everything saved on this phone, but keep how the app looks (language, font, theme, calendar). */
   function wipeLocal() {
+    if (self.Notify) Notify.clear();
     var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, weekStart: S.settings.weekStart, calendar: S.settings.calendar };
     S = defaults(); Object.assign(S.settings, keep);
     try { localStorage.removeItem(SNAP_KEY); localStorage.removeItem(UNDO_KEY); } catch (e) { }
@@ -823,6 +930,24 @@
     pain: function () { openSheet({ type: 'pain' }); },
     'pain-sym': function (el) { var id = el.dataset.id; updLog(today, function (l) { l.sym = toggleIn(l.sym, id); }); render(); },
     'lib-cat': function (el) { ui.lib.cat = el.dataset.v; renderView(); },
+    'notify-toggle': function (el) {
+      if (el.dataset.v === 'off') { S.settings.notify.on = false; save(); Notify.clear(); render(); return; }
+      Notify.request().then(function (granted) {
+        S.settings.notify.on = !!granted; save(); syncNotify(); render();
+        if (!granted) toast('nt.denied');
+      });
+    },
+    'notify-pre': function (el) { S.settings.notify.pre = +el.dataset.v; save(); syncNotify(); render(); },
+    'privacy': function () { openSheet({ type: 'privacy', top: true }); },
+    'tips-tab': function (el) { ui.tipsTab = el.dataset.v === 'move' ? 'move' : 'read'; renderView(); },
+    'wk-cat': function (el) { ui.wk.cat = el.dataset.v; renderView(); },
+    'wk-retry': function () { ui.wk.state = 'idle'; renderView(); },
+    'wk-step': function (el) { if (ui.sheet && ui.sheet.type === 'workout') { var i = +el.dataset.i; ui.sheet.open = ui.sheet.open === i ? -1 : i; renderSheet(); } },
+    'workout': function (el) {
+      var id = el.dataset.id; openSheet({ type: 'workout', id: id, st: 'loading', w: null, open: -1, top: true });
+      CT.workout(id).then(function (w) { if (ui.sheet && ui.sheet.type === 'workout' && ui.sheet.id === id) { ui.sheet.w = w; ui.sheet.st = 'ready'; renderSheet(); } },
+        function () { if (ui.sheet && ui.sheet.type === 'workout' && ui.sheet.id === id) { ui.sheet.st = 'fail'; renderSheet(); } });
+    },
     'lib-retry': function () { loadContent(true); },
     'set-cal': function (el) {
       S.settings.calendar = el.dataset.v; I.setCalendar(S.settings.calendar);
@@ -1022,6 +1147,7 @@
       pendingNote = { n: +el.dataset.n, v: el.value };
       clearTimeout(noteTimer); noteTimer = setTimeout(flushNote, 500);
     }
+    if (el && el.id === 'notifyTime' && /^([01]\d|2[0-3]):[0-5]\d$/.test(el.value)) { S.settings.notify.time = el.value; save(true); syncNotify(); }
     if (el && el.id === 'nameField') {
       if (ui.onb) ui.onb.name = el.value.slice(0, 30);
       else { S.settings.name = cleanName(el.value); save(true); clearTimeout(nameTimer); nameTimer = setTimeout(function () { save(); }, 800); }

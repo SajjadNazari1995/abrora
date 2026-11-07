@@ -1,0 +1,835 @@
+{
+ "exercises": [
+  {
+   "id": "child-pose",
+   "name": {
+    "fa": "حالت کودک",
+    "en": "Child’s pose",
+    "de": "Kindhaltung"
+   },
+   "how": {
+    "fa": [
+     "روی زانوها بنشینید و باسن را به سمت پاشنه‌ها بدهید.",
+     "بالاتنه را به جلو خم کنید و دست‌ها را روی زمین دراز کنید.",
+     "پیشانی را روی زمین یا بالش بگذارید و آرام نفس بکشید."
+    ],
+    "en": [
+     "Kneel and sit your hips back toward your heels.",
+     "Fold forward and reach your arms out on the floor.",
+     "Rest your forehead on the floor or a cushion and breathe slowly."
+    ],
+    "de": [
+     "Knie dich hin und setz das Gesäß Richtung Fersen.",
+     "Beuge dich nach vorn und streck die Arme auf dem Boden aus.",
+     "Leg die Stirn auf Boden oder Kissen und atme ruhig."
+    ]
+   },
+   "note": {
+    "fa": "اگر زانو درد می‌کند زیر آن‌ها بالش بگذارید.",
+    "en": "If your knees hurt, put a cushion under them.",
+    "de": "Wenn die Knie schmerzen, leg ein Kissen darunter."
+   },
+   "muscles": "lower back, hips",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "cat-cow",
+   "name": {
+    "fa": "گربه و گاو",
+    "en": "Cat–cow",
+    "de": "Katze–Kuh"
+   },
+   "how": {
+    "fa": [
+     "چهار دست‌وپا شوید؛ مچ‌ها زیر شانه و زانوها زیر باسن.",
+     "با بازدم کمر را گرد کنید و چانه را به سینه نزدیک کنید.",
+     "با دم کمر را آرام گود کنید و سینه را باز کنید."
+    ],
+    "en": [
+     "Come onto hands and knees, wrists under shoulders, knees under hips.",
+     "Exhale and round your back, chin toward chest.",
+     "Inhale and gently arch your back, opening the chest."
+    ],
+    "de": [
+     "Geh in den Vierfüßlerstand, Handgelenke unter den Schultern, Knie unter der Hüfte.",
+     "Atme aus und runde den Rücken, Kinn Richtung Brust.",
+     "Atme ein und mach den Rücken sanft hohl, Brust öffnen."
+    ]
+   },
+   "note": {
+    "fa": "حرکت را آرام و هماهنگ با نفس انجام دهید.",
+    "en": "Move slowly with your breath.",
+    "de": "Bewege dich langsam im Atemrhythmus."
+   },
+   "muscles": "spine, core",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "supine-twist",
+   "name": {
+    "fa": "چرخش ستون فقرات خوابیده",
+    "en": "Supine spinal twist",
+    "de": "Liegende Rumpfdrehung"
+   },
+   "how": {
+    "fa": [
+     "به پشت بخوابید و یک زانو را به سینه بیاورید.",
+     "زانو را آرام به سمت مخالف بدن بخوابانید و بازوها را باز کنید.",
+     "نگاه را به سمت دیگر ببرید و چند نفس بکشید؛ سپس طرف دیگر."
+    ],
+    "en": [
+     "Lie on your back and draw one knee to your chest.",
+     "Let the knee fall gently across your body, arms wide.",
+     "Look the other way and breathe; then switch sides."
+    ],
+    "de": [
+     "Leg dich auf den Rücken und zieh ein Knie zur Brust.",
+     "Lass das Knie sanft zur Gegenseite sinken, Arme seitlich ausgestreckt.",
+     "Blick zur anderen Seite, ein paar Atemzüge; dann Seite wechseln."
+    ]
+   },
+   "note": {
+    "fa": "در حد راحتی بپیچید و به زور نکشید.",
+    "en": "Twist only as far as is comfortable.",
+    "de": "Dreh dich nur so weit, wie es angenehm ist."
+   },
+   "muscles": "back, hips",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "knees-to-chest",
+   "name": {
+    "fa": "زانو به سینه",
+    "en": "Knees to chest",
+    "de": "Knie zur Brust"
+   },
+   "how": {
+    "fa": [
+     "به پشت بخوابید.",
+     "هر دو زانو را با دست‌ها به سینه نزدیک کنید.",
+     "کمی تکان ملایم بدهید و آرام نفس بکشید."
+    ],
+    "en": [
+     "Lie on your back.",
+     "Hug both knees toward your chest.",
+     "Rock gently and breathe slowly."
+    ],
+    "de": [
+     "Leg dich auf den Rücken.",
+     "Zieh beide Knie mit den Händen zur Brust.",
+     "Wiege sanft und atme ruhig."
+    ]
+   },
+   "note": {
+    "fa": "اگر فشار روی شکم ناراحت است، یک زانو را بیاورید.",
+    "en": "If pressure on the belly is uncomfortable, bring one knee at a time.",
+    "de": "Ist der Druck auf den Bauch unangenehm, zieh nur ein Knie heran."
+   },
+   "muscles": "lower back, abdomen",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "butterfly-stretch",
+   "name": {
+    "fa": "پروانه",
+    "en": "Butterfly stretch",
+    "de": "Schmetterling"
+   },
+   "how": {
+    "fa": [
+     "بنشینید و کف پاها را مقابل هم بگذارید.",
+     "پاها را به خودتان نزدیک کنید و ستون فقرات را بلند نگه دارید.",
+     "زانوها را آرام رها کنید و کمی به جلو خم شوید."
+    ],
+    "en": [
+     "Sit with the soles of your feet together.",
+     "Draw your feet in and keep your spine tall.",
+     "Let your knees relax and fold forward slightly."
+    ],
+    "de": [
+     "Setz dich mit zusammengelegten Fußsohlen hin.",
+     "Zieh die Füße heran und halte die Wirbelsäule aufrecht.",
+     "Lass die Knie sinken und beuge dich leicht nach vorn."
+    ]
+   },
+   "note": {
+    "fa": "زانوها را پایین فشار ندهید.",
+    "en": "Do not press your knees down.",
+    "de": "Drück die Knie nicht nach unten."
+   },
+   "muscles": "inner thighs, hips",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "standing-forward-fold",
+   "name": {
+    "fa": "خم‌شدن ایستاده",
+    "en": "Standing forward fold",
+    "de": "Stehende Vorbeuge"
+   },
+   "how": {
+    "fa": [
+     "ایستاده، پاها به اندازه‌ی عرض لگن باز.",
+     "با کمر صاف از لگن به جلو خم شوید و زانوها را کمی شل نگه دارید.",
+     "سر و گردن را رها کنید و چند نفس بکشید؛ آرام بالا بیایید."
+    ],
+    "en": [
+     "Stand with feet hip-width apart.",
+     "Hinge forward from the hips, knees slightly soft.",
+     "Let your head and neck hang; breathe, then rise slowly."
+    ],
+    "de": [
+     "Steh hüftbreit.",
+     "Beuge dich aus der Hüfte nach vorn, Knie leicht weich.",
+     "Lass Kopf und Nacken hängen; atme, dann langsam aufrichten."
+    ]
+   },
+   "note": {
+    "fa": "اگر سرگیجه گرفتید، آهسته بالا بیایید.",
+    "en": "If you feel dizzy, come up slowly.",
+    "de": "Wird dir schwindelig, richte dich langsam auf."
+   },
+   "muscles": "hamstrings, back",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "neck-rolls",
+   "name": {
+    "fa": "چرخش گردن",
+    "en": "Neck rolls",
+    "de": "Nackenkreisen"
+   },
+   "how": {
+    "fa": [
+     "صاف بنشینید یا بایستید و شانه‌ها را شل کنید.",
+     "چانه را آرام به سینه بیاورید و گردن را نیم‌دایره بچرخانید.",
+     "از چرخش کامل پشت سر پرهیز کنید."
+    ],
+    "en": [
+     "Sit or stand tall with relaxed shoulders.",
+     "Lower your chin and roll your neck in a half circle.",
+     "Avoid rolling your head all the way back."
+    ],
+    "de": [
+     "Sitz oder steh aufrecht mit lockeren Schultern.",
+     "Kinn zur Brust, Nacken in einem Halbkreis rollen.",
+     "Den Kopf nicht ganz in den Nacken rollen."
+    ]
+   },
+   "note": {
+    "fa": "اگر سرگیجه یا درد دارید متوقف شوید.",
+    "en": "Stop if you feel dizzy or pain.",
+    "de": "Hör bei Schwindel oder Schmerz auf."
+   },
+   "muscles": "neck, shoulders",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "deep-breathing",
+   "name": {
+    "fa": "تنفس عمیق",
+    "en": "Deep breathing",
+    "de": "Tiefe Atmung"
+   },
+   "how": {
+    "fa": [
+     "راحت بنشینید یا بخوابید و یک دست را روی شکم بگذارید.",
+     "۴ ثانیه از بینی نفس بکشید تا شکم بالا بیاید.",
+     "۶ ثانیه آرام بیرون بدهید و تکرار کنید."
+    ],
+    "en": [
+     "Sit or lie comfortably with a hand on your belly.",
+     "Breathe in through your nose for 4 seconds, letting the belly rise.",
+     "Breathe out slowly for 6 seconds and repeat."
+    ],
+    "de": [
+     "Setz oder leg dich bequem hin, eine Hand auf den Bauch.",
+     "4 Sekunden durch die Nase einatmen, der Bauch hebt sich.",
+     "6 Sekunden langsam ausatmen und wiederholen."
+    ]
+   },
+   "note": {
+    "fa": "",
+    "en": "",
+    "de": ""
+   },
+   "muscles": "diaphragm",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "brisk-walk",
+   "name": {
+    "fa": "پیاده‌روی با نشاط",
+    "en": "Brisk walk",
+    "de": "Zügiges Gehen"
+   },
+   "how": {
+    "fa": [
+     "با سرعتی راه بروید که بتوانید حرف بزنید ولی کمی نفس‌نفس بزنید.",
+     "شانه‌ها را شل و قدم‌ها را راحت بردارید.",
+     "در پایان ۲ دقیقه آرام‌تر شوید."
+    ],
+    "en": [
+     "Walk at a pace where you can talk but feel slightly out of breath.",
+     "Keep shoulders relaxed and strides easy.",
+     "Slow down for the last 2 minutes."
+    ],
+    "de": [
+     "Geh so zügig, dass du noch sprechen kannst, aber leicht außer Atem bist.",
+     "Schultern locker, Schritte entspannt.",
+     "Geh die letzten 2 Minuten langsamer."
+    ]
+   },
+   "note": {
+    "fa": "کفش راحت بپوشید و آب همراه داشته باشید.",
+    "en": "Wear comfortable shoes and take water.",
+    "de": "Trag bequeme Schuhe und nimm Wasser mit."
+   },
+   "muscles": "legs, heart",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "glute-bridge",
+   "name": {
+    "fa": "پل باسن",
+    "en": "Glute bridge",
+    "de": "Glute Bridge"
+   },
+   "how": {
+    "fa": [
+     "به پشت بخوابید، زانوها خم و کف پاها روی زمین.",
+     "کف پا را فشار دهید و باسن را تا خط مستقیم شانه–زانو بالا ببرید.",
+     "یک ثانیه نگه دارید و آرام پایین بیایید."
+    ],
+    "en": [
+     "Lie on your back, knees bent, feet flat.",
+     "Press through your feet and lift your hips until shoulders, hips and knees line up.",
+     "Hold a second and lower slowly."
+    ],
+    "de": [
+     "Leg dich auf den Rücken, Knie angewinkelt, Füße flach.",
+     "Drück durch die Füße und heb die Hüfte, bis Schultern, Hüfte und Knie eine Linie bilden.",
+     "Eine Sekunde halten und langsam absenken."
+    ]
+   },
+   "note": {
+    "fa": "کمر را بیش از حد گود نکنید.",
+    "en": "Do not over-arch your lower back.",
+    "de": "Das Hohlkreuz vermeiden."
+   },
+   "muscles": "glutes, hamstrings",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "goblet-squat",
+   "name": {
+    "fa": "اسکات گابلت",
+    "en": "Goblet squat",
+    "de": "Goblet-Kniebeuge"
+   },
+   "how": {
+    "fa": [
+     "دمبل را با دو دست جلوی سینه نگه دارید؛ پاها کمی بازتر از شانه.",
+     "با کمر صاف و سینه بالا به پایین بنشینید، زانوها در امتداد پنجه‌ها.",
+     "با فشار از پاشنه‌ها بالا بیایید."
+    ],
+    "en": [
+     "Hold a dumbbell at your chest with both hands, feet slightly wider than shoulders.",
+     "Sit down with a straight back and lifted chest, knees tracking over toes.",
+     "Drive up through your heels."
+    ],
+    "de": [
+     "Halte eine Kurzhantel mit beiden Händen vor der Brust, Füße etwas schulterbreiter.",
+     "Geh mit geradem Rücken und offener Brust in die Hocke, Knie über den Zehen.",
+     "Drück dich über die Fersen nach oben."
+    ]
+   },
+   "note": {
+    "fa": "وزنه‌ی سبک را شروع کنید و فرم را مهم‌تر از وزن بدانید.",
+    "en": "Start light; form matters more than weight.",
+    "de": "Beginne leicht; saubere Technik ist wichtiger als Gewicht."
+   },
+   "muscles": "legs, glutes",
+   "equipment": "dumbbell",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "dumbbell-row",
+   "name": {
+    "fa": "پارویی با دمبل",
+    "en": "Dumbbell row",
+    "de": "Hantelrudern"
+   },
+   "how": {
+    "fa": [
+     "یک دست و یک زانو را روی نیمکت بگذارید و پشت را صاف نگه دارید.",
+     "دمبل را به سمت کمر بکشید و آرنج را نزدیک بدن نگه دارید.",
+     "آرام پایین بیاورید؛ سپس طرف دیگر."
+    ],
+    "en": [
+     "Rest one hand and knee on a bench with a flat back.",
+     "Pull the dumbbell toward your hip, elbow close to your body.",
+     "Lower slowly; then switch sides."
+    ],
+    "de": [
+     "Stütz eine Hand und ein Knie auf eine Bank, Rücken gerade.",
+     "Zieh die Hantel zur Hüfte, Ellbogen nah am Körper.",
+     "Langsam absenken; dann Seite wechseln."
+    ]
+   },
+   "note": {
+    "fa": "از تاب‌دادن بدن برای بالا کشیدن وزنه خودداری کنید.",
+    "en": "Do not swing your body to lift the weight.",
+    "de": "Schwing den Körper nicht mit."
+   },
+   "muscles": "back, arms",
+   "equipment": "dumbbell, bench",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "knee-push-up",
+   "name": {
+    "fa": "شنا روی زانو",
+    "en": "Knee push-up",
+    "de": "Liegestütz auf den Knien"
+   },
+   "how": {
+    "fa": [
+     "دست‌ها کمی بازتر از شانه، زانوها روی زمین و بدن در یک خط.",
+     "سینه را به زمین نزدیک کنید و آرنج‌ها را حدود ۴۵ درجه از بدن دور نگه دارید.",
+     "با فشار دست‌ها بالا بیایید."
+    ],
+    "en": [
+     "Hands slightly wider than shoulders, knees down, body in one line.",
+     "Lower your chest toward the floor, elbows about 45° from your body.",
+     "Press back up."
+    ],
+    "de": [
+     "Hände etwas schulterbreiter, Knie am Boden, Körper in einer Linie.",
+     "Senke die Brust zum Boden, Ellbogen etwa 45° vom Körper.",
+     "Drück dich wieder hoch."
+    ]
+   },
+   "note": {
+    "fa": "",
+    "en": "",
+    "de": ""
+   },
+   "muscles": "chest, arms, core",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "plank",
+   "name": {
+    "fa": "پلانک",
+    "en": "Plank",
+    "de": "Unterarmstütz"
+   },
+   "how": {
+    "fa": [
+     "روی ساعد و پنجه‌ی پا قرار بگیرید؛ آرنج زیر شانه.",
+     "شکم را سفت و بدن را در یک خط نگه دارید.",
+     "عادی نفس بکشید و مدت را نگه دارید."
+    ],
+    "en": [
+     "Support yourself on forearms and toes, elbows under shoulders.",
+     "Brace your abdomen and keep your body in one line.",
+     "Breathe normally and hold."
+    ],
+    "de": [
+     "Stütz dich auf Unterarme und Zehen, Ellbogen unter den Schultern.",
+     "Bauch anspannen, Körper in einer Linie halten.",
+     "Normal weiteratmen und halten."
+    ]
+   },
+   "note": {
+    "fa": "اگر کمر درد می‌گیرد، روی زانو انجام دهید یا متوقف شوید.",
+    "en": "If your lower back hurts, do it on your knees or stop.",
+    "de": "Schmerzt der untere Rücken, auf den Knien machen oder aufhören."
+   },
+   "muscles": "core",
+   "equipment": "none",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "romanian-deadlift",
+   "name": {
+    "fa": "ددلیفت رومانیایی",
+    "en": "Romanian deadlift",
+    "de": "Rumänisches Kreuzheben"
+   },
+   "how": {
+    "fa": [
+     "دمبل‌ها جلوی ران‌ها، زانوها کمی خم.",
+     "کمر صاف، لگن را به عقب ببرید و دمبل‌ها را نزدیک پا پایین ببرید.",
+     "با فشار لگن به جلو بالا بیایید."
+    ],
+    "en": [
+     "Dumbbells in front of your thighs, knees slightly bent.",
+     "With a flat back, push hips back and lower the weights close to your legs.",
+     "Drive hips forward to stand."
+    ],
+    "de": [
+     "Hanteln vor den Oberschenkeln, Knie leicht gebeugt.",
+     "Mit geradem Rücken die Hüfte nach hinten schieben und die Gewichte nah am Bein absenken.",
+     "Hüfte nach vorn schieben und aufrichten."
+    ]
+   },
+   "note": {
+    "fa": "گرد شدن کمر یعنی وزنه یا دامنه زیاد است؛ کمترش کنید.",
+    "en": "A rounding back means too much weight or range; reduce it.",
+    "de": "Ein runder Rücken heißt: zu viel Gewicht oder Bewegungsweite; reduzieren."
+   },
+   "muscles": "hamstrings, glutes, back",
+   "equipment": "dumbbells",
+   "image": "",
+   "video": ""
+  },
+  {
+   "id": "leg-press",
+   "name": {
+    "fa": "پرس پا",
+    "en": "Leg press",
+    "de": "Beinpresse"
+   },
+   "how": {
+    "fa": [
+     "پشت را به پشتی دستگاه بچسبانید و پاها را به اندازه‌ی شانه روی صفحه بگذارید.",
+     "زانوها را خم کنید تا حدود ۹۰ درجه، بدون بلندشدن باسن.",
+     "با فشار پاشنه‌ها صفحه را برگردانید و زانوها را کامل قفل نکنید."
+    ],
+    "en": [
+     "Back flat on the pad, feet shoulder-width on the platform.",
+     "Bend your knees to about 90° without your hips lifting.",
+     "Press through your heels, without fully locking your knees."
+    ],
+    "de": [
+     "Rücken fest an die Lehne, Füße schulterbreit auf der Platte.",
+     "Knie bis etwa 90° beugen, ohne dass die Hüfte abhebt.",
+     "Über die Fersen drücken, Knie nicht ganz durchstrecken."
+    ]
+   },
+   "note": {
+    "fa": "در باشگاه از مربی بخواهید تنظیم دستگاه را نشانتان دهد.",
+    "en": "Ask a trainer to set the machine up for you.",
+    "de": "Lass dir die Einstellung vom Trainer zeigen."
+   },
+   "muscles": "legs, glutes",
+   "equipment": "machine",
+   "image": "",
+   "video": ""
+  }
+ ],
+ "workouts": [
+  {
+   "id": "gentle-cramp-relief",
+   "title": {
+    "fa": "کشش ملایم برای گرفتگی و کمردرد",
+    "en": "Gentle stretch for cramps and back ache",
+    "de": "Sanftes Dehnen bei Krämpfen und Rückenschmerzen"
+   },
+   "summary": {
+    "fa": "ده دقیقه کشش آرام روی زمین برای روزهای پریود؛ بدون فشار و بدون وسیله.",
+    "en": "Ten easy minutes on the floor for period days; no pressure, no equipment.",
+    "de": "Zehn ruhige Minuten auf dem Boden für Periodentage; ohne Druck, ohne Geräte."
+   },
+   "kind": "stretch",
+   "where": "home",
+   "level": "beginner",
+   "minutes": 10,
+   "phases": [
+    "menstrual",
+    "pms"
+   ],
+   "signals": [
+    "cramps",
+    "backache",
+    "fatigue"
+   ],
+   "order": 10,
+   "steps": [
+    {
+     "exercise": "child-pose",
+     "amount": "45s",
+     "note": ""
+    },
+    {
+     "exercise": "cat-cow",
+     "amount": "10x",
+     "note": ""
+    },
+    {
+     "exercise": "supine-twist",
+     "amount": "30s/side",
+     "note": ""
+    },
+    {
+     "exercise": "knees-to-chest",
+     "amount": "30s",
+     "note": ""
+    },
+    {
+     "exercise": "deep-breathing",
+     "amount": "2min",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "evening-wind-down",
+   "title": {
+    "fa": "یوگای آرام شبانه",
+    "en": "Evening wind-down yoga",
+    "de": "Ruhiges Abend-Yoga"
+   },
+   "summary": {
+    "fa": "حرکت‌های آرام برای کم‌شدن تنش و خواب بهتر، مخصوص روزهای پیش از پریود.",
+    "en": "Slow moves to ease tension and sleep better, especially in the days before your period.",
+    "de": "Langsame Bewegungen gegen Anspannung und für besseren Schlaf, besonders vor der Periode."
+   },
+   "kind": "yoga",
+   "where": "home",
+   "level": "beginner",
+   "minutes": 12,
+   "phases": [
+    "luteal",
+    "pms"
+   ],
+   "signals": [
+    "sleep",
+    "fatigue",
+    "bloating"
+   ],
+   "order": 20,
+   "steps": [
+    {
+     "exercise": "butterfly-stretch",
+     "amount": "45s",
+     "note": ""
+    },
+    {
+     "exercise": "standing-forward-fold",
+     "amount": "30s",
+     "note": ""
+    },
+    {
+     "exercise": "child-pose",
+     "amount": "60s",
+     "note": ""
+    },
+    {
+     "exercise": "supine-twist",
+     "amount": "30s/side",
+     "note": ""
+    },
+    {
+     "exercise": "deep-breathing",
+     "amount": "3min",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "morning-mobility",
+   "title": {
+    "fa": "تحرک صبحگاهی",
+    "en": "Morning mobility",
+    "de": "Morgendliche Mobilisation"
+   },
+   "summary": {
+    "fa": "هشت دقیقه حرکت سبک برای بیدار کردن بدن، مناسب روزهای پرانرژی.",
+    "en": "Eight light minutes to wake the body up, good for higher-energy days.",
+    "de": "Acht leichte Minuten, um den Körper zu wecken – gut für energiereiche Tage."
+   },
+   "kind": "mobility",
+   "where": "home",
+   "level": "beginner",
+   "minutes": 8,
+   "phases": [
+    "follicular",
+    "fertile"
+   ],
+   "signals": [],
+   "order": 30,
+   "steps": [
+    {
+     "exercise": "neck-rolls",
+     "amount": "5x",
+     "note": ""
+    },
+    {
+     "exercise": "cat-cow",
+     "amount": "10x",
+     "note": ""
+    },
+    {
+     "exercise": "standing-forward-fold",
+     "amount": "30s",
+     "note": ""
+    },
+    {
+     "exercise": "brisk-walk",
+     "amount": "3min",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "easy-cardio-walk",
+   "title": {
+    "fa": "پیاده‌روی سبک",
+    "en": "Easy cardio walk",
+    "de": "Leichter Cardio-Spaziergang"
+   },
+   "summary": {
+    "fa": "بیست دقیقه راه رفتن؛ ساده‌ترین ورزش برای هر روز چرخه، حتی روزهای کم‌انرژی.",
+    "en": "Twenty minutes of walking: the simplest workout for any day of your cycle, even low-energy days.",
+    "de": "Zwanzig Minuten Gehen: das einfachste Training für jeden Zyklustag, auch bei wenig Energie."
+   },
+   "kind": "cardio",
+   "where": "any",
+   "level": "beginner",
+   "minutes": 20,
+   "phases": [
+    "any"
+   ],
+   "signals": [
+    "fatigue",
+    "bloating"
+   ],
+   "order": 40,
+   "steps": [
+    {
+     "exercise": "brisk-walk",
+     "amount": "20min",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "full-body-gym-beginner",
+   "title": {
+    "fa": "تمرین کل بدن در باشگاه (مبتدی)",
+    "en": "Full-body gym workout (beginner)",
+    "de": "Ganzkörper-Training im Gym (Anfänger)"
+   },
+   "summary": {
+    "fa": "پنج حرکت پایه برای قدرت کل بدن؛ مناسب بعد از پریود که انرژی بالاتر است.",
+    "en": "Five basic moves for whole-body strength; a good fit after your period when energy is higher.",
+    "de": "Fünf Grundübungen für Ganzkörperkraft; passend nach der Periode, wenn die Energie höher ist."
+   },
+   "kind": "strength",
+   "where": "gym",
+   "level": "beginner",
+   "minutes": 40,
+   "phases": [
+    "follicular",
+    "fertile"
+   ],
+   "signals": [],
+   "order": 50,
+   "steps": [
+    {
+     "exercise": "goblet-squat",
+     "amount": "3x10",
+     "note": ""
+    },
+    {
+     "exercise": "dumbbell-row",
+     "amount": "3x10/side",
+     "note": ""
+    },
+    {
+     "exercise": "glute-bridge",
+     "amount": "3x12",
+     "note": ""
+    },
+    {
+     "exercise": "knee-push-up",
+     "amount": "3x8",
+     "note": ""
+    },
+    {
+     "exercise": "plank",
+     "amount": "3x30s",
+     "note": ""
+    }
+   ]
+  },
+  {
+   "id": "lower-body-gym",
+   "title": {
+    "fa": "تمرین پایین‌تنه در باشگاه",
+    "en": "Lower-body gym workout",
+    "de": "Unterkörper-Training im Gym"
+   },
+   "summary": {
+    "fa": "تمرین پا و باسن برای کسانی که ورزش را منظم انجام می‌دهند.",
+    "en": "Legs and glutes for people who already train regularly.",
+    "de": "Beine und Gesäß für alle, die schon regelmäßig trainieren."
+   },
+   "kind": "strength",
+   "where": "gym",
+   "level": "intermediate",
+   "minutes": 45,
+   "phases": [
+    "follicular",
+    "fertile"
+   ],
+   "signals": [],
+   "order": 60,
+   "steps": [
+    {
+     "exercise": "leg-press",
+     "amount": "4x10",
+     "note": ""
+    },
+    {
+     "exercise": "romanian-deadlift",
+     "amount": "3x10",
+     "note": ""
+    },
+    {
+     "exercise": "goblet-squat",
+     "amount": "3x12",
+     "note": ""
+    },
+    {
+     "exercise": "glute-bridge",
+     "amount": "3x15",
+     "note": ""
+    },
+    {
+     "exercise": "plank",
+     "amount": "3x45s",
+     "note": ""
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "id": "stress-and-cycle",
+ "status": "published",
+ "category": "pms",
+ "emoji": "🌿",
+ "tone": "mint",
+ "phases": [
+  "luteal",
+  "pms",
+  "late"
+ ],
+ "signals": [
+  "sleep"
+ ],
+ "moods": [
+  "anxious",
+  "irritable",
+  "sensitive"
+ ],
+ "readMin": 3,
+ "order": 16,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "10 stress busters",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/tips-to-reduce-stress/"
+  },
+  {
+   "title": "Missed or late periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/missed-or-late-periods/"
+  }
+ ],
+ "title": {
+  "fa": "استرس و چرخه‌ی قاعدگی",
+  "en": "Stress and your cycle",
+  "de": "Stress und Zyklus"
+ },
+ "summary": {
+  "fa": "استرس شدید یا طولانی می‌تواند تخمک‌گذاری را عقب بیندازد و پریود را دیر یا نامنظم کند. بدن شما نشان می‌دهد زیر فشار است؛ چند عادت ساده کمک می‌کند.",
+  "en": "Intense or long-lasting stress can delay ovulation and make a period late or irregular. Your body is showing you it is under pressure, and a few simple habits help.",
+  "de": "Starker oder lang anhaltender Stress kann den Eisprung verzögern und die Periode verspäten oder unregelmäßig machen. Dein Körper zeigt dir, dass er unter Druck steht – ein paar einfache Gewohnheiten helfen."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "چه ارتباطی هست؟"
+   },
+   {
+    "p": "مغز و تخمدان‌ها با هورمون‌ها با هم در ارتباط‌اند. فشار روانی، بی‌خوابی یا ورزش بسیار سنگین می‌تواند این گفت‌وگو را به‌هم بزند. نتیجه معمولاً تأخیر در تخمک‌گذاری است و پریود دیرتر می‌آید. همچنین نشانه‌های PMS ممکن است در روزهای پرفشار شدیدتر حس شود."
+   },
+   {
+    "h": "کارهای کوچک و مؤثر"
+   },
+   {
+    "ul": [
+     "حرکت منظم، مثل پیاده‌روی روزانه.",
+     "خواب کافی و ساعت ثابت.",
+     "تنفس آرام: ۴ ثانیه دم، ۶ ثانیه بازدم، چند دقیقه.",
+     "با کسی که به او اعتماد دارید حرف بزنید و کارها را فهرست و اولویت‌بندی کنید.",
+     "برای خودتان زمان استراحت بگذارید؛ لازم نیست همه‌چیز را کامل انجام دهید."
+    ]
+   },
+   {
+    "h": "کی کمک بگیرید؟"
+   },
+   {
+    "p": "اگر پریود بیش از ۳ ماه نیامده، یا اضطراب و غم مدام زندگی را سخت کرده، با پزشک صحبت کنید. کمک گرفتن نشانه‌ی ضعف نیست."
+   }
+  ],
+  "en": [
+   {
+    "h": "What is the link?"
+   },
+   {
+    "p": "Your brain and ovaries talk to each other through hormones. Pressure, poor sleep or very heavy exercise can disturb that conversation. The usual result is later ovulation, so your period comes later. PMS signs can also feel stronger on stressful days."
+   },
+   {
+    "h": "Small things that work"
+   },
+   {
+    "ul": [
+     "Regular movement, such as a daily walk.",
+     "Enough sleep at fixed times.",
+     "Slow breathing: in for 4 seconds, out for 6, for a few minutes.",
+     "Talk to someone you trust, and list and prioritise your tasks.",
+     "Plan rest time; you do not have to do everything perfectly."
+    ]
+   },
+   {
+    "h": "When to get help"
+   },
+   {
+    "p": "If your period has not come for over 3 months, or constant worry or low mood is making life hard, talk to a doctor. Asking for help is not weakness."
+   }
+  ],
+  "de": [
+   {
+    "h": "Was ist der Zusammenhang?"
+   },
+   {
+    "p": "Gehirn und Eierstöcke sprechen über Hormone miteinander. Druck, schlechter Schlaf oder sehr intensiver Sport können dieses Gespräch stören. Meist verschiebt sich der Eisprung, und die Periode kommt später. PMS-Zeichen können sich an stressigen Tagen stärker anfühlen."
+   },
+   {
+    "h": "Kleine Dinge, die wirken"
+   },
+   {
+    "ul": [
+     "Regelmäßige Bewegung, zum Beispiel ein täglicher Spaziergang.",
+     "Genug Schlaf zu festen Zeiten.",
+     "Langsames Atmen: 4 Sekunden ein, 6 Sekunden aus, einige Minuten lang.",
+     "Mit jemandem sprechen, dem du vertraust, und Aufgaben auflisten und priorisieren.",
+     "Ruhezeiten einplanen; du musst nicht alles perfekt machen."
+    ]
+   },
+   {
+    "h": "Wann Hilfe holen?"
+   },
+   {
+    "p": "Wenn deine Periode länger als 3 Monate ausbleibt oder anhaltende Sorgen oder gedrückte Stimmung den Alltag schwer machen, sprich mit der Praxis. Hilfe zu holen ist keine Schwäche."
+   }
+  ]
+ }
+}

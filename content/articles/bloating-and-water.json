@@ -1,0 +1,107 @@
+{
+ "id": "bloating-and-water",
+ "status": "published",
+ "category": "nutrition",
+ "emoji": "💧",
+ "tone": "sky",
+ "phases": [
+  "luteal",
+  "pms",
+  "menstrual"
+ ],
+ "signals": [
+  "bloating"
+ ],
+ "moods": [],
+ "readMin": 3,
+ "order": 18,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Bloating",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/bloating/"
+  },
+  {
+   "title": "Periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/periods/"
+  }
+ ],
+ "title": {
+  "fa": "نفخ قبل پریود: چه کنیم؟",
+  "en": "Bloating before your period: what helps?",
+  "de": "Blähbauch vor der Periode: Was hilft?"
+ },
+ "summary": {
+  "fa": "قبل از پریود هورمون‌ها می‌توانند باعث نگه‌داشتن آب و کندی روده شوند و شکم باد کند. کم‌کردن نمک، نوشیدن آب، حرکت و غذای آرام کمک می‌کند. نفخ مداوم باید بررسی شود.",
+  "en": "Before a period, hormones can make you hold fluid and slow your gut, so your belly swells. Less salt, enough water, movement and calm eating help. Bloating that does not go away should be checked.",
+  "de": "Vor der Periode können Hormone dazu führen, dass der Körper Wasser einlagert und der Darm träger wird, sodass der Bauch anschwillt. Weniger Salz, genug Wasser, Bewegung und ruhiges Essen helfen. Anhaltender Blähbauch sollte abgeklärt werden."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "چه کمک می‌کند؟"
+   },
+   {
+    "ul": [
+     "نمک و غذاهای فرآوری‌شده را کم کنید.",
+     "آب کافی بنوشید؛ کم‌آبی نفخ را بدتر می‌کند.",
+     "پیاده‌روی ملایم یا کشش، چون حرکت روده را فعال می‌کند.",
+     "آهسته و در وعده‌های کوچک بخورید؛ نوشابه‌های گازدار و آدامس را کم کنید.",
+     "فیبر (میوه، سبزی، حبوبات) را کم‌کم زیاد کنید تا خودش باعث نفخ نشود.",
+     "کیسه‌ی آب گرم روی شکم آرام‌کننده است."
+    ]
+   },
+   {
+    "h": "کی به پزشک بگویید؟"
+   },
+   {
+    "p": "اگر نفخ بیش از ۳ هفته ادامه دارد یا با کاهش وزن بی‌دلیل، کم‌اشتهایی، درد مداوم شکم یا تغییر در اجابت مزاج همراه است، نوبت پزشک بگیرید."
+   }
+  ],
+  "en": [
+   {
+    "h": "What can help?"
+   },
+   {
+    "ul": [
+     "Cut back on salt and processed foods.",
+     "Drink enough water; dehydration can make bloating worse.",
+     "Gentle walking or stretching, because movement gets the gut going.",
+     "Eat slowly and in small meals; go easy on fizzy drinks and chewing gum.",
+     "Raise fibre (fruit, vegetables, pulses) gradually so it does not cause bloating itself.",
+     "A hot-water bottle on your belly is soothing."
+    ]
+   },
+   {
+    "h": "When to talk to a doctor"
+   },
+   {
+    "p": "See a doctor if bloating lasts more than 3 weeks, or comes with unexplained weight loss, loss of appetite, constant abdominal pain or a change in bowel habits."
+   }
+  ],
+  "de": [
+   {
+    "h": "Was kann helfen?"
+   },
+   {
+    "ul": [
+     "Weniger Salz und stark verarbeitete Lebensmittel.",
+     "Genug Wasser trinken; Flüssigkeitsmangel kann den Blähbauch verstärken.",
+     "Sanftes Gehen oder Dehnen, weil Bewegung den Darm anregt.",
+     "Langsam und in kleinen Mahlzeiten essen; bei Sprudel und Kaugummi zurückhaltend sein.",
+     "Ballaststoffe (Obst, Gemüse, Hülsenfrüchte) langsam steigern, damit sie nicht selbst blähen.",
+     "Eine Wärmflasche auf dem Bauch wirkt beruhigend."
+    ]
+   },
+   {
+    "h": "Wann zum Arzt?"
+   },
+   {
+    "p": "Sprich mit der Praxis, wenn der Blähbauch länger als 3 Wochen anhält oder mit ungewolltem Gewichtsverlust, Appetitlosigkeit, dauerhaften Bauchschmerzen oder veränderten Stuhlgewohnheiten einhergeht."
+   }
+  ]
+ }
+}

@@ -150,6 +150,86 @@
     }, Promise.resolve());
   }
 
+  /* ---------- workouts ---------- */
+  var KIND_W = ['stretch', 'yoga', 'strength', 'cardio', 'mobility'], WHERE = ['home', 'gym', 'any'], LEVEL = ['beginner', 'intermediate', 'advanced'];
+  var wList = null, wFull = {}, wBundled = null;
+
+  function normExercise(e) {
+    if (!e || typeof e !== 'object' || !/^[a-z0-9][a-z0-9-]*$/.test(str(e.id, 80))) return null;
+    var name = tri(e.name, 120); if (!name) return null;
+    var how = {}; LANGS.forEach(function (l) {
+      var a = e.how && e.how[l]; how[l] = (Array.isArray(a) ? a : []).filter(function (x) { return typeof x === 'string'; }).map(function (x) { return str(x, 500); }).slice(0, 12);
+    });
+    LANGS.forEach(function (l) { if (!how[l].length) how[l] = how.en.length ? how.en : (how.fa.length ? how.fa : how.de); });
+    var note = {}; LANGS.forEach(function (l) { note[l] = str(e.note && e.note[l], 400); });
+    return { id: e.id, name: name, how: how, note: note, muscles: str(e.muscles, 80), equipment: str(e.equipment, 80) || 'none',
+      image: /^https:\/\//.test(e.image || '') ? e.image.slice(0, 400) : '', video: /^https:\/\//.test(e.video || '') ? e.video.slice(0, 400) : '' };
+  }
+  function normWorkout(w, exMap) {
+    if (!w || typeof w !== 'object' || !/^[a-z0-9][a-z0-9-]*$/.test(str(w.id, 80))) return null;
+    var title = tri(w.title, 160); if (!title) return null;
+    var steps = null;
+    if (Array.isArray(w.steps)) {
+      steps = w.steps.map(function (st) {
+        if (!st || typeof st.exercise !== 'string') return null;
+        var d = normExercise(st.detail) || (exMap && exMap[st.exercise]) || null;
+        if (!d) return null;
+        var amt = str(st.amount, 20); if (!/^[0-9]{1,3}(x[0-9]{1,3})?(s|min|x)?(\/side)?$/.test(amt)) amt = '';
+        return { exercise: st.exercise, amount: amt, note: str(st.note, 200), detail: d };
+      }).filter(Boolean).slice(0, 40);
+      if (!steps.length) return null;
+    }
+    return {
+      id: w.id, title: title, summary: tri(w.summary, 600) || title,
+      kind: KIND_W.indexOf(w.kind) >= 0 ? w.kind : 'stretch', where: WHERE.indexOf(w.where) >= 0 ? w.where : 'home',
+      level: LEVEL.indexOf(w.level) >= 0 ? w.level : 'beginner', minutes: Math.max(1, Math.min(240, Math.round(+w.minutes) || 15)),
+      phases: strList(w.phases, PHASES, 8), signals: strList(w.signals, null, 20), order: isFinite(+w.order) ? +w.order : 999,
+      count: steps ? steps.length : Math.max(0, Math.min(99, Math.round(+w.count) || 0)), steps: steps
+    };
+  }
+  function bundledWorkouts() {
+    if (wBundled) return Promise.resolve(wBundled);
+    return getJSON('workouts.json').then(function (j) {
+      var ex = {}; (Array.isArray(j.exercises) ? j.exercises : []).forEach(function (e) { var n = normExercise(e); if (n) ex[n.id] = n; });
+      var list = (Array.isArray(j.workouts) ? j.workouts : []).map(function (w) { return normWorkout(w, ex); }).filter(Boolean);
+      list.sort(function (a, b) { return a.order - b.order; });
+      return (wBundled = list);
+    });
+  }
+  /* The list of workouts: server first, then the ones that ship with the app. */
+  function workouts() {
+    if (wList) return Promise.resolve(wList);
+    var first = (api && useApi) ? getApi('workouts').then(function (j) {
+      var l = (Array.isArray(j && j.workouts) ? j.workouts : []).map(function (w) { return normWorkout(w); }).filter(Boolean);
+      if (!l.length) throw new Error('none'); l.sort(function (a, b) { return a.order - b.order; }); wFull = {}; return { list: l, server: true };
+    }) : Promise.reject(new Error('no server'));
+    return first.catch(function () { return bundledWorkouts().then(function (l) { return { list: l, server: false }; }); })
+      .then(function (r) { wList = r.list; wList.server = r.server; return wList; });
+  }
+  function workout(id) {
+    if (wFull[id]) return Promise.resolve(wFull[id]);
+    var fromBundle = function () { return bundledWorkouts().then(function (l) { var w = l.filter(function (x) { return x.id === id; })[0]; if (!w) throw new Error('unknown workout'); return (wFull[id] = w); }); };
+    if (wList && wList.server) {
+      return getApi('workouts/' + id).then(function (j) { var w = normWorkout(j); if (!w || !w.steps) throw new Error('bad workout'); return (wFull[id] = w); }).catch(fromBundle);
+    }
+    return fromBundle();
+  }
+  function recommendWorkouts(items, ctx, n) {
+    var sym = (ctx.sym || []).concat(ctx.symRecent || []);
+    return (items || []).map(function (w) {
+      var s = 0, hit = w.signals.filter(function (x) { return (ctx.sym || []).indexOf(x) >= 0; }).length;
+      if (hit) s += 4 + (hit > 1 ? 1 : 0);
+      if (w.signals.some(function (x) { return sym.indexOf(x) >= 0; })) s += 1;
+      if (w.phases.indexOf(ctx.phase) >= 0) s += 3;
+      if (ctx.kind && ctx.kind !== ctx.phase && w.phases.indexOf(ctx.kind) >= 0) s += 2;
+      if (w.phases.indexOf('any') >= 0) s += 1;
+      // a tired or sore day should not get the hardest workout
+      if ((ctx.sym || []).some(function (x) { return x === 'fatigue' || x === 'cramps' || x === 'backache'; }) && w.level !== 'beginner') s -= 3;
+      s += (hash(w.id + ':' + ctx.day) % 100) / 200;
+      return { w: w, s: s };
+    }).sort(function (a, b) { return b.s - a.s; }).slice(0, n || 3).map(function (x) { return x.w; });
+  }
+
   /* ---------- daily messages and fonts that live on the server (both optional) ---------- */
   function messages() {
     if (!api) return Promise.resolve(null);
@@ -232,7 +312,7 @@
   }
 
   return {
-    load: load, get: get, prefetch: prefetch, messages: messages, fonts: fonts, usingServer: function () { return useApi; }, recommend: recommend, forPain: forPain, search: search,
+    load: load, get: get, prefetch: prefetch, workouts: workouts, workout: workout, recommendWorkouts: recommendWorkouts, normWorkout: normWorkout, messages: messages, fonts: fonts, usingServer: function () { return useApi; }, recommend: recommend, forPain: forPain, search: search,
     index: function () { return idx; }, failed: function () { return failed; },
     normIndex: normIndex, normBody: normBody, PAIN: PAIN, base: base
   };

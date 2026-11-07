@@ -1,0 +1,129 @@
+{
+ "id": "pcos-pmos-basics",
+ "status": "published",
+ "category": "health",
+ "emoji": "🧩",
+ "tone": "lilac",
+ "phases": [
+  "any"
+ ],
+ "signals": [
+  "acne"
+ ],
+ "moods": [],
+ "readMin": 3,
+ "order": 14,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Polyendocrine metabolic ovarian syndrome (PMOS)",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/polyendocrine-metabolic-ovarian-syndrome-pmos/"
+  },
+  {
+   "title": "Irregular periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/irregular-periods/"
+  }
+ ],
+ "title": {
+  "fa": "سندرم تخمدان پلی‌کیستیک (PCOS)",
+  "en": "Polycystic ovary syndrome (PCOS)",
+  "de": "Polyzystisches Ovarsyndrom (PCOS)"
+ },
+ "summary": {
+  "fa": "PCOS یک اختلال هورمونی شایع است که می‌تواند باعث پریودهای نامنظم، آکنه یا رشد موی زیاد شود. تشخیص با پزشک است و درمان و سبک زندگی کمک بزرگی می‌کنند. در بریتانیا نام آن به PMOS تغییر کرده است.",
+  "en": "PCOS is a common hormonal condition that can cause irregular periods, acne or extra hair growth. A doctor makes the diagnosis, and treatment and lifestyle changes help a lot. In the UK it is now being renamed PMOS.",
+  "de": "PCOS ist eine häufige hormonelle Störung, die unregelmäßige Perioden, Akne oder vermehrten Haarwuchs verursachen kann. Die Diagnose stellt die Praxis; Behandlung und Lebensstil helfen viel. In Großbritannien wird sie inzwischen in PMOS umbenannt."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "نشانه‌های احتمالی"
+   },
+   {
+    "ul": [
+     "پریودهای نامنظم، کم یا قطع‌شده.",
+     "آکنه‌ی مداوم، موهای پررنگ‌تر روی صورت یا بدن، یا ریزش موی سر.",
+     "افزایش وزن یا سختی در کم‌کردن وزن.",
+     "گاهی مشکل در باردارشدن."
+    ]
+   },
+   {
+    "h": "تشخیص و درمان"
+   },
+   {
+    "p": "هیچ‌کدام از این نشانه‌ها به‌تنهایی PCOS نیست و علت‌های دیگر (مثل تیروئید) باید کنار گذاشته شود. پزشک با پرسش، آزمایش خون و گاهی سونوگرافی تصمیم می‌گیرد. درمان به هدف شما بستگی دارد: تنظیم پریود، پوست، یا باروری."
+   },
+   {
+    "h": "چه چیزی کمک می‌کند؟"
+   },
+   {
+    "ul": [
+     "تحرک منظم و غذای متعادل؛ حتی کاهش وزن اندک در صورت اضافه‌وزن می‌تواند علائم را بهتر کند.",
+     "ثبت پریودها در ابرورا برای نشان‌دادن الگو به پزشک.",
+     "اگر پریود شما بیش از ۳ ماه نیامده یا نشانه‌ها آزارتان می‌دهد، وقت بگیرید."
+    ]
+   }
+  ],
+  "en": [
+   {
+    "h": "Possible signs"
+   },
+   {
+    "ul": [
+     "Irregular, infrequent or missing periods.",
+     "Ongoing acne, darker hair on the face or body, or thinning scalp hair.",
+     "Weight gain or difficulty losing weight.",
+     "Sometimes trouble getting pregnant."
+    ]
+   },
+   {
+    "h": "Diagnosis and treatment"
+   },
+   {
+    "p": "None of these signs alone means PCOS, and other causes such as thyroid problems need to be ruled out. A doctor decides using questions, blood tests and sometimes an ultrasound. Treatment depends on your goal: regular periods, skin, or fertility."
+   },
+   {
+    "h": "What can help?"
+   },
+   {
+    "ul": [
+     "Regular activity and balanced eating; even a small weight loss, if you are above a healthy weight, can ease symptoms.",
+     "Logging periods in Abrora to show your doctor the pattern.",
+     "Book an appointment if you have had no period for over 3 months or the symptoms bother you."
+    ]
+   }
+  ],
+  "de": [
+   {
+    "h": "Mögliche Zeichen"
+   },
+   {
+    "ul": [
+     "Unregelmäßige, seltene oder ausbleibende Perioden.",
+     "Anhaltende Akne, dunklere Behaarung im Gesicht oder am Körper oder dünner werdendes Haar.",
+     "Gewichtszunahme oder Schwierigkeiten beim Abnehmen.",
+     "Manchmal Probleme, schwanger zu werden."
+    ]
+   },
+   {
+    "h": "Diagnose und Behandlung"
+   },
+   {
+    "p": "Keines dieser Zeichen bedeutet allein PCOS, und andere Ursachen wie Schilddrüsenprobleme müssen ausgeschlossen werden. Die Praxis entscheidet mit Fragen, Blutwerten und manchmal Ultraschall. Die Behandlung richtet sich nach deinem Ziel: regelmäßige Perioden, Haut oder Kinderwunsch."
+   },
+   {
+    "h": "Was kann helfen?"
+   },
+   {
+    "ul": [
+     "Regelmäßige Bewegung und ausgewogene Ernährung; schon ein kleiner Gewichtsverlust kann bei Übergewicht die Beschwerden lindern.",
+     "Perioden in Abrora festhalten, um der Praxis das Muster zu zeigen.",
+     "Mach einen Termin, wenn deine Periode länger als 3 Monate ausbleibt oder die Beschwerden dich belasten."
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "period-products",
+ "status": "published",
+ "category": "basics",
+ "emoji": "🩸",
+ "tone": "rose",
+ "phases": [
+  "menstrual"
+ ],
+ "signals": [],
+ "moods": [],
+ "readMin": 3,
+ "order": 12,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/periods/"
+  },
+  {
+   "title": "Toxic shock syndrome",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/toxic-shock-syndrome/"
+  }
+ ],
+ "title": {
+  "fa": "پد، تامپون یا کاپ؟ انتخاب و استفاده‌ی ایمن",
+  "en": "Pads, tampons or cups? Choosing and using them safely",
+  "de": "Binden, Tampons oder Tassen? Auswahl und sichere Anwendung"
+ },
+ "summary": {
+  "fa": "هیچ انتخاب «درستی» برای همه وجود ندارد. مهم این است که محصول را به‌موقع عوض کنید و جذب مناسب بردارید. نشانه‌های نادر ولی جدی عفونت (شوک سمی) را بشناسید.",
+  "en": "There is no single right choice for everyone. What matters is changing products on time and using the lowest absorbency that works. Know the rare but serious signs of toxic shock syndrome.",
+  "de": "Für alle gibt es nicht die eine richtige Wahl. Wichtig ist, Produkte rechtzeitig zu wechseln und die niedrigste passende Saugstärke zu nehmen. Kenne die seltenen, aber ernsten Zeichen eines toxischen Schocksyndroms."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "گزینه‌ها"
+   },
+   {
+    "ul": [
+     "پد: ساده و بدون ورود به بدن؛ در حجم خونریزی زیاد یا شب مناسب است.",
+     "تامپون: برای ورزش و شنا راحت است؛ با کمترین جذب لازم شروع کنید.",
+     "کاپ قاعدگی: قابل استفاده‌ی مجدد؛ طبق دستور سازنده معمولاً تا چند ساعت (حداکثر حدود ۱۲ ساعت) می‌ماند و باید شسته و ضدعفونی شود.",
+     "لباس زیر ویژه‌ی پریود: نرم و بی‌دردسر برای روزهای سبک."
+    ]
+   },
+   {
+    "h": "نکات ایمنی"
+   },
+   {
+    "ul": [
+     "تامپون را هر ۴ تا ۸ ساعت عوض کنید و بیش از ۸ ساعت نگه ندارید؛ شبانه یکی را درست قبل از خواب بگذارید و صبح بردارید.",
+     "جذب بالاتر از نیازتان نخرید؛ تامپونِ زیادی خشک در خونریزی کم خطر را بیشتر می‌کند.",
+     "پیش از گذاشتن یا برداشتن، دست‌ها را بشویید.",
+     "اگر تامپون یادتان رفت و چند روز گذشت، با پزشک تماس بگیرید."
+    ]
+   },
+   {
+    "h": "نشانه‌های هشدار"
+   },
+   {
+    "p": "تب ناگهانی، تهوع یا استفراغ، سرگیجه، بثورات شبیه آفتاب‌سوختگی یا ضعف شدید در حین پریود، به‌خصوص با تامپون یا کاپ، اورژانسی است: محصول را بردارید و فوراً به اورژانس بروید."
+   }
+  ],
+  "en": [
+   {
+    "h": "The options"
+   },
+   {
+    "ul": [
+     "Pads: simple and nothing goes inside; good for heavy days or nights.",
+     "Tampons: handy for sport and swimming; start with the lowest absorbency that works.",
+     "Menstrual cups: reusable; follow the maker’s instructions, usually up to several hours (about 12 at most), and clean and sterilise them.",
+     "Period underwear: soft and low-fuss for lighter days."
+    ]
+   },
+   {
+    "h": "Safety tips"
+   },
+   {
+    "ul": [
+     "Change a tampon every 4 to 8 hours and never leave one in longer than 8 hours; put one in just before bed and take it out in the morning.",
+     "Do not use a higher absorbency than you need; a too-dry tampon on a light flow raises the risk.",
+     "Wash your hands before inserting or removing anything.",
+     "If you forget a tampon for days, contact a doctor."
+    ]
+   },
+   {
+    "h": "Warning signs"
+   },
+   {
+    "p": "A sudden high fever, vomiting, dizziness, a rash like sunburn or severe weakness during a period, especially with a tampon or cup, is an emergency: remove the product and go to urgent care at once."
+   }
+  ],
+  "de": [
+   {
+    "h": "Die Möglichkeiten"
+   },
+   {
+    "ul": [
+     "Binden: einfach, nichts kommt in den Körper; gut für starke Tage und die Nacht.",
+     "Tampons: praktisch für Sport und Schwimmen; beginne mit der niedrigsten passenden Saugstärke.",
+     "Menstruationstassen: wiederverwendbar; nach Herstellerangaben meist mehrere Stunden (höchstens etwa 12), danach reinigen und auskochen/desinfizieren.",
+     "Periodenunterwäsche: weich und unkompliziert an leichten Tagen."
+    ]
+   },
+   {
+    "h": "Sicherheitstipps"
+   },
+   {
+    "ul": [
+     "Tampons alle 4 bis 8 Stunden wechseln und nie länger als 8 Stunden tragen; abends direkt vor dem Schlafen einen einführen und morgens entfernen.",
+     "Keine höhere Saugstärke nehmen als nötig; ein zu trockener Tampon bei schwacher Blutung erhöht das Risiko.",
+     "Vor dem Einführen oder Entfernen die Hände waschen.",
+     "Wenn du einen Tampon tagelang vergessen hast, melde dich in der Praxis."
+    ]
+   },
+   {
+    "h": "Warnzeichen"
+   },
+   {
+    "p": "Plötzlich hohes Fieber, Erbrechen, Schwindel, ein sonnenbrandähnlicher Ausschlag oder starke Schwäche während der Periode – besonders mit Tampon oder Tasse – ist ein Notfall: Produkt entfernen und sofort in die Notaufnahme."
+   }
+  ]
+ }
+}

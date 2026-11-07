@@ -12,8 +12,8 @@ const VERSION = 'abrora-v' + self.ABRORA_RELEASE.version;
 const CONTENT = 'abrora-content';   // survives app updates on purpose
 const CORE = [
   './', 'index.html', 'manifest.webmanifest',
-  'css/app.css', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/tips.js', 'js/lock.js',
-  'content/index.json', 'js/update.js', 'js/sync.js', 'js/config.js', 'js/app.js',
+  'css/app.css', 'js/version.js', 'js/calendar.js', 'js/engine.js', 'js/i18n.js', 'js/content.js', 'js/tips.js', 'js/privacy.js', 'js/notify.js', 'js/lock.js',
+  'content/index.json', 'content/workouts.json', 'js/update.js', 'js/sync.js', 'js/config.js', 'js/app.js',
   'icons/logo.svg', 'icons/splash-bg.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png',
   'icons/apple-touch-icon.png', 'icons/favicon.png',
   'fonts/Vazir-Regular.woff2', 'fonts/Vazir-Medium.woff2', 'fonts/Vazir-Bold.woff2',

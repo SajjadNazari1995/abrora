@@ -35,11 +35,34 @@
   function read() { try { var j = JSON.parse(localStorage.getItem(KEY) || 'null'); return j && typeof j.id === 'string' ? j : null; } catch (e) { return null; } }
   function write(o) { try { if (o) localStorage.setItem(KEY, JSON.stringify(o)); else localStorage.removeItem(KEY); } catch (e) { } }
 
+  /* Inside the Android/iOS app the web page cannot use WebAuthn, so the app asks the phone through a native plugin instead
+     (@aparajita/capacitor-biometric-auth). Same result: the phone verifies the person with Face ID / fingerprint / passcode. */
+  var nativeP = null;
+  function native() {
+    var C = root.Capacitor;
+    if (!C) return null;
+    if (C.Plugins && C.Plugins.BiometricAuth) return C.Plugins.BiometricAuth;
+    if (!nativeP && C.isNativePlatform && C.isNativePlatform() && C.registerPlugin) nativeP = C.registerPlugin('BiometricAuth');
+    return nativeP;
+  }
+  var REASON = { fa: 'برای باز کردن ابرورا', en: 'Unlock Abrora', de: 'Abrora entsperren' };
+  function nativeAsk() {
+    var lang = (root.document && document.documentElement.lang) || 'en';
+    return native().authenticate({ reason: REASON[lang] || REASON.en, cancelTitle: '✕', allowDeviceCredential: true, iosFallbackTitle: '' });
+  }
+  function mapNative(e) {
+    var c = e && (e.code || e.name) || '';
+    if (/cancel/i.test(c)) return fail('cancel');                       // userCancel, systemCancel, appCancel
+    if (/notAvailable|notEnrolled|passcodeNotSet|notSupported/i.test(c)) return fail('unsupported');
+    return fail('fail');
+  }
+
   function api() {
     return !!(root.PublicKeyCredential && navigator.credentials && navigator.credentials.create && navigator.credentials.get && root.crypto && crypto.getRandomValues);
   }
   /* Resolves true when this phone can verify the person with its screen lock. */
   function supported() {
+    if (native()) return native().checkBiometry().then(function (r) { return !!(r && (r.isAvailable || r.deviceIsSecure)); }, function () { return false; });
     if (!api()) return Promise.resolve(false);
     var f = root.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable;
     if (typeof f !== 'function') return Promise.resolve(false);
@@ -49,6 +72,7 @@
   function enabled() { return !!read(); }
 
   function enable() {
+    if (native()) return nativeAsk().then(function () { write({ id: 'native', at: Date.now() }); }, function (e) { throw mapNative(e); });
     if (!api()) return Promise.reject(fail('unsupported'));
     return navigator.credentials.create({
       publicKey: {
@@ -69,6 +93,7 @@
   function verify() {
     var saved = read();
     if (!saved) return Promise.resolve();
+    if (saved.id === 'native') return native() ? nativeAsk().then(function () { }, function (e) { throw mapNative(e); }) : Promise.reject(fail('unsupported'));
     if (!api()) return Promise.reject(fail('unsupported'));
     return navigator.credentials.get({
       publicKey: {

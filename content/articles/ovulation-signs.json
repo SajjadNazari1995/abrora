@@ -1,0 +1,103 @@
+{
+ "id": "ovulation-signs",
+ "status": "published",
+ "category": "fertility",
+ "emoji": "🔍",
+ "tone": "mint",
+ "phases": [
+  "fertile",
+  "follicular"
+ ],
+ "signals": [],
+ "moods": [
+  "energetic"
+ ],
+ "readMin": 3,
+ "order": 17,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "How can I tell when I’m ovulating?",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/common-health-questions/sexual-health/how-can-i-tell-when-i-am-ovulating/"
+  },
+  {
+   "title": "Vaginal discharge",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/vaginal-discharge/"
+  }
+ ],
+ "title": {
+  "fa": "نشانه‌های تخمک‌گذاری در بدن",
+  "en": "Signs of ovulation in your body",
+  "de": "Körperzeichen für den Eisprung"
+ },
+ "summary": {
+  "fa": "ترشح شفاف و کشسان، درد خفیف یک‌طرفه، و بالا رفتن دمای پایه از نشانه‌های رایج تخمک‌گذاری‌اند. این نشانه‌ها راهنما هستند، نه تضمین، و برای پیشگیری از بارداری قابل اتکا نیستند.",
+  "en": "Clear, stretchy discharge, mild one-sided pain and a rise in basal temperature are common signs of ovulation. They are a guide, not a guarantee, and not reliable for avoiding pregnancy.",
+  "de": "Klarer, dehnbarer Ausfluss, leichter einseitiger Schmerz und ein Anstieg der Basaltemperatur sind häufige Zeichen des Eisprungs. Sie sind ein Anhaltspunkt, keine Garantie, und nicht verlässlich zur Verhütung."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "چه چیزهایی را ببینید؟"
+   },
+   {
+    "ul": [
+     "ترشح: نزدیک تخمک‌گذاری بیشتر، شفاف، لغزنده و کشسان (شبیه سفیده‌ی تخم‌مرغ) می‌شود.",
+     "درد تخمک‌گذاری: دردی خفیف و کوتاه در یک سمت پایین شکم، چند ساعت تا یک‌دو روز.",
+     "دمای پایه: بعد از تخمک‌گذاری حدود ۰٫۲ تا ۰٫۵ درجه‌ی سانتی‌گراد بالا می‌رود. هر روز صبح پیش از برخاستن اندازه بگیرید؛ این روش تخمک‌گذاری را بعد از وقوعش نشان می‌دهد.",
+     "تست LH: ادرار را برای افزایش هورمون پیش از تخمک‌گذاری می‌سنجد.",
+     "بعضی افراد میل جنسی یا انرژی بیشتری حس می‌کنند."
+    ]
+   },
+   {
+    "h": "محدودیت‌ها"
+   },
+   {
+    "p": "تخمک‌گذاری هر ماه در یک روز ثابت رخ نمی‌دهد، و استرس یا بیماری می‌تواند آن را جابه‌جا کند. پس پیش‌بینی ابرورا و این نشانه‌ها فقط تخمین‌اند و جای روش پیشگیری از بارداری را نمی‌گیرند."
+   }
+  ],
+  "en": [
+   {
+    "h": "What to look for"
+   },
+   {
+    "ul": [
+     "Discharge: near ovulation it becomes more plentiful, clear, slippery and stretchy (like raw egg white).",
+     "Ovulation pain: a mild, short pain on one side of the lower abdomen, lasting hours to a day or two.",
+     "Basal temperature: it rises by about 0.2 to 0.5 °C after ovulation. Measure every morning before getting up; this shows ovulation after it has happened.",
+     "LH test: detects the hormone surge before ovulation in urine.",
+     "Some people notice more desire or energy."
+    ]
+   },
+   {
+    "h": "Limits"
+   },
+   {
+    "p": "Ovulation does not happen on the same day every month, and stress or illness can shift it. So Abrora’s predictions and these signs are only estimates and do not replace contraception."
+   }
+  ],
+  "de": [
+   {
+    "h": "Worauf du achten kannst"
+   },
+   {
+    "ul": [
+     "Ausfluss: Um den Eisprung wird er mehr, klar, glitschig und dehnbar (wie rohes Eiweiß).",
+     "Eisprungschmerz: ein leichter, kurzer Schmerz auf einer Seite im Unterbauch, für Stunden bis ein, zwei Tage.",
+     "Basaltemperatur: Sie steigt nach dem Eisprung um etwa 0,2 bis 0,5 °C. Jeden Morgen vor dem Aufstehen messen; so erkennst du den Eisprung erst im Nachhinein.",
+     "LH-Test: weist im Urin den Hormonanstieg vor dem Eisprung nach.",
+     "Manche spüren mehr Lust oder Energie."
+    ]
+   },
+   {
+    "h": "Grenzen"
+   },
+   {
+    "p": "Der Eisprung findet nicht jeden Monat am gleichen Tag statt, und Stress oder Krankheit können ihn verschieben. Die Vorhersagen in Abrora und diese Zeichen sind daher nur Schätzungen und ersetzen keine Verhütung."
+   }
+  ]
+ }
+}

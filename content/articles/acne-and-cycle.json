@@ -1,0 +1,100 @@
+{
+ "id": "acne-and-cycle",
+ "status": "published",
+ "category": "pms",
+ "emoji": "🧴",
+ "tone": "butter",
+ "phases": [
+  "luteal",
+  "pms"
+ ],
+ "signals": [
+  "acne"
+ ],
+ "moods": [
+  "sensitive"
+ ],
+ "readMin": 3,
+ "order": 19,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Acne",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/acne/"
+  }
+ ],
+ "title": {
+  "fa": "جوش‌های قبل از پریود",
+  "en": "Breakouts before your period",
+  "de": "Pickel vor der Periode"
+ },
+ "summary": {
+  "fa": "در هفته‌ی پیش از پریود تغییر هورمون‌ها چربی پوست را بیشتر می‌کند و جوش‌ها را بدتر. مراقبت ملایم و صبور بهتر از شست‌وشوی شدید است؛ اگر جوش شدید است یا جای زخم می‌گذارد، از داروساز یا پزشک کمک بگیرید.",
+  "en": "In the week before a period, hormone changes make skin oilier and breakouts worse. Gentle, patient care beats harsh scrubbing; if acne is severe or scarring, ask a pharmacist or doctor.",
+  "de": "In der Woche vor der Periode machen Hormonschwankungen die Haut fettiger und Pickel schlimmer. Sanfte, geduldige Pflege ist besser als kräftiges Schrubben; bei starker oder vernarbender Akne hilft die Apotheke oder Praxis."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "مراقبت روزمره"
+   },
+   {
+    "ul": [
+     "صورت را روزی دو بار با شوینده‌ی ملایم و آب ولرم بشویید؛ بیشتر از این پوست را تحریک می‌کند.",
+     "جوش‌ها را نفشارید؛ جای زخم و عفونت می‌گذارد.",
+     "از مرطوب‌کننده و آرایش سبک و «غیرمسدودکننده‌ی منافذ» استفاده کنید.",
+     "آرایش را شب پاک کنید و ملافه‌ی بالش را مرتب عوض کنید.",
+     "به خودتان زمان بدهید؛ نتیجه‌ی هر روش معمولاً چند هفته بعد دیده می‌شود."
+    ]
+   },
+   {
+    "h": "کی کمک بگیرید؟"
+   },
+   {
+    "p": "اگر جوش‌ها عمیق، دردناک یا جای‌گذار است، یا روی اعتماد به‌نفس شما اثر گذاشته، با داروساز یا پزشک صحبت کنید. بعضی داروهای جوش در بارداری ممنوع‌اند؛ اگر قصد بارداری دارید یا باردار شده‌اید، حتماً بگویید."
+   }
+  ],
+  "en": [
+   {
+    "h": "Everyday care"
+   },
+   {
+    "ul": [
+     "Wash your face twice a day with a gentle cleanser and lukewarm water; more often irritates the skin.",
+     "Do not squeeze spots; it can scar and infect them.",
+     "Use light, non-comedogenic moisturiser and make-up.",
+     "Remove make-up at night and change pillowcases regularly.",
+     "Give it time; any method usually takes a few weeks to show results."
+    ]
+   },
+   {
+    "h": "When to get help"
+   },
+   {
+    "p": "If spots are deep, painful or scarring, or are affecting your confidence, talk to a pharmacist or doctor. Some acne medicines must not be used in pregnancy, so say so if you plan to be or are pregnant."
+   }
+  ],
+  "de": [
+   {
+    "h": "Alltägliche Pflege"
+   },
+   {
+    "ul": [
+     "Das Gesicht zweimal täglich mit einem milden Reiniger und lauwarmem Wasser waschen; häufiger reizt die Haut.",
+     "Pickel nicht ausdrücken; das kann Narben und Entzündungen verursachen.",
+     "Leichte, nicht porenverstopfende Pflege und Make-up verwenden.",
+     "Make-up abends entfernen und den Kissenbezug regelmäßig wechseln.",
+     "Gib ihr Zeit; jede Methode zeigt meist erst nach einigen Wochen Wirkung."
+    ]
+   },
+   {
+    "h": "Wann Hilfe holen?"
+   },
+   {
+    "p": "Wenn die Pickel tief, schmerzhaft oder vernarbend sind oder dein Selbstvertrauen belasten, sprich mit der Apotheke oder Praxis. Manche Aknemedikamente dürfen in der Schwangerschaft nicht angewendet werden – sag Bescheid, wenn du schwanger bist oder es werden möchtest."
+   }
+  ]
+ }
+}

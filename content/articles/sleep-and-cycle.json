@@ -1,0 +1,126 @@
+{
+ "id": "sleep-and-cycle",
+ "status": "published",
+ "category": "health",
+ "emoji": "🌙",
+ "tone": "sky",
+ "phases": [
+  "luteal",
+  "pms",
+  "menstrual"
+ ],
+ "signals": [
+  "sleep",
+  "fatigue"
+ ],
+ "moods": [
+  "irritable",
+  "anxious"
+ ],
+ "readMin": 3,
+ "order": 11,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Insomnia",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/insomnia/"
+  },
+  {
+   "title": "Fall asleep faster and sleep better",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/how-to-fall-asleep-faster-and-sleep-better/"
+  }
+ ],
+ "title": {
+  "fa": "چرا قبل و حین پریود بد می‌خوابم؟",
+  "en": "Why do I sleep badly around my period?",
+  "de": "Warum schlafe ich rund um die Periode schlecht?"
+ },
+ "summary": {
+  "fa": "در نیمه‌ی دوم چرخه و روزهای اول پریود خواب بسیاری از افراد سبک‌تر یا بریده‌بریده می‌شود. تغییر هورمون‌ها، کمی بالا رفتن دمای بدن و درد دلیل‌های رایج‌اند، و عادت‌های ساده‌ی خواب کمک می‌کنند.",
+  "en": "In the second half of the cycle and the first days of a period, many people sleep lighter or wake more often. Changing hormones, a slightly higher body temperature and pain are common reasons, and simple sleep habits can help.",
+  "de": "In der zweiten Zyklushälfte und an den ersten Periodentagen schlafen viele leichter oder wachen öfter auf. Wechselnde Hormone, eine etwas höhere Körpertemperatur und Schmerzen sind häufige Gründe – einfache Schlafgewohnheiten helfen."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "چه اتفاقی می‌افتد؟"
+   },
+   {
+    "p": "بعد از تخمک‌گذاری دمای پایه‌ی بدن کمی بالا می‌رود و پروژسترون تغییر می‌کند. این‌ها می‌تواند خواب را سبک‌تر کند. درد، نفخ یا نگرانی هم خواب را سخت‌تر می‌کنند. اگر نزدیک پریود بدخواب می‌شوید، شما تنها نیستید."
+   },
+   {
+    "h": "چه چیزهایی کمک می‌کند؟"
+   },
+   {
+    "ul": [
+     "ساعت خواب و بیداری تقریباً ثابت، حتی آخر هفته‌ها.",
+     "اتاق خنک، تاریک و ساکت؛ در روزهای گرم‌تر چرخه لباس و پتوی سبک‌تر.",
+     "کافئین را از بعدازظهر کم کنید و شام سنگین یا دیروقت نخورید.",
+     "یک ساعت پیش از خواب صفحه‌ی گوشی را کنار بگذارید و کار آرام‌کننده‌ای مثل دوش ولرم یا کتاب انجام دهید.",
+     "اگر گرفتگی بیدارتان می‌کند، کیسه‌ی آب گرم کنار شکم کمک می‌کند."
+    ]
+   },
+   {
+    "h": "کی به پزشک بگویید؟"
+   },
+   {
+    "p": "اگر بی‌خوابی بیشتر از چند هفته ادامه دارد، در روز عملکردتان را مختل می‌کند یا هر ماه شدیدتر می‌شود، با پزشک صحبت کنید."
+   }
+  ],
+  "en": [
+   {
+    "h": "What is happening?"
+   },
+   {
+    "p": "After ovulation your resting body temperature rises a little and progesterone changes. This can make sleep lighter. Pain, bloating or worry make it harder still. If you sleep worse before your period, you are not alone."
+   },
+   {
+    "h": "What can help?"
+   },
+   {
+    "ul": [
+     "Go to bed and get up at roughly the same time, even at weekends.",
+     "Keep the bedroom cool, dark and quiet; use lighter bedding in the warmer part of your cycle.",
+     "Cut back on caffeine from the afternoon and avoid heavy or late meals.",
+     "Put screens away an hour before bed and wind down with a warm shower or a book.",
+     "If cramps wake you, a hot-water bottle on your abdomen can help."
+    ]
+   },
+   {
+    "h": "When to talk to a doctor"
+   },
+   {
+    "p": "See a doctor if poor sleep lasts more than a few weeks, affects your day, or gets worse every month."
+   }
+  ],
+  "de": [
+   {
+    "h": "Was passiert da?"
+   },
+   {
+    "p": "Nach dem Eisprung steigt die Ruhetemperatur des Körpers leicht an und das Progesteron verändert sich. Das kann den Schlaf leichter machen. Schmerzen, Blähbauch oder Sorgen erschweren es zusätzlich. Wenn du vor der Periode schlechter schläfst, bist du damit nicht allein."
+   },
+   {
+    "h": "Was kann helfen?"
+   },
+   {
+    "ul": [
+     "Ungefähr zur gleichen Zeit schlafen gehen und aufstehen, auch am Wochenende.",
+     "Das Schlafzimmer kühl, dunkel und ruhig halten; in der wärmeren Zyklushälfte leichtere Bettwäsche nutzen.",
+     "Ab dem Nachmittag weniger Koffein und keine schweren oder späten Mahlzeiten.",
+     "Eine Stunde vor dem Schlafen Bildschirme weglegen und mit einer warmen Dusche oder einem Buch zur Ruhe kommen.",
+     "Wenn Krämpfe dich wecken, hilft eine Wärmflasche am Bauch."
+    ]
+   },
+   {
+    "h": "Wann zum Arzt?"
+   },
+   {
+    "p": "Sprich mit der Praxis, wenn die Schlafprobleme länger als ein paar Wochen anhalten, den Tag beeinträchtigen oder jeden Monat schlimmer werden."
+   }
+  ]
+ }
+}

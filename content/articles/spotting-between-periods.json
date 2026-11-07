@@ -1,0 +1,125 @@
+{
+ "id": "spotting-between-periods",
+ "status": "published",
+ "category": "health",
+ "emoji": "🔎",
+ "tone": "butter",
+ "phases": [
+  "any",
+  "fertile"
+ ],
+ "signals": [],
+ "moods": [],
+ "readMin": 3,
+ "order": 13,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Vaginal bleeding between periods or after sex",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/vaginal-bleeding-between-periods-or-after-sex/"
+  },
+  {
+   "title": "Irregular periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/irregular-periods/"
+  }
+ ],
+ "title": {
+  "fa": "لکه‌بینی بین دو پریود",
+  "en": "Spotting between periods",
+  "de": "Schmierblutungen zwischen den Perioden"
+ },
+ "summary": {
+  "fa": "لکه‌بینی سبک گاهی طبیعی است، مثلاً هنگام تخمک‌گذاری یا در ماه‌های اول قرص. اما اگر تکرار شود، بعد از رابطه رخ دهد یا همراه درد باشد، باید بررسی شود.",
+  "en": "Light spotting can be normal, for example around ovulation or in the first months of the pill. But if it keeps happening, follows sex or comes with pain, it should be checked.",
+  "de": "Leichte Schmierblutungen sind manchmal normal, etwa um den Eisprung oder in den ersten Monaten der Pille. Wenn sie sich wiederholen, nach dem Sex auftreten oder mit Schmerzen einhergehen, sollten sie abgeklärt werden."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "علت‌های رایج"
+   },
+   {
+    "ul": [
+     "تخمک‌گذاری: لکه‌ی کم و کوتاه حدود وسط چرخه.",
+     "روش‌های هورمونی مثل قرص، آی‌یو‌دی یا ایمپلنت، به‌ویژه در ماه‌های اول یا وقتی قرصی فراموش شود.",
+     "بارداری اولیه.",
+     "عفونت‌ها، پولیپ یا فیبروم، و گاهی تغییر در تیروئید یا استرس."
+    ]
+   },
+   {
+    "h": "کی باید بررسی شود؟"
+   },
+   {
+    "ul": [
+     "لکه‌بینی چند ماه پشت‌سرهم تکرار شود.",
+     "بعد از رابطه‌ی جنسی خونریزی کنید.",
+     "همراه درد، تب یا ترشح بدبو باشد.",
+     "ممکن است باردار باشید.",
+     "بعد از یائسگی دوباره خونریزی کردید."
+    ]
+   },
+   {
+    "p": "ثبت تاریخ و مقدار لکه‌بینی در ابرورا به پزشک کمک می‌کند."
+   }
+  ],
+  "en": [
+   {
+    "h": "Common causes"
+   },
+   {
+    "ul": [
+     "Ovulation: a little light bleeding around the middle of the cycle.",
+     "Hormonal contraception such as the pill, IUD or implant, especially in the first months or after a missed pill.",
+     "Early pregnancy.",
+     "Infections, polyps or fibroids, and sometimes thyroid changes or stress."
+    ]
+   },
+   {
+    "h": "When to get it checked"
+   },
+   {
+    "ul": [
+     "The spotting repeats for several months in a row.",
+     "You bleed after sex.",
+     "It comes with pain, fever or a foul-smelling discharge.",
+     "You might be pregnant.",
+     "You bleed again after the menopause."
+    ]
+   },
+   {
+    "p": "Logging when and how much you spot in Abrora gives your doctor useful detail."
+   }
+  ],
+  "de": [
+   {
+    "h": "Häufige Ursachen"
+   },
+   {
+    "ul": [
+     "Eisprung: leichte, kurze Blutung etwa in der Zyklusmitte.",
+     "Hormonelle Verhütung wie Pille, Spirale oder Implantat, besonders in den ersten Monaten oder nach einer vergessenen Pille.",
+     "Frühe Schwangerschaft.",
+     "Infektionen, Polypen oder Myome, manchmal auch Schilddrüsenveränderungen oder Stress."
+    ]
+   },
+   {
+    "h": "Wann abklären lassen?"
+   },
+   {
+    "ul": [
+     "Die Schmierblutung tritt mehrere Monate hintereinander auf.",
+     "Du blutest nach dem Sex.",
+     "Sie kommt mit Schmerzen, Fieber oder übel riechendem Ausfluss.",
+     "Du könntest schwanger sein.",
+     "Du blutest nach den Wechseljahren wieder."
+    ]
+   },
+   {
+    "p": "Wenn du in Abrora festhältst, wann und wie stark du schmierst, hilft das der Praxis."
+   }
+  ]
+ }
+}

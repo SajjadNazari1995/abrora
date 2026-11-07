@@ -1,0 +1,115 @@
+{
+ "id": "late-period-causes",
+ "status": "published",
+ "category": "health",
+ "emoji": "⏳",
+ "tone": "lilac",
+ "phases": [
+  "late",
+  "luteal"
+ ],
+ "signals": [],
+ "moods": [
+  "anxious"
+ ],
+ "readMin": 3,
+ "order": 20,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Missed or late periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/missed-or-late-periods/"
+  },
+  {
+   "title": "Irregular periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/symptoms/irregular-periods/"
+  }
+ ],
+ "title": {
+  "fa": "چرا پریودم دیر شده؟",
+  "en": "Why is my period late?",
+  "de": "Warum ist meine Periode verspätet?"
+ },
+ "summary": {
+  "fa": "بارداری شایع‌ترین علت دیرکرد در کسانی است که رابطه داشته‌اند، اما استرس، تغییر وزن، ورزش سنگین، شیردهی و مشکلات هورمونی هم می‌توانند دلیل باشند. چند روز تأخیر معمولاً نگران‌کننده نیست.",
+  "en": "Pregnancy is the most common reason for a late period in people who have had sex, but stress, weight change, heavy exercise, breastfeeding and hormonal problems can also be behind it. A few days’ delay is usually nothing to worry about.",
+  "de": "Eine Schwangerschaft ist bei Menschen mit Geschlechtsverkehr der häufigste Grund für eine verspätete Periode, aber auch Stress, Gewichtsveränderungen, intensiver Sport, Stillen und hormonelle Probleme können dahinterstecken. Ein paar Tage Verspätung sind meist kein Grund zur Sorge."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "علت‌های رایج"
+   },
+   {
+    "ul": [
+     "بارداری: اگر ممکن است، یک تست بارداری بزنید (از روز اول تأخیر قابل اعتمادتر است).",
+     "استرس، بدخوابی یا سفر.",
+     "کاهش یا افزایش زیاد وزن، یا ورزش بسیار سنگین.",
+     "شیردهی، قرص یا روش‌های هورمونی تازه قطع‌شده.",
+     "PCOS، مشکلات تیروئید، و نزدیک‌شدن به یائسگی."
+    ]
+   },
+   {
+    "h": "چه کار کنید؟"
+   },
+   {
+    "ul": [
+     "چند روز صبر کنید و در ابرورا روز واقعی شروع پریود را ثبت کنید؛ پیش‌بینی بعدی خودکار اصلاح می‌شود.",
+     "اگر باردار هستید یا نگرانید، تست بزنید یا با پزشک صحبت کنید.",
+     "اگر بیش از ۳ ماه پریود نیامده، یا با درد شدید، تب یا خونریزی غیرعادی همراه است، به پزشک مراجعه کنید."
+    ]
+   }
+  ],
+  "en": [
+   {
+    "h": "Common causes"
+   },
+   {
+    "ul": [
+     "Pregnancy: if it is possible, take a pregnancy test (more reliable from the first day of lateness).",
+     "Stress, poor sleep or travel.",
+     "Large weight loss or gain, or very heavy exercise.",
+     "Breastfeeding, or hormonal contraception that was recently stopped.",
+     "PCOS, thyroid problems, and approaching the menopause."
+    ]
+   },
+   {
+    "h": "What to do"
+   },
+   {
+    "ul": [
+     "Wait a few days and log the real start of your period in Abrora; the next prediction then adjusts itself.",
+     "If you could be pregnant or are worried, take a test or talk to a doctor.",
+     "See a doctor if you have had no period for over 3 months, or it comes with severe pain, fever or unusual bleeding."
+    ]
+   }
+  ],
+  "de": [
+   {
+    "h": "Häufige Ursachen"
+   },
+   {
+    "ul": [
+     "Schwangerschaft: Wenn sie möglich ist, mach einen Schwangerschaftstest (ab dem ersten Tag der Verspätung verlässlicher).",
+     "Stress, schlechter Schlaf oder Reisen.",
+     "Starke Gewichtsab- oder -zunahme oder sehr intensiver Sport.",
+     "Stillzeit oder kürzlich abgesetzte hormonelle Verhütung.",
+     "PCOS, Schilddrüsenprobleme und die Annäherung an die Wechseljahre."
+    ]
+   },
+   {
+    "h": "Was tun?"
+   },
+   {
+    "ul": [
+     "Ein paar Tage abwarten und den tatsächlichen Periodenbeginn in Abrora eintragen; die nächste Vorhersage passt sich dann an.",
+     "Wenn du schwanger sein könntest oder dir Sorgen machst, mach einen Test oder sprich mit der Praxis.",
+     "Geh zur Praxis, wenn deine Periode länger als 3 Monate ausbleibt oder mit starken Schmerzen, Fieber oder ungewöhnlicher Blutung einhergeht."
+    ]
+   }
+  ]
+ }
+}

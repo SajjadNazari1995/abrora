@@ -1,0 +1,121 @@
+{
+ "id": "endometriosis-signs",
+ "status": "published",
+ "category": "health",
+ "emoji": "🩺",
+ "tone": "rose",
+ "phases": [
+  "menstrual"
+ ],
+ "signals": [
+  "cramps",
+  "backache"
+ ],
+ "moods": [],
+ "readMin": 4,
+ "order": 15,
+ "updated": "2026-11-07",
+ "reviewed": "",
+ "sources": [
+  {
+   "title": "Endometriosis",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/endometriosis/"
+  },
+  {
+   "title": "Heavy periods",
+   "org": "NHS",
+   "url": "https://www.nhs.uk/conditions/heavy-periods/"
+  }
+ ],
+ "title": {
+  "fa": "اندومتریوز: وقتی درد پریود «عادی» نیست",
+  "en": "Endometriosis: when period pain is not \"just normal\"",
+  "de": "Endometriose: wenn Periodenschmerzen nicht „normal“ sind"
+ },
+ "summary": {
+  "fa": "در اندومتریوز بافتی شبیه لایه‌ی داخلی رحم بیرون از رحم رشد می‌کند و می‌تواند درد شدید ایجاد کند. بسیاری از افراد سال‌ها دیر تشخیص می‌گیرند. درد شدیدی که زندگی را مختل می‌کند باید بررسی شود.",
+  "en": "In endometriosis, tissue similar to the lining of the womb grows outside it and can cause severe pain. Many people wait years for a diagnosis. Pain that disrupts your life deserves to be checked.",
+  "de": "Bei Endometriose wächst Gewebe, das der Gebärmutterschleimhaut ähnelt, außerhalb der Gebärmutter und kann starke Schmerzen verursachen. Viele warten Jahre auf die Diagnose. Schmerzen, die den Alltag stören, sollten abgeklärt werden."
+ },
+ "body": {
+  "fa": [
+   {
+    "h": "نشانه‌هایی که باید جدی گرفت"
+   },
+   {
+    "ul": [
+     "درد پریود که با مسکن‌های معمول بهتر نمی‌شود یا هر ماه بدتر می‌شود.",
+     "درد هنگام رابطه‌ی جنسی.",
+     "درد یا ناراحتی هنگام اجابت مزاج یا ادرار، به‌ویژه در روزهای پریود.",
+     "خونریزی سنگین، خستگی زیاد، نفخ شدید.",
+     "مشکل در باردارشدن."
+    ]
+   },
+   {
+    "h": "چه کار کنید؟"
+   },
+   {
+    "p": "این نشانه‌ها همیشه اندومتریوز نیستند، ولی ارزش بررسی دارند. به پزشک عمومی یا زنان بگویید درد چقدر شما را از کار و زندگی می‌اندازد؛ ثبت روزانه‌ی درد و روزهای از‌دست‌رفته در ابرورا به شما کمک می‌کند حرفتان شنیده شود. درمان‌ها از مسکن و روش‌های هورمونی تا جراحی متغیرند."
+   },
+   {
+    "h": "نکته"
+   },
+   {
+    "p": "تحمل‌کردن درد شدید «وظیفه‌ی زن بودن» نیست. اگر بار اول جدی گرفته نشد، می‌توانید نظر دوم بگیرید."
+   }
+  ],
+  "en": [
+   {
+    "h": "Signs to take seriously"
+   },
+   {
+    "ul": [
+     "Period pain that standard painkillers do not ease, or that gets worse each month.",
+     "Pain during sex.",
+     "Pain or discomfort when you pass stools or urine, especially on period days.",
+     "Heavy bleeding, marked tiredness, severe bloating.",
+     "Difficulty getting pregnant."
+    ]
+   },
+   {
+    "h": "What to do"
+   },
+   {
+    "p": "These signs are not always endometriosis, but they are worth checking. Tell your GP or gynaecologist how much the pain limits your work and life; a daily record of pain and missed days in Abrora helps you be heard. Treatments range from painkillers and hormones to surgery."
+   },
+   {
+    "h": "Good to know"
+   },
+   {
+    "p": "Putting up with severe pain is not part of being a woman. If you are not taken seriously the first time, you can ask for a second opinion."
+   }
+  ],
+  "de": [
+   {
+    "h": "Zeichen, die man ernst nehmen sollte"
+   },
+   {
+    "ul": [
+     "Periodenschmerzen, die auf übliche Schmerzmittel kaum ansprechen oder jeden Monat schlimmer werden.",
+     "Schmerzen beim Sex.",
+     "Schmerzen oder Beschwerden beim Stuhlgang oder Wasserlassen, besonders an Periodentagen.",
+     "Starke Blutung, ausgeprägte Müdigkeit, starker Blähbauch.",
+     "Schwierigkeiten, schwanger zu werden."
+    ]
+   },
+   {
+    "h": "Was tun?"
+   },
+   {
+    "p": "Diese Zeichen sind nicht immer Endometriose, aber eine Abklärung lohnt sich. Sag der Hausarzt- oder Frauenarztpraxis, wie stark dich die Schmerzen einschränken; ein Tagebuch über Schmerzen und ausgefallene Tage in Abrora hilft, gehört zu werden. Die Behandlung reicht von Schmerzmitteln und Hormonen bis zur Operation."
+   },
+   {
+    "h": "Gut zu wissen"
+   },
+   {
+    "p": "Starke Schmerzen auszuhalten gehört nicht zum Frausein. Wenn du beim ersten Mal nicht ernst genommen wirst, kannst du eine zweite Meinung einholen."
+   }
+  ]
+ }
+}

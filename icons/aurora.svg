@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1=".2" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#0a2a3a"/><stop offset=".6" stop-color="#0d4a4a"/><stop offset="1" stop-color="#14705f"/></linearGradient>
+    <linearGradient id="r1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6ff5c8" stop-opacity="0"/><stop offset=".45" stop-color="#6ff5c8"/><stop offset="1" stop-color="#4fd1ff" stop-opacity=".2"/></linearGradient>
+    <linearGradient id="r2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b79cff" stop-opacity=".1"/><stop offset=".55" stop-color="#b79cff"/><stop offset="1" stop-color="#ff9ad1" stop-opacity="0"/></linearGradient>
+    <filter id="bl" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="6"/></filter>
+  <clipPath id="clip"><rect width="512" height="512" rx="120"/></clipPath></defs>
+  <g clip-path="url(#clip)">
+  <rect width="512" height="512" rx="120" fill="url(#bg)"/>
+  <g fill="#fff"><circle cx="110" cy="96" r="4"/><circle cx="196" cy="62" r="3"/><circle cx="388" cy="84" r="4.5"/><circle cx="440" cy="150" r="3"/><circle cx="66" cy="176" r="3"/></g>
+  <path d="M40 360C130 190 230 150 300 230S430 300 480 150" fill="none" stroke="url(#r1)" stroke-width="64" stroke-linecap="round" filter="url(#bl)" opacity=".7"/>
+  <path d="M40 360C130 190 230 150 300 230S430 300 480 150" fill="none" stroke="url(#r1)" stroke-width="26" stroke-linecap="round"/>
+  <path d="M40 430C140 290 240 250 310 320S430 380 480 270" fill="none" stroke="url(#r2)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M40 300C120 150 220 110 290 170S410 230 480 100" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="7" stroke-linecap="round"/>
+</g></svg>

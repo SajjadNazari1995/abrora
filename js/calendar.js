@@ -1,4 +1,4 @@
-/* Abrora — calendar helper (Gregorian + Persian/Jalali).
+/* Abra — calendar helper (Gregorian + Persian/Jalali).
    All data inside the app stays on Gregorian "day numbers" (days since 1970-01-01, UTC).
    This file only converts a day number to / from the date the person sees on screen,
    so switching the calendar never changes or loses anything that was logged. */

@@ -1,4 +1,4 @@
-/* Abrora — content: articles that live OUTSIDE the app code, plus the "what should I read today" scoring.
+/* Abra — content: articles that live OUTSIDE the app code, plus the "what should I read today" scoring.
 
    Where the content comes from
    - Today:  the files in /content (index.json + articles/<id>.json) that ship with the app.

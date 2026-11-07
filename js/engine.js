@@ -1,4 +1,4 @@
-/* Abrora — cycle engine (pure functions, no DOM).
+/* Abra — cycle engine (pure functions, no DOM).
    Days are handled as integer "day numbers" (days since 1970-01-01, UTC),
    so there are no time-zone or daylight-saving surprises. */
 (function (root, factory) {

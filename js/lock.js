@@ -1,4 +1,4 @@
-/* Abrora — app lock.
+/* Abra — app lock.
    Uses the phone's own screen lock (Face ID / Touch ID / passcode on iPhone, fingerprint / face / PIN on Android)
    through WebAuthn. There is no password stored anywhere: the browser asks the phone to verify the person.
 
@@ -45,10 +45,10 @@
     if (!nativeP && C.isNativePlatform && C.isNativePlatform() && C.registerPlugin) nativeP = C.registerPlugin('BiometricAuth');
     return nativeP;
   }
-  var REASON = { fa: 'برای باز کردن ابرورا', en: 'Unlock Abrora', de: 'Abrora entsperren' };
+  var REASON = { fa: 'برای باز کردن %APP%', en: 'Unlock %APP%', de: '%APP% entsperren' };
   function nativeAsk() {
     var lang = (root.document && document.documentElement.lang) || 'en';
-    return native().authenticate({ reason: REASON[lang] || REASON.en, cancelTitle: '✕', allowDeviceCredential: true, iosFallbackTitle: '' });
+    return native().authenticate({ reason: (REASON[lang] || REASON.en).split('%APP%').join(self.Brand ? Brand.name() : 'Abra'), cancelTitle: '✕', allowDeviceCredential: true, iosFallbackTitle: '' });
   }
   function mapNative(e) {
     var c = e && (e.code || e.name) || '';
@@ -77,8 +77,8 @@
     return navigator.credentials.create({
       publicKey: {
         challenge: rnd(32),
-        rp: { name: 'Abrora' },
-        user: { id: rnd(16), name: 'abrora', displayName: 'Abrora' },
+        rp: { name: self.Brand ? Brand.name() : 'Abra' },
+        user: { id: rnd(16), name: 'abrora', displayName: self.Brand ? Brand.name() : 'Abra' },
         pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
         authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' },
         attestation: 'none', timeout: 60000

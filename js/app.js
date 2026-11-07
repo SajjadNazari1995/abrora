@@ -1,11 +1,11 @@
-/* Abrora — app shell, views and interactions. Vanilla JS, fully offline. */
+/* Abra — app shell, views and interactions. Vanilla JS, fully offline. */
 (function () {
   'use strict';
 
   var E = Engine, I = I18N, t = I.t, num = I.num, CT = self.Content, LK = self.Lock;
-  var KEY = 'abrora:v1';
+  var LEGACY_KEY = 'abrora:v1', PREFS_KEY = 'abra:prefs';
   var VERSION = (self.ABRORA_RELEASE || {}).version || '1.0.0';
-  var SNAP_KEY = 'abrora:pre-update', UNDO_KEY = 'abrora:pre-restore';
+  var LEGACY_SNAP = 'abrora:pre-update', LEGACY_UNDO = 'abrora:pre-restore';
   var THEMES = ['auto', 'light', 'dark'];
   var ISO_RE = /^\d{4}-\d{2}-\d{2}$/, SLUG_RE = /^[a-z0-9][a-z0-9-]{0,79}$/;
   function cleanName(v) { return String(v || '').replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 30); }
@@ -14,7 +14,7 @@
   function defaults() {
     return {
       v: 1,
-      settings: { lang: 'fa', font: 'vazir', theme: 'auto', weekStart: 1, calendar: 'gregorian', name: '', notify: { on: false, time: '09:00', pre: 2 }, cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
+      settings: { lang: 'en', font: 'vazir', theme: 'auto', skin: 'calm', guest: false, weekStart: 1, calendar: 'gregorian', name: '', notify: { on: false, time: '09:00', pre: 2 }, cycleLen: 28, periodLen: 5, lutealLen: 14, onboarded: false, installDismissed: false },
       periods: [], logs: {}, reads: {}, saved: []
     };
   }
@@ -25,6 +25,8 @@
     var s = j.settings || {};
     if (I.LANGS.indexOf(s.lang) >= 0) d.settings.lang = s.lang;
     if (THEMES.indexOf(s.theme) >= 0) d.settings.theme = s.theme;
+    if (s.skin === 'glass' || s.skin === 'calm') d.settings.skin = s.skin;
+    d.settings.guest = !!s.guest;
     if (s.font === 'iransans' || s.font === 'vazir' || (typeof s.font === 'string' && /^srv-[a-z0-9][a-z0-9-]{0,59}$/.test(s.font))) d.settings.font = s.font;
     if ([0, 1, 6].indexOf(+s.weekStart) >= 0) d.settings.weekStart = +s.weekStart;
     if (s.calendar === 'jalali' || s.calendar === 'gregorian') d.settings.calendar = s.calendar;
@@ -53,25 +55,42 @@
     (Array.isArray(j.saved) ? j.saved : []).forEach(function (k) { if (typeof k === 'string' && SLUG_RE.test(k) && d.saved.indexOf(k) < 0 && d.saved.length < 200) d.saved.push(k); });
     return d;
   }
-  function load() {
+  /* Health data lives in the protected Store (encrypted). Only non-health look-and-feel preferences are mirrored in
+     plain localStorage so the opening screen can show the right language before anything is decrypted. */
+  function savePrefs() {
     try {
-      var raw = localStorage.getItem(KEY);
-      if (raw) return sanitize(JSON.parse(raw));
-      // Main data missing but a safety copy from the last update exists: bring it back.
-      var snap = JSON.parse(localStorage.getItem(SNAP_KEY) || 'null');
-      if (snap && snap.data) { var r = sanitize(snap.data); if (r.periods.length || Object.keys(r.logs).length) return r; }
-    } catch (e) { /* private mode or corrupt data: start fresh */ }
-    return defaults();
+      var s = S.settings;
+      localStorage.setItem(PREFS_KEY, JSON.stringify({ lang: s.lang, theme: s.theme, skin: s.skin, calendar: s.calendar, font: s.font, brand: Brand.key() }));
+    } catch (e) { }
   }
+  function readPrefs() { try { return JSON.parse(localStorage.getItem(PREFS_KEY) || 'null') || {}; } catch (e) { return {}; } }
+  var storeMode = 'plain';
   function save(quiet) {
-    try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* storage unavailable: keep in memory */ }
+    Store.save('main', S);
+    savePrefs();
     if (!quiet && self.Sync) Sync.touch();
+  }
+  /* One-time move of data written by older versions (plain localStorage) into the protected Store. */
+  function migrateLegacy() {
+    var raw = null, snap = null, undo = null;
+    try { raw = localStorage.getItem(LEGACY_KEY); snap = localStorage.getItem(LEGACY_SNAP); undo = localStorage.getItem(LEGACY_UNDO); } catch (e) { }
+    var jobs = [], data = null;
+    try { if (raw) data = sanitize(JSON.parse(raw)); } catch (e) { }
+    if (!data && snap) { try { var sn = JSON.parse(snap); if (sn && sn.data) { var r = sanitize(sn.data); if (r.periods.length || Object.keys(r.logs).length) data = r; } } catch (e) { } }
+    if (data) { data.settings.guest = true; jobs.push(Store.save('main', data)); }
+    if (snap) { try { jobs.push(Store.save('snap', JSON.parse(snap))); } catch (e) { } }
+    if (undo) { try { jobs.push(Store.save('undo', JSON.parse(undo))); } catch (e) { } }
+    return Promise.all(jobs).then(function () {
+      // remove the old plain copies only after the protected copies were written
+      try { [LEGACY_KEY, LEGACY_SNAP, LEGACY_UNDO].forEach(function (k) { localStorage.removeItem(k); }); } catch (e) { }
+      return data;
+    });
   }
   function emptyLog(l) {
     return !l.flow && !(l.mood && l.mood.length) && !(l.sym && l.sym.length) && !(l.note && String(l.note).trim());
   }
 
-  var S = load();
+  var S = defaults();
   var today = E.todayN(), A = null, ST = null;
   var ui = {
     view: 'home', prev: 'home', sheet: null, sheetShown: false, intro: true,
@@ -99,15 +118,18 @@
     tips: '<path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M19 15.5v4M17 17.5h4"/>',
     sliders: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
     chev: '<path d="M9 5.5l6.5 6.5L9 18.5"/>',
+    refresh: '<path d="M20 11a8 8 0 00-14.5-4.2M4 5v3.5h3.5M4 13a8 8 0 0014.5 4.2M20 19v-3.5h-3.5"/>',
+    together: '<circle cx="9" cy="12" r="5.2"/><circle cx="15" cy="12" r="5.2"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
     minus: '<path d="M5 12h14"/>',
     heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',
+    globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5S14.6 18.1 12 20.5C9.4 18.1 8.2 15.3 8.2 12S9.4 5.9 12 3.5z"/>',
     lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="3"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5"/>'
   };
   function icon(name, cls) {
     return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + IC[name] + '</svg>';
   }
-  function drop() { return '<svg viewBox="0 0 12 18" fill="currentColor" aria-hidden="true"><path d="M6 0C4 4.5 0 8 0 12a6 6 0 0012 0C12 8 8 4.5 6 0z"/></svg>'; }
+  function bead() { return '<svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><circle cx="7" cy="7" r="5.5"/></svg>'; }
 
   /* ============ theme + language ============ */
   var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
@@ -129,6 +151,7 @@
     h.lang = S.settings.lang;
     h.dir = I.isRTL() ? 'rtl' : 'ltr';
     document.title = t('app.name');
+    h.setAttribute('data-skin', S.settings.skin === 'glass' ? 'glass' : 'calm');
     applyFont();
   }
 
@@ -172,7 +195,7 @@
     clearTimeout(notifyTimer);
     notifyTimer = setTimeout(function () {
       var n = S.settings.notify, list = (S.settings.onboarded && !A.empty && ST.nextStart)
-        ? Notify.plan({ nextStart: E.toISO(ST.nextStart), cycleLen: A.L, lang: S.settings.lang, settings: n }) : [];
+        ? Notify.plan({ nextStart: E.toISO(ST.nextStart), cycleLen: A.L, lang: S.settings.lang, app: Brand.name(), settings: n }) : [];
       Notify.apply(list);
     }, 800);
   }
@@ -257,7 +280,7 @@
   function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
 
   function topbar(withDate) {
-    return '<header class="topbar"><div class="brand"><img class="logo" src="icons/logo.svg" alt="">' +
+    return '<header class="topbar"><div class="brand"><img class="logo" src="' + Brand.logo() + '" alt="">' +
       '<div><div class="brand-name">' + esc(t('app.name')) + '</div><div class="brand-date">' + esc(t('app.tag')) + '</div></div></div>' +
       '<button class="icon-btn" data-act="settings" aria-label="' + esc(t('nav.settings')) + '">' + icon('sliders') + '</button></header>';
   }
@@ -395,7 +418,7 @@
   /* ============ app lock ============ */
   var LOCK_GRACE = 20000, awayAt = 0;
   function lockHTML() {
-    var h = '<div class="applock-card"><img class="logo" src="icons/logo.svg" alt="">';
+    var h = '<div class="applock-card"><img class="logo" src="' + Brand.logo() + '" alt="">';
     if (ui.lockHelp) {
       return h + '<h1>' + esc(t('lock.reset_t')) + '</h1><p class="lead">' + esc(t('lock.reset_d')) + '</p><div class="stack">' +
         '<button class="btn danger block" data-act="lock-reset-yes">' + esc(t('lock.reset_yes')) + '</button>' +
@@ -695,28 +718,64 @@
   }
   function renderUpdateCard() { var r = $('#update-root'); if (r) r.innerHTML = updateCardHTML(); }
 
-  function settingsHTML() {
+  /* Settings are grouped in categories: a short list first, then one small page per category. */
+  var SET_CATS = [['account', '👤'], ['look', '🎨'], ['cycle', '🌸'], ['notify', '🔔'], ['privacy', '🔒'], ['data', '☁️'], ['app', '📲'], ['about', 'ℹ️']];
+  function settingsCatHTML(cat) {
     var s = S.settings, h = '';
-    h += '<div class="page-head"><div class="left"><button class="icon-btn" data-act="settings-back" aria-label="' + esc(t('back')) + '">' + icon('chev', 'flip-back') + '</button><h1 class="page-title">' + esc(t('st.title')) + '</h1></div></div>';
-    h += '<section class="group"><h3>' + esc(t('st.profile')) + '</h3><label class="lbl" for="nameField">' + esc(t('st.name')) + '</label><input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(s.name) + '"></section>';
-    h += '<section class="group"><h3>' + esc(t('st.calendar')) + '</h3>' + seg([['gregorian', t('cal.gregorian')], ['jalali', t('cal.jalali')]], s.calendar, 'set-cal') + '<p class="hint">' + esc(t('st.cal_hint')) + '</p></section>';
-    h += '<section class="group"><h3>' + esc(t('st.language')) + '</h3>' + seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang') + '</section>';
-    h += '<section class="group"><h3>' + esc(t('st.font')) + '</h3>' + seg([['vazir', t('st.font.vazir')], ['iransans', t('st.font.iransans')]].concat(srvFonts.filter(function (x) { return x.scripts !== 'latin'; }).map(function (x) { return ['srv-' + x.id, x.label]; })), s.font, 'set-font') + '</section>';
-    h += '<section class="group"><h3>' + esc(t('st.theme')) + '</h3>' + seg(THEMES.map(function (x) { return [x, t('st.theme.' + x)]; }), s.theme, 'set-theme') + '<p class="hint">' + esc(t('st.theme.hint')) + '</p></section>';
-    h += '<section class="group"><h3>' + esc(t('st.week')) + '</h3>' + seg([[6, t('weekday.6')], [0, t('weekday.0')], [1, t('weekday.1')]], s.weekStart, 'set-week') + '</section>';
-    h += '<section class="group"><h3>' + esc(t('st.defaults')) + '</h3><p class="hint">' + esc(t('st.defaults_hint')) + '</p>' +
+    if (cat === 'account') {
+      h += '<section class="group"><h3>' + esc(t('st.profile')) + '</h3><label class="lbl" for="nameField">' + esc(t('st.name')) + '</label><input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(s.name) + '"></section>';
+      h += accountGroup();
+    }
+    if (cat === 'look') {
+      h += '<section class="group"><h3>' + esc(t('st.language')) + '</h3>' + seg(I.LANGS.map(function (l) { return [l, t('lang.' + l)]; }), s.lang, 'set-lang') + '</section>';
+      h += '<section class="group"><h3>' + esc(t('st.calendar')) + '</h3>' + seg([['gregorian', t('cal.gregorian')], ['jalali', t('cal.jalali')]], s.calendar, 'set-cal') + '<p class="hint">' + esc(t('st.cal_hint')) + '</p></section>';
+      h += '<section class="group"><h3>' + esc(t('st.week')) + '</h3>' + seg([[6, t('weekday.6')], [0, t('weekday.0')], [1, t('weekday.1')]], s.weekStart, 'set-week') + '</section>';
+      h += '<section class="group"><h3>' + esc(t('st.font')) + '</h3>' + seg([['vazir', t('st.font.vazir')], ['iransans', t('st.font.iransans')]].concat(srvFonts.filter(function (x) { return x.scripts !== 'latin'; }).map(function (x) { return ['srv-' + x.id, x.label]; })), s.font, 'set-font') + '</section>';
+      h += '<section class="group"><h3>' + esc(t('st.theme')) + '</h3>' + seg(THEMES.map(function (x) { return [x, t('st.theme.' + x)]; }), s.theme, 'set-theme') + '<p class="hint">' + esc(t('st.theme.hint')) + '</p></section>';
+      h += '<section class="group"><h3>' + esc(t('st.skin')) + '</h3>' + seg([['calm', t('skin.calm')], ['glass', t('skin.glass')]], s.skin, 'set-skin') + '<p class="hint">' + esc(t('skin.hint')) + '</p></section>';
+    }
+    if (cat === 'cycle') {
+      h += '<section class="group"><h3>' + esc(t('st.defaults')) + '</h3><p class="hint">' + esc(t('st.defaults_hint')) + '</p>' +
       stepper(t('st.cycle_len'), 'cycleLen', s.cycleLen) + stepper(t('st.period_len'), 'periodLen', s.periodLen) + stepper(t('st.luteal'), 'lutealLen', s.lutealLen) +
       '<p class="hint">' + esc(t('st.luteal_hint')) + '</p></section>';
-    h += lockGroup() + notifyGroup() + cloudGroup() + updateGroup();
-    h += '<section class="group"><h3>' + esc(t('st.data')) + '</h3><p class="hint">' + esc(t('st.private')) + '</p><div class="stack">' +
+    }
+    if (cat === 'notify') {
+      h += notifyGroup();
+    }
+    if (cat === 'privacy') {
+      h += lockGroup();
+      h += storageGroup();
+    }
+    if (cat === 'data') {
+      h += cloudGroup();
+      h += '<section class="group"><h3>' + esc(t('st.data')) + '</h3><p class="hint">' + esc(t('st.private')) + '</p><div class="stack">' +
       '<button class="btn soft block" data-act="export">' + esc(t('st.export')) + '</button>' +
       '<button class="btn soft block" data-act="import">' + esc(t('st.import')) + '</button>' +
       '<input type="file" id="importFile" accept="application/json,.json" hidden>' +
       '<button class="btn danger block" data-act="erase">' + esc(t('st.erase')) + '</button></div><p class="hint">' + esc(t('st.backup_hint')) + '</p></section>';
-    h += '<section class="group"><h3>' + esc(t('st.install')) + '</h3><p class="hint">' + esc(t('st.install_d')) + '</p></section>';
-    h += '<section class="group"><h3>' + esc(t('st.about')) + '</h3><p class="hint">' + esc(t('st.disclaimer')) + '</p></section>';
-    h += '<button class="btn soft block" data-act="privacy">' + esc(t('st.privacy')) + '</button>';
-    h += '<div class="ver">' + esc(t('app.name')) + ' · ' + esc(t('st.version')) + ' ' + esc(num(VERSION)) + '</div>';
+    }
+    if (cat === 'app') {
+      h += updateGroup();
+      h += '<section class="group"><h3>' + esc(t('st.install')) + '</h3><p class="hint">' + esc(t('st.install_d')) + '</p></section>';
+    }
+    if (cat === 'about') {
+      h += legalGroup();
+      h += aboutGroup();
+    }
+    return h;
+  }
+  function settingsHTML() {
+    var h = '', cat = ui.setCat;
+    if (!cat) {
+      h += '<div class="page-head"><div class="left"><button class="icon-btn" data-act="settings-back" aria-label="' + esc(t('back')) + '">' + icon('chev', 'flip-back') + '</button><h1 class="page-title">' + esc(t('st.title')) + '</h1></div></div>';
+      h += '<div class="cat-list">' + SET_CATS.map(function (c) {
+        return '<button class="cat-row" data-act="set-cat" data-v="' + c[0] + '"><span class="cat-ic" aria-hidden="true">' + c[1] + '</span><span class="cat-tx"><b>' + esc(t('cat.' + c[0])) + '</b><small>' + esc(t('cat.' + c[0] + '_d')) + '</small></span>' + icon('chev', 'flip') + '</button>';
+      }).join('') + '</div>';
+      h += '<div class="ver">' + esc(t('app.name')) + ' · ' + esc(t('st.version')) + ' ' + esc(num(VERSION)) + '</div>';
+      return h;
+    }
+    h += '<div class="page-head"><div class="left"><button class="icon-btn" data-act="set-cat-back" aria-label="' + esc(t('back')) + '">' + icon('chev', 'flip-back') + '</button><h1 class="page-title">' + esc(t('cat.' + cat)) + '</h1></div></div>';
+    h += settingsCatHTML(cat);
     return h;
   }
 
@@ -725,7 +784,7 @@
     var o = ui.onb, s = S.settings, step = o.step, body = '', foot = '';
     var dots = '<div class="steps">' + [0, 1, 2].map(function (i) { return '<i class="' + (i === step ? 'on' : '') + '"></i>'; }).join('') + '</div>';
     if (step === 0) {
-      body = '<img class="hero" src="icons/logo.svg" alt=""><h1>' + esc(t('o.welcome')) + '</h1><p class="lead">' + esc(t('o.welcome_d')) + '</p>' +
+      body = '<img class="hero" src="' + Brand.logo() + '" alt=""><h1>' + esc(t('o.welcome')) + '</h1><p class="lead">' + esc(t('o.welcome_d')) + '</p>' +
         '<div class="onb-form"><label class="lbl" for="nameField">' + esc(t('o.name_l')) + '</label>' +
         '<input class="field" id="nameField" type="text" maxlength="30" autocomplete="given-name" enterkeyhint="done" placeholder="' + esc(t('o.name_ph')) + '" value="' + esc(o.name || '') + '">' +
         '<p class="hint">' + esc(t('o.name_h')) + '</p>' +
@@ -771,7 +830,7 @@
     } else {
       h += '<div class="block"><h3>' + esc(t('d.flow')) + '</h3><div class="flow">';
       for (var f = 1; f <= 4; f++) {
-        var dr = ''; for (var k = 0; k < f; k++) dr += drop();
+        var dr = ''; for (var k = 0; k < f; k++) dr += bead();
         h += '<button data-act="flow" data-v="' + f + '" aria-pressed="' + (l.flow === f) + '"><span class="drops">' + dr + '</span>' + esc(t('flow.' + f)) + '</button>';
       }
       h += '</div></div>';
@@ -797,6 +856,10 @@
       return '<h2 class="sheet-title">' + esc(PV.title[pl]) + '</h2><div class="reader">' + PV.sections.map(function (s) { return '<div class="rh">' + esc(s.h[pl]) + '</div><p class="body">' + esc(s.p[pl]) + '</p>'; }).join('') +
         '</div><p class="sub art-disc">' + esc(PV.who[pl] + ' · ' + PV.updatedLabel[pl] + ': ' + PV.updated) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('close')) + '</button></div>';
     }
+    if (sh.type === 'tg-unlink') return Together.unlinkSheet();
+    if (sh.type === 'del-account') return delSheet();
+    if (sh.type === 'del-done') return delDoneSheet(sh.res);
+    if (sh.type === 'legal') return legalSheet(sh.id);
     if (sh.type === 'pain') return painSheet();
     if (sh.type === 'pick') {
       return '<h2>' + esc(t('o.last_t')) + '</h2><div class="sub">' + esc(t('o.last_d')) + '</div><div class="cal-card" style="margin-top:14px"><div class="cal-head"><button class="cal-nav" data-act="pick-prev" aria-label="' + esc(t('cal.prev')) + '">' + icon('chev', 'flip-back') + '</button><div class="cal-title">' + esc(I.fmt.monthYear(sh.c.y, sh.c.m)) + '</div><button class="cal-nav" data-act="pick-next" aria-label="' + esc(t('cal.next')) + '">' + icon('chev', 'flip') + '</button></div>' + monthGrid(sh.c, 'pick') + '</div>' +
@@ -822,19 +885,27 @@
   /* ============ rendering ============ */
   function renderView() {
     var vr = $('#view-root'), y = window.scrollY;
+    var st = stage();
+    if (st === 'terms' || st === 'login') {
+      vr.innerHTML = st === 'terms' ? termsHTML() : loginHTML();
+      $('#tab-root').innerHTML = '';
+      if (st === 'terms') afterTerms();
+      return;
+    }
     if (!S.settings.onboarded) {
       vr.innerHTML = onbHTML();
       $('#tab-root').innerHTML = '';
       return;
     }
-    var map = { home: homeHTML, calendar: calendarHTML, stats: statsHTML, tips: tipsHTML, settings: settingsHTML };
+    var map = { home: homeHTML, calendar: calendarHTML, stats: statsHTML, tips: tipsHTML, settings: settingsHTML, together: Together.html };
     vr.innerHTML = '<main class="view">' + map[ui.view]() + '</main>';
     window.scrollTo(0, y);
     renderTabs();
+    if (ui.view === 'together') Together.after();
     if (ui.intro && ui.view === 'home') setTimeout(function () { ui.intro = false; }, 1800);
   }
   function renderTabs() {
-    var items = [['home', 'cycle', 'nav.cycle'], ['calendar', 'calendar', 'nav.calendar'], ['stats', 'stats', 'nav.stats'], ['tips', 'tips', 'nav.tips']];
+    var items = [['home', 'cycle', 'nav.cycle'], ['calendar', 'calendar', 'nav.calendar'], ['stats', 'stats', 'nav.stats'], ['tips', 'tips', 'nav.tips'], ['together', 'together', 'nav.together']];
     $('#tab-root').innerHTML = '<nav class="tabbar" aria-label="' + esc(t('app.name')) + '">' + items.map(function (it) {
       return '<button class="tab" data-act="tab" data-v="' + it[0] + '"' + (ui.view === it[0] ? ' aria-current="page"' : '') + '><span class="ic">' + icon(it[1]) + '</span>' + esc(t(it[2])) + '</button>';
     }).join('') + '</nav>';
@@ -898,14 +969,21 @@
   /* Forget everything saved on this phone, but keep how the app looks (language, font, theme, calendar). */
   function wipeLocal() {
     if (self.Notify) Notify.clear();
-    var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, weekStart: S.settings.weekStart, calendar: S.settings.calendar };
+    var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, skin: S.settings.skin, guest: S.settings.guest, weekStart: S.settings.weekStart, calendar: S.settings.calendar };
     S = defaults(); Object.assign(S.settings, keep);
-    try { localStorage.removeItem(SNAP_KEY); localStorage.removeItem(UNDO_KEY); } catch (e) { }
+    Store.remove('snap'); Store.remove('undo');
   }
   var A_ = {
-    tab: function (el) { ui.view = el.dataset.v; ui.sheet = null; renderSheet(); renderView(); window.scrollTo(0, 0); },
-    settings: function () { ui.prev = ui.view === 'settings' ? 'home' : ui.view; ui.view = 'settings'; renderView(); window.scrollTo(0, 0); },
-    'settings-back': function () { ui.view = ui.prev || 'home'; renderView(); window.scrollTo(0, 0); },
+    tab: function (el) {
+      var was = ui.view; ui.view = el.dataset.v; ui.sheet = null; renderSheet();
+      if (was === 'together' && ui.view !== 'together') Together.leave();
+      renderView(); window.scrollTo(0, 0);
+      if (ui.view === 'together' && was !== 'together') Together.enter();
+    },
+    settings: function () { ui.setCat = null; ui.prev = ui.view === 'settings' ? 'home' : ui.view; ui.view = 'settings'; renderView(); window.scrollTo(0, 0); },
+    'set-cat': function (el) { ui.setCat = el.dataset.v; renderView(); window.scrollTo(0, 0); },
+    'set-cat-back': function () { ui.setCat = null; renderView(); window.scrollTo(0, 0); },
+    'settings-back': function () { ui.setCat = null; ui.view = ui.prev || 'home'; renderView(); window.scrollTo(0, 0); },
     'cal-prev': function () { ui.cal = shiftMonth(ui.cal, -1); renderView(); },
     'cal-next': function () { ui.cal = shiftMonth(ui.cal, 1); renderView(); },
     'cal-today': function () { ui.cal = monthOf(today); renderView(); },
@@ -1074,7 +1152,7 @@
   /* ---- cloud: restore + first connect ---- */
   function hasData() { return S.periods.length > 0 || Object.keys(S.logs).length > 0; }
   function restoreFrom(backup) {
-    try { localStorage.setItem(UNDO_KEY, JSON.stringify({ at: Date.now(), data: S })); } catch (e) { }
+    Store.save('undo', { at: Date.now(), data: S });
     var next = sanitize(backup.data); next.settings.onboarded = true;
     S = next; save(true); Sync.markClean();
   }
@@ -1134,6 +1212,41 @@
     fr.readAsText(file);
   }
 
+
+  /* ============ Together (partner) glue ============ */
+  function syncBrand() {
+    var a = Core.account(), k = a && a.space && a.space.state === 'paired' ? 'abrora' : 'abra';
+    if (Brand.key() === k) return;
+    Brand.set(k); savePrefs(); render();
+  }
+  function recentLogs(days) {
+    var out = [];
+    for (var i = 0; i < days; i++) { var l = S.logs[E.toISO(today - i)]; if (l) out.push(l); }
+    return out;
+  }
+  function uniq(list, max) { var o = []; list.forEach(function (x) { if (o.indexOf(x) < 0 && o.length < max) o.push(x); }); return o; }
+  /* High-level summaries only. Notes, flow and day-by-day logs are never shareable. */
+  function summaryFor(cat) {
+    if (!S.settings.onboarded) return null;
+    if (cat === 'mood') return { mood: uniq([].concat.apply([], recentLogs(3).map(function (l) { return l.mood || []; })), 2) };
+    if (cat === 'symptoms') return { sym: uniq([].concat.apply([], recentLogs(3).map(function (l) { return l.sym || []; })), 3) };
+    if (A.empty || ST.kind === 'none') return null;
+    if (cat === 'phase') return { phase: ST.phase, day: ST.dayInCycle };
+    if (cat === 'forecast') return { daysTo: ST.daysToPeriod };
+    if (cat === 'fertility') return { kind: ST.kind === 'fertile' || ST.kind === 'ovulation' ? ST.kind : 'none' };
+    return null;
+  }
+  Together.init({
+    t: t, esc: esc, icon: icon, num: num, view: function () { return ui.view; },
+    rerender: function () { if (ui.view === 'together' && !ui.locked) { renderView(); } if (ui.sheet) renderSheet(); },
+    toast: toast, summary: summaryFor, syncBrand: syncBrand,
+    openSheet: openSheet, closeSheet: function () { closeSheet(); },
+    celebrate: function () { toast('tw.now_abrora'); },
+    moodEmoji: function (id) { var e = ''; I.MOODS.forEach(function (m) { if (m[0] === id) e = m[1]; }); return e; },
+    fmtDate: function (iso) { var d = new Date(iso); return isNaN(d) ? '' : I.fmt.dayMonth(E.fromYMD(d.getFullYear(), d.getMonth(), d.getDate())); }
+  });
+  Object.keys(Together.act).forEach(function (k) { A_[k] = Together.act[k]; });
+
   /* ============ events ============ */
   document.addEventListener('click', function (e) {
     var el = e.target.closest ? e.target.closest('[data-act]') : null;
@@ -1182,9 +1295,247 @@
   document.addEventListener('visibilitychange', function () { if (!document.hidden && E.todayN() !== today) { render(); } });
   window.addEventListener('pagehide', flushNote);
 
+  /* ============ Phase 1: consent gate, sign-in, account ============ */
+  var PV = self.Privacy;
+  var CONSENT = { records: [], synced: false };
+  ui.pre = { mode: 'signin', busy: false, err: '', msg: '', email: '', ti: 0, reached: {}, checked: {}, langOpen: false };
+  ui.del = { pw: '', typed: '', busy: false, err: '' };
+  var LANG_NAMES = { fa: 'فارسی', en: 'English', de: 'Deutsch' };
+
+  function consentFor(id) {
+    var cur = PV.docs[id].version, best = null;
+    CONSENT.records.forEach(function (r) { if (r.docId === id && r.version === cur) best = r; });
+    return best;
+  }
+  function consentOK() { return PV.REQUIRED.every(function (id) { return !!consentFor(id); }); }
+  function stage() {
+    if (!consentOK()) return 'terms';
+    if (!Core.signedIn() && !S.settings.guest) return 'login';
+    if (!S.settings.onboarded) return 'onb';
+    return 'app';
+  }
+  function saveConsent() { Store.save('consent', CONSENT); }
+  function syncConsent() {
+    if (!Core.signedIn() || !Core.configured()) return;
+    var acc = Core.account();
+    if (acc && Array.isArray(acc.needsConsent) && !acc.needsConsent.length) return;   // server already has the current versions
+    var recs = PV.REQUIRED.map(consentFor).filter(Boolean).map(function (r) { return { docId: r.docId, version: r.version, locale: r.locale, acceptedAt: r.acceptedAt }; });
+    if (recs.length) Core.consent(recs).then(function () { CONSENT.synced = true; saveConsent(); }, function () { });
+  }
+
+  function preHead() {
+    var L = S.settings.lang;
+    return '<header class="pre-head"><div class="pre-brand"><img src="' + Brand.logo() + '" alt="" width="30" height="30"><span class="brand-name">' + esc(Brand.name()) + '</span></div>' +
+      '<button class="lang-btn" data-act="lang-open" aria-haspopup="true" aria-expanded="' + ui.pre.langOpen + '" aria-label="' + esc(t('lang.pick')) + '">' + icon('globe') + '<span>' + esc(L.toUpperCase()) + '</span></button>' +
+      (ui.pre.langOpen ? '<div class="lang-menu" role="menu">' + I.LANGS.map(function (l) {
+        return '<button role="menuitemradio" aria-checked="' + (l === L) + '" data-act="pre-lang" data-v="' + l + '" lang="' + l + '">' + esc(LANG_NAMES[l]) + (l === L ? ' ✓' : '') + '</button>';
+      }).join('') + '</div>' : '') + '</header>';
+  }
+
+  /* --- terms gate --- */
+  function docHTML(d) {
+    var l = S.settings.lang;
+    return d.sections.map(function (s) { return '<h3>' + esc(s.h[l]) + '</h3><p>' + esc(s.p[l]) + '</p>'; }).join('');
+  }
+  function termsHTML() {
+    var p = ui.pre, id = PV.REQUIRED[p.ti], d = PV.docs[id], n = PV.REQUIRED.length, reached = !!p.reached[id], checked = !!p.checked[id];
+    var last = p.ti === n - 1;
+    return preHead() + '<div class="pre-body terms"><div class="pre-title"><h1>' + esc(t('tg.title')) + '</h1><p class="lead">' + esc(t(CONSENT.records.some(function (r) { return PV.docs[r.docId] && r.version !== PV.docs[r.docId].version; }) ? 'tg.reconsent' : 'tg.sub')) + '</p></div>' +
+      '<div class="doc-card"><div class="doc-head"><h2>' + esc(d.title[S.settings.lang]) + '</h2><span class="doc-step">' + esc(t('tg.step', p.ti + 1, n)) + ' · ' + esc(t('tg.version', d.version)) + '</span></div>' +
+      '<div class="doc-scroll" id="docScroll" tabindex="0" role="region" aria-label="' + esc(d.title[S.settings.lang]) + '">' + docHTML(d) + '</div>' +
+      '<p class="doc-hint" id="docHint" aria-live="polite">' + esc(t(reached ? 'tg.end' : 'tg.scroll')) + '</p></div>' +
+      '<label class="check"><input type="checkbox" id="docCheck" data-doc="' + id + '"' + (reached ? '' : ' disabled') + (checked ? ' checked' : '') + '><span>' + esc(t('tg.accept_' + id)) + '</span></label>' +
+      '<button class="btn primary block" id="docNext" data-act="terms-next"' + (reached && checked ? '' : ' disabled') + '>' + esc(t(last ? 'tg.finish' : 'tg.next')) + '</button></div>';
+  }
+  function afterTerms() {
+    var sc = $('#docScroll'); if (!sc) return;
+    var id = PV.REQUIRED[ui.pre.ti];
+    function check() {
+      if (ui.pre.reached[id]) return;
+      if (sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 6) {
+        ui.pre.reached[id] = true;
+        var cb = $('#docCheck'); if (cb) cb.disabled = false;
+        var h = $('#docHint'); if (h) h.textContent = t('tg.end');
+      }
+    }
+    sc.addEventListener('scroll', check, { passive: true });
+    requestAnimationFrame(check);
+  }
+
+  /* --- sign-in --- */
+  function loginHTML() {
+    var p = ui.pre, create = p.mode === 'create', social = '';
+    if (Core.googleReady()) social += '<button class="btn soft block social" data-act="login-google" type="button"><b class="g-mark" aria-hidden="true">G</b>' + esc(t('lg.google')) + '</button>';
+    if (Core.appleReady()) social += '<button class="btn soft block social" data-act="login-apple" type="button"><b class="a-mark" aria-hidden="true"></b>' + esc(t('lg.apple')) + '</button>';
+    return preHead() + '<div class="pre-body login"><div class="pre-title"><img class="hero" src="' + Brand.logo() + '" alt="" width="84" height="84"><h1>' + esc(t('lg.title')) + '</h1><p class="lead">' + esc(t('lg.sub')) + '</p></div>' +
+      '<form class="login-form" id="loginForm" novalidate>' +
+      '<label class="lbl" for="lgEmail">' + esc(t('lg.email')) + '</label><input class="field" id="lgEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" dir="ltr" value="' + esc(p.email) + '">' +
+      '<label class="lbl" for="lgPw">' + esc(t('lg.password')) + '</label><input class="field" id="lgPw" type="password" autocomplete="' + (create ? 'new-password' : 'current-password') + '" dir="ltr"' + (create ? ' minlength="10"' : '') + '>' +
+      (create ? '<p class="hint">' + esc(t('lg.pw_hint')) + '</p>' : '<button class="link" type="button" data-act="login-forgot">' + esc(t('lg.forgot')) + '</button>') +
+      '<p class="form-msg ' + (p.err ? 'err' : 'ok') + '" id="lgMsg" role="status" aria-live="polite">' + esc(p.err || p.msg) + '</p>' +
+      '<button class="btn primary block" type="submit" id="lgGo"' + (p.busy ? ' disabled' : '') + '>' + esc(p.busy ? t('lg.busy') : t(create ? 'lg.create' : 'lg.signin')) + '</button></form>' +
+      '<button class="link center" type="button" data-act="login-mode">' + esc(t(create ? 'lg.to_signin' : 'lg.to_create')) + '</button>' +
+      (social ? '<div class="divider"><span>' + esc(t('or')) + '</span></div>' + social : '') +
+      '<div class="divider"><span>' + esc(t('or')) + '</span></div>' +
+      '<button class="btn block ghost" type="button" data-act="login-guest">' + esc(t('lg.guest')) + '</button><p class="hint center">' + esc(t('lg.guest_d')) + '</p></div>';
+  }
+  function errText(e) {
+    var c = e && e.code;
+    var map = { network: 'err.network', not_configured: 'err.not_configured', unauthorized: 'err.unauthorized', conflict: 'err.conflict', invalid_request: 'err.invalid_request', rate_limited: 'err.rate_limited', account_suspended: 'err.account_suspended', cancelled: 'err.cancelled' };
+    return t(map[c] || 'err.generic');
+  }
+  function setLoginState(o) {
+    Object.assign(ui.pre, o);
+    var m = $('#lgMsg'), b = $('#lgGo');
+    if (m) { m.textContent = ui.pre.err || ui.pre.msg; m.className = 'form-msg ' + (ui.pre.err ? 'err' : 'ok'); }
+    if (b) { b.disabled = ui.pre.busy; b.textContent = ui.pre.busy ? t('lg.busy') : t(ui.pre.mode === 'create' ? 'lg.create' : 'lg.signin'); }
+  }
+  function authDone() {
+    S.settings.guest = false;
+    if (Core.account() && (Core.account().locale !== S.settings.lang || Core.account().calendar !== S.settings.calendar)) Core.patchMe({ locale: S.settings.lang, calendar: S.settings.calendar }).catch(function () { });
+    syncConsent(); save(true);
+    ui.pre = { mode: 'signin', busy: false, err: '', msg: '', email: '', ti: 0, reached: {}, checked: {}, langOpen: false };
+    if (!S.settings.onboarded) ui.onb = { step: 0, cal: monthOf(today), last: null };
+    render();
+  }
+  function authFail(e) { setLoginState({ busy: false, err: errText(e), msg: '' }); }
+  function submitLogin() {
+    var email = ($('#lgEmail') || {}).value || '', pw = ($('#lgPw') || {}).value || '';
+    ui.pre.email = email.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(ui.pre.email)) return setLoginState({ err: t('err.invalid_request'), msg: '' });
+    if (!pw) return setLoginState({ err: t('err.unauthorized'), msg: '' });
+    setLoginState({ busy: true, err: '', msg: '' });
+    (ui.pre.mode === 'create' ? Core.register(ui.pre.email, pw, S.settings.lang) : Core.login(ui.pre.email, pw)).then(authDone, authFail);
+  }
+
+  /* --- account settings & deletion --- */
+  function accountGroup() {
+    var acc = Core.account(), h = '<section class="group"><h3>' + esc(t('st.account')) + '</h3>';
+    if (Core.signedIn()) {
+      h += '<p class="hint">' + esc(t('ac.signed_as')) + '</p><div class="acct-id" dir="ltr">' + esc((acc && acc.email) || (acc && acc.providers ? acc.providers.join(', ') : '')) + '</div>' +
+        '<div class="stack"><button class="btn soft block" data-act="signout">' + esc(t('ac.signout')) + '</button><button class="btn danger block" data-act="del-open">' + esc(t('ac.delete')) + '</button></div>';
+    } else {
+      h += '<p class="hint">' + esc(t('ac.guest_d')) + '</p><div class="stack"><button class="btn soft block" data-act="signin-open">' + esc(t('ac.signin')) + '</button></div>';
+    }
+    return h + '</section>';
+  }
+  function storageGroup() {
+    return '<section class="group"><h3>' + esc(t('st.storage')) + '</h3><p class="hint">' + esc(t(Store.mode() === 'enc' ? 'st.enc_on' : 'st.enc_off')) + '</p></section>';
+  }
+  function legalGroup() {
+    var h = '<section class="group"><h3>' + esc(t('st.legal')) + '</h3><div class="stack"><button class="btn soft block" data-act="privacy">' + esc(t('st.privacy')) + '</button><button class="btn soft block" data-act="terms-view">' + esc(t('st.terms')) + '</button></div>';
+    var r = consentFor('terms');
+    if (r) h += '<p class="hint">' + esc(t('st.consent_rec', r.version, r.acceptedAt.slice(0, 10))) + '</p>';
+    return h + '</section>';
+  }
+  function aboutGroup() {
+    return '<section class="group about"><h3>' + esc(t('ab.title')) + '</h3><img class="nz-logo" src="icons/nazari-full.png" alt="Nazari Technologies" width="130"><p class="hint">' + esc(t('ab.note')) + '</p>' +
+      '<p class="hint">' + esc(t('ab.estimates')) + '</p><p class="hint">' + esc(t('st.disclaimer')) + '</p></section>';
+  }
+  function delSheet() {
+    var d = ui.del, acc = Core.account() || {}, pwAcc = (acc.providers || []).indexOf('email') >= 0;
+    return '<h2>' + esc(t('del.title')) + '</h2><p class="body">' + esc(t('del.d')) + '</p><ul class="plain"><li>' + esc(t('del.l1')) + '</li><li>' + esc(t('del.l2')) + '</li><li>' + esc(t('del.l3')) + '</li></ul>' +
+      (pwAcc ? '<label class="lbl" for="delPw">' + esc(t('del.pw')) + '</label><input class="field" id="delPw" type="password" autocomplete="current-password" dir="ltr" value="' + esc(d.pw) + '">' : '<p class="hint">' + esc(t('del.social')) + '</p>') +
+      '<label class="lbl" for="delType">' + esc(t('del.type')) + '</label><input class="field" id="delType" type="text" autocomplete="off" autocapitalize="characters" dir="ltr" value="' + esc(d.typed) + '">' +
+      '<p class="form-msg err" id="delMsg" role="status" aria-live="polite">' + esc(d.err) + '</p>' +
+      '<div class="actions two"><button class="btn soft block" data-act="sheet-close">' + esc(t('st.cancel')) + '</button><button class="btn danger block" id="delGo" data-act="del-go"' + (d.typed === 'DELETE' && !d.busy ? '' : ' disabled') + '>' + esc(d.busy ? t('lg.busy') : t('del.btn')) + '</button></div>';
+  }
+  function delDoneSheet(r) {
+    var by = r && r.deletion && r.deletion.backups && r.deletion.backups.by ? r.deletion.backups.by.slice(0, 10) : '';
+    return '<div class="big-em" aria-hidden="true">✓</div><h2>' + esc(t('del.done')) + '</h2><p class="body">' + esc(t('del.done_d')) + '</p>' + (by ? '<p class="hint">' + esc(t('del.backups', by)) + '</p>' : '') +
+      '<div class="actions"><button class="btn primary block" data-act="del-finish">' + esc(t('del.ok')) + '</button></div>';
+  }
+  function legalSheet(id) {
+    var d = PV.docs[id], l = S.settings.lang;
+    return '<h2 class="sheet-title">' + esc(d.title[l]) + '</h2><div class="reader">' + docHTML(d) + '</div><p class="sub art-disc">' + esc(PV.who[l] + ' · ' + PV.updatedLabel[l] + ': ' + d.version) + '</p><div class="actions"><button class="btn primary block" data-act="sheet-close">' + esc(t('back')) + '</button></div>';
+  }
+  /* Erase everything for this account on this device, including the encryption key (crypto-shredding). */
+  function wipeDevice() {
+    if (self.Notify) Notify.clear();
+    Together.reset(); Pair.destroy();
+    if (LK) LK.forget();
+    if (self.Sync && Sync.connected && Sync.connected()) { try { Sync.disconnect && Sync.disconnect(); } catch (e) { } }
+    var keep = { lang: S.settings.lang, font: S.settings.font, theme: S.settings.theme, skin: S.settings.skin, weekStart: S.settings.weekStart, calendar: S.settings.calendar };
+    CONSENT = { records: [], synced: false };
+    return Store.destroy().then(function () {
+      S = defaults(); Object.assign(S.settings, keep);
+      try { [LEGACY_KEY, LEGACY_SNAP, LEGACY_UNDO].forEach(function (k) { localStorage.removeItem(k); }); } catch (e) { }
+      savePrefs();
+    });
+  }
+  function reauthForDelete() {
+    var acc = Core.account() || {};
+    if ((acc.providers || []).indexOf('email') >= 0) return Core.reauth({ password: ui.del.pw });
+    if ((acc.providers || []).indexOf('google') >= 0) return Core.googleToken().then(function (tok) { return Core.reauth({ provider: 'google', idToken: tok }); });
+    return Promise.reject({ code: 'generic' });
+  }
+
+  Object.assign(A_, {
+    'lang-open': function () { ui.pre.langOpen = !ui.pre.langOpen; renderView(); var b = $('.lang-menu button[aria-checked="true"]'); if (b) b.focus(); },
+    'pre-lang': function (el) { S.settings.lang = el.dataset.v; ui.pre.langOpen = false; save(true); render(); },
+    'terms-next': function () {
+      var p = ui.pre, id = PV.REQUIRED[p.ti];
+      if (!p.reached[id] || !p.checked[id]) return;
+      CONSENT.records.push({ docId: id, version: PV.docs[id].version, locale: S.settings.lang, acceptedAt: new Date().toISOString() });
+      if (p.ti < PV.REQUIRED.length - 1) { p.ti++; saveConsent(); renderView(); window.scrollTo(0, 0); return; }
+      p.ti = 0; p.reached = {}; p.checked = {};
+      saveConsent(); syncConsent(); render();
+    },
+    'login-mode': function () { ui.pre.mode = ui.pre.mode === 'create' ? 'signin' : 'create'; ui.pre.err = ui.pre.msg = ''; renderView(); },
+    'login-guest': function () { S.settings.guest = true; save(true); if (!S.settings.onboarded) ui.onb = { step: 0, cal: monthOf(today), last: null }; render(); },
+    'login-forgot': function () {
+      var email = (($('#lgEmail') || {}).value || '').trim(); ui.pre.email = email;
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return setLoginState({ err: t('err.invalid_request'), msg: '' });
+      setLoginState({ busy: true, err: '', msg: '' });
+      Core.forgot(email).then(function () { setLoginState({ busy: false, msg: t('lg.forgot_sent'), err: '' }); }, authFail);
+    },
+    'login-google': function () { setLoginState({ busy: true, err: '', msg: '' }); Core.googleToken().then(Core.google).then(authDone, authFail); },
+    'login-apple': function () { setLoginState({ busy: true, err: '', msg: '' }); authFail({ code: 'generic' }); },
+    'signin-open': function () { S.settings.guest = false; save(true); ui.view = 'home'; render(); },
+    signout: function () { Together.leave(); Core.logout().then(function () { Together.reset(); Store.remove('pair'); return Pair.destroy(); }).then(function () { S.settings.guest = false; save(true); ui.view = 'home'; syncBrand(); render(); }); },
+    'del-open': function () { ui.del = { pw: '', typed: '', busy: false, err: '' }; openSheet({ type: 'del-account' }); },
+    'del-go': function () {
+      var d = ui.del; if (d.typed !== 'DELETE' || d.busy) return;
+      d.busy = true; d.err = ''; renderSheet();
+      reauthForDelete().then(function (r) { return Core.deleteAccount(r.reauthToken); }).then(function (res) {
+        return wipeDevice().then(function () { ui.view = 'home'; ui.sheet = null; openSheet({ type: 'del-done', res: res }); });
+      }).catch(function (e) {
+        d.busy = false; d.err = e && e.code === 'unauthorized' || e && e.code === 'reauth_required' ? t('err.unauthorized') : errText(e); renderSheet();
+      });
+    },
+    'del-finish': function () { ui.sheet = null; renderSheet(); ui.pre = { mode: 'signin', busy: false, err: '', msg: '', email: '', ti: 0, reached: {}, checked: {}, langOpen: false }; ui.onb = { step: 0, cal: monthOf(today), last: null }; render(); },
+    'terms-view': function () { openSheet({ type: 'legal', id: 'terms', top: true }); },
+    'set-skin': function (el) { S.settings.skin = el.dataset.v === 'glass' ? 'glass' : 'calm'; save(true); render(); }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target && e.target.id === 'docCheck') {
+      var id = e.target.dataset.doc; ui.pre.checked[id] = e.target.checked;
+      var b = $('#docNext'); if (b) b.disabled = !(ui.pre.reached[id] && e.target.checked);
+    }
+  });
+  document.addEventListener('input', function (e) {
+    if (e.target && e.target.id === 'delPw') ui.del.pw = e.target.value;
+    if (e.target && e.target.id === 'delType') { ui.del.typed = e.target.value.trim(); var b = $('#delGo'); if (b) b.disabled = !(ui.del.typed === 'DELETE' && !ui.del.busy); }
+  });
+  document.addEventListener('submit', function (e) { if (e.target && e.target.id === 'loginForm') { e.preventDefault(); submitLogin(); } });
+  document.addEventListener('click', function (e) {
+    if (ui.pre && ui.pre.langOpen && !(e.target.closest && e.target.closest('.lang-btn, .lang-menu'))) { ui.pre.langOpen = false; var m = $('.lang-menu'); if (m) m.remove(); }
+  });
+
   /* ============ boot ============ */
-  document.addEventListener('abrora:splash-end', function () { applyTheme(); if (ui.locked) tryUnlock(true); });
+  document.addEventListener('abra:splash-end', function () { applyTheme(); if (ui.locked) tryUnlock(true); });
   function boot() {
+    Store.init().then(function (m) { storeMode = m; return migrateLegacy(); })
+      .then(function () { return Store.load('main'); })
+      .then(function (d) { if (d) S = sanitize(d); return Store.load('consent'); })
+      .then(function (c) { if (c && Array.isArray(c.records)) CONSENT = c; return Core.restore(); })
+      .catch(function () { })
+      .then(start);
+  }
+  function start() {
+    var acc0 = Core.account();
+    Brand.set(acc0 && acc0.space && acc0.space.state === 'paired' ? 'abrora' : 'abra');
+    savePrefs();
     document.getElementById('app').innerHTML =
       '<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div><div id="view-root"></div><div id="tab-root"></div><div id="sheet-root"></div><div id="update-root"></div><div id="toast-root"></div><div id="lock-root"></div>';
     if (LK && LK.enabled()) ui.locked = true;
@@ -1193,6 +1544,7 @@
     var back = self.Sync ? Sync.handleRedirect() : null;
     render();
     renderLock();
+    if (Core.signedIn() && Core.configured()) Core.me().then(function () { syncBrand(); }, function () { });
     if (LK) LK.supported().then(function (ok) { ui.lockOk = ok; if (ui.view === 'settings' && !ui.sheet && S.settings.onboarded) renderView(); });
     loadContent(false);
     if (self.Sync) {
@@ -1205,7 +1557,7 @@
       // Before switching versions: flush notes, keep a safety copy of the data, and push a cloud backup if we can.
       beforeApply: function () {
         flushNote(); save(true);
-        try { localStorage.setItem(SNAP_KEY, JSON.stringify({ at: Date.now(), from: VERSION, data: S })); } catch (e) { }
+        Store.save('snap', { at: Date.now(), from: VERSION, data: S });
         if (self.Sync && Sync.connected() && Sync.authed()) {
           return Promise.race([Sync.backupNow().catch(function () { }), new Promise(function (r) { setTimeout(r, 3000); })]);
         }

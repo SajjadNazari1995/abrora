@@ -1,4 +1,4 @@
-/* Abrora — reminders (phone app only).
+/* Abra — reminders (phone app only).
    Why only the Android/iOS app: a web page cannot show a reminder at a set time when it is closed (iPhone needs a push server for that).
    The phone app can schedule them on the device itself, so no data leaves the phone.
 
@@ -10,17 +10,17 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  var TITLE = { fa: 'ابرورا', en: 'Abrora', de: 'Abrora' };
+  var TITLE = { fa: '%APP%', en: '%APP%', de: '%APP%' };
   var TEXT = {
     heads: {   // a day or two before
-      fa: ['با خودت مهربون باش؛ یه سر به ابرورا بزن 🌸', 'امروز یه کم آروم‌تر برو؛ ابرورا چند حرف مهربون برات داره 💜', 'یه نوشیدنی گرم و یه نگاه به ابرورا ☕'],
-      en: ['Be kind to yourself today — pop into Abrora 🌸', 'Take it a little easier today; Abrora has a kind note for you 💜', 'A warm drink and a quick look at Abrora ☕'],
-      de: ['Sei heute lieb zu dir – schau kurz in Abrora vorbei 🌸', 'Nimm es heute etwas ruhiger; Abrora hat ein paar liebe Worte für dich 💜', 'Ein warmes Getränk und ein kurzer Blick in Abrora ☕']
+      fa: ['با خودت مهربون باش؛ یه سر به %APP% بزن 🌸', 'امروز یه کم آروم‌تر برو؛ %APP% چند حرف مهربون برات داره 💜', 'یه نوشیدنی گرم و یه نگاه به %APP% ☕'],
+      en: ['Be kind to yourself today — pop into %APP% 🌸', 'Take it a little easier today; %APP% has a kind note for you 💜', 'A warm drink and a quick look at %APP% ☕'],
+      de: ['Sei heute lieb zu dir – schau kurz in %APP% vorbei 🌸', 'Nimm es heute etwas ruhiger; %APP% hat ein paar liebe Worte für dich 💜', 'Ein warmes Getränk und ein kurzer Blick in %APP% ☕']
     },
     day: {     // the expected day itself
-      fa: ['صبح بخیر! امروز یه نگاهی به ابرورا بنداز 🌷', 'امروز مراقب خودت باش؛ ابرورا کنارته 🤍'],
-      en: ['Good morning! Take a moment for Abrora today 🌷', 'Look after yourself today; Abrora is with you 🤍'],
-      de: ['Guten Morgen! Nimm dir heute kurz Zeit für Abrora 🌷', 'Pass heute auf dich auf; Abrora ist bei dir 🤍']
+      fa: ['صبح بخیر! امروز یه نگاهی به %APP% بنداز 🌷', 'امروز مراقب خودت باش؛ %APP% کنارته 🤍'],
+      en: ['Good morning! Take a moment for %APP% today 🌷', 'Look after yourself today; %APP% is with you 🤍'],
+      de: ['Guten Morgen! Nimm dir heute kurz Zeit für %APP% 🌷', 'Pass heute auf dich auf; %APP% ist bei dir 🤍']
     }
   };
   var CYCLES_AHEAD = 3;
@@ -40,6 +40,7 @@
   function plan(inp) {
     var st = cleanSettings(inp.settings), out = [];
     if (!st.on || !inp.nextStart || !(inp.cycleLen >= 15 && inp.cycleLen <= 90)) return out;
+    function sub(t) { return String(t).split('%APP%').join(inp.app || 'Abra'); }   // brand name is never translated
     var lang = TITLE[inp.lang] ? inp.lang : 'en', hm = st.time.split(':'), now = inp.now || Date.now();
     var base = new Date(inp.nextStart + 'T00:00:00');           // local midnight
     if (isNaN(base.getTime())) return out;
@@ -50,7 +51,7 @@
         var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() - x[0], +hm[0], +hm[1], 0, 0);
         if (d.getTime() <= now + 60000) return;
         var seed = lang + d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + x[1];
-        out.push({ id: 7000 + k * 10 + (x[1] === 'heads' ? 1 : 2), at: d.getTime(), title: TITLE[lang], body: pick(TEXT[x[1]][lang], seed) });
+        out.push({ id: 7000 + k * 10 + (x[1] === 'heads' ? 1 : 2), at: d.getTime(), title: sub(TITLE[lang]), body: sub(pick(TEXT[x[1]][lang], seed)) });
       });
     }
     return out;

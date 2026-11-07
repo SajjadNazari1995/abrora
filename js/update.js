@@ -1,4 +1,4 @@
-/* Abrora updater: notices a new version and lets the person apply it with one tap.
+/* Abra updater: notices a new version and lets the person apply it with one tap.
    Works the same on iPhone (home-screen app) and Android (Chrome / installed app). */
 (function (root) {
   'use strict';

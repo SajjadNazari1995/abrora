@@ -1,4 +1,4 @@
-/* Abrora cloud backup through the person's own Google Drive.
+/* Abra cloud backup through the person's own Google Drive.
    - Needs no server: the phone talks to Google directly.
    - The backup is one small JSON file in Drive's hidden "appDataFolder": only Abrora can see it,
      it does not show up in the Drive app, and it uses the non-sensitive `drive.appdata` scope.

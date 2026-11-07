@@ -1,4 +1,4 @@
-/* Abrora — "tips for today": short care tips picked from how the day actually is.
+/* Abra — "tips for today": short care tips picked from how the day actually is.
    Pool = tips for the current phase (from i18n.js) + tips for a symptom or mood the user logged.
    Nothing is fixed at 3 any more: logged symptoms/mood move the matching tips to the top, the rest is filled by the phase. */
 (function (root, factory) {

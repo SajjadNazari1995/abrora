@@ -1,10 +1,10 @@
-/* Abrora — translations (fa / en / de), numerals and Gregorian date names. */
+/* Abra — translations (fa / en / de), numerals and Gregorian date names. */
 (function (root) {
   'use strict';
 
   var LANGS = ['fa', 'en', 'de'];
   var IDX = { fa: 0, en: 1, de: 2 };
-  var lang = 'fa';
+  var lang = 'en'; /* English is the default (V2) */
 
   var FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
   function num(n) {
@@ -37,7 +37,7 @@
 
   /* ---------- dictionary: key -> [fa, en, de]; values may be functions ---------- */
   var D = {
-    'app.name': ['ابرورا', 'Abrora', 'Abrora'],
+    'app.name': ['%APP%', '%APP%', '%APP%'],
     'app.tag': ['همراه آرام چرخه‌ی شما', 'Your calm cycle companion', 'Dein ruhiger Zyklusbegleiter'],
 
     'nav.cycle': ['سیکل', 'Cycle', 'Zyklus'],
@@ -224,9 +224,9 @@
                        'Days between ovulation and the next period, usually 12 to 16.',
                        'Tage zwischen Eisprung und nächster Periode, meist 12 bis 16.'],
     'st.data': ['اطلاعات شما', 'Your data', 'Deine Daten'],
-    'st.private': ['اطلاعات شما روی همین گوشی ذخیره می‌شود و برنامه کاملاً آفلاین کار می‌کند. فقط اگر خودتان پشتیبان‌گیری ابری را روشن کنید، یک نسخه در Google Drive شخصی شما نگه داشته می‌شود.',
-                   'Your data is stored on this phone and the app works fully offline. Only if you turn on cloud backup is a copy kept in your own Google Drive.',
-                   'Deine Daten liegen auf diesem Telefon und die App funktioniert komplett offline. Nur wenn du das Cloud-Backup einschaltest, wird eine Kopie in deinem eigenen Google Drive abgelegt.'],
+    'st.private': ['اطلاعات چرخه‌ی شما رمزگذاری‌شده روی همین دستگاه ذخیره می‌شود و برنامه آفلاین کار می‌کند. حساب فقط برای ورود است. فقط اگر خودتان پشتیبان‌گیری ابری را روشن کنید، یک نسخه در Google Drive شخصی شما نگه داشته می‌شود.',
+                   'Your cycle data is stored encrypted on this device and the app works offline. An account is only for signing in. Only if you turn on cloud backup is a copy kept in your own Google Drive.',
+                   'Deine Zyklusdaten liegen verschlüsselt auf diesem Gerät und die App funktioniert offline. Ein Konto dient nur der Anmeldung. Nur wenn du das Cloud-Backup einschaltest, wird eine Kopie in deinem eigenen Google Drive abgelegt.'],
     'st.export': ['ذخیره‌ی نسخه‌ی پشتیبان', 'Save a backup', 'Backup speichern'],
     'st.import': ['بازیابی از نسخه‌ی پشتیبان', 'Restore from backup', 'Aus Backup wiederherstellen'],
     'st.backup_hint': ['اگر برنامه را پاک کنید یا گوشی را عوض کنید، فقط با نسخه‌ی پشتیبان می‌توانید اطلاعات را برگردانید.',
@@ -268,7 +268,7 @@
     'st.version': ['نسخه', 'Version', 'Version'],
 
     /* app updates */
-    'u.title': ['نسخه‌ی جدید ابرورا آماده است', 'A new version of Abrora is ready', 'Eine neue Version von Abrora ist bereit'],
+    'u.title': ['نسخه‌ی جدید %APP% آماده است', 'A new version of %APP% is ready', 'Eine neue Version von %APP% ist bereit'],
     'u.ver': [function (v) { return 'نسخه‌ی ' + num(v); }, function (v) { return 'Version ' + v; }, function (v) { return 'Version ' + v; }],
     'u.safe': ['اطلاعات شما همه می‌ماند.', 'All your data stays as it is.', 'Alle deine Daten bleiben erhalten.'],
     'u.btn': ['بروزرسانی', 'Update', 'Aktualisieren'],
@@ -283,9 +283,9 @@
 
     /* cloud backup (Google Drive) */
     'cl.title': ['پشتیبان‌گیری ابری', 'Cloud backup', 'Cloud-Backup'],
-    'cl.desc': ['نسخه‌ی پشتیبان در بخش اختصاصی و پنهان Google Drive خودتان ذخیره می‌شود. فقط ابرورا به آن دسترسی دارد و در برنامه‌ی Drive هم دیده نمی‌شود. روی گوشی جدید فقط با ورود به همین حساب، اطلاعاتتان برمی‌گردد.',
-                'Your backup is kept in a private, hidden area of your own Google Drive. Only Abrora can access it and it doesn’t show up in the Drive app. On a new phone, just sign in with the same account to get your data back.',
-                'Dein Backup liegt in einem privaten, versteckten Bereich deines eigenen Google Drive. Nur Abrora hat Zugriff, und es erscheint nicht in der Drive-App. Auf einem neuen Telefon meldest du dich einfach mit demselben Konto an.'],
+    'cl.desc': ['نسخه‌ی پشتیبان در بخش اختصاصی و پنهان Google Drive خودتان ذخیره می‌شود. فقط %APP% به آن دسترسی دارد و در برنامه‌ی Drive هم دیده نمی‌شود. روی گوشی جدید فقط با ورود به همین حساب، اطلاعاتتان برمی‌گردد.',
+                'Your backup is kept in a private, hidden area of your own Google Drive. Only %APP% can access it and it doesn’t show up in the Drive app. On a new phone, just sign in with the same account to get your data back.',
+                'Dein Backup liegt in einem privaten, versteckten Bereich deines eigenen Google Drive. Nur %APP% hat Zugriff, und es erscheint nicht in der Drive-App. Auf einem neuen Telefon meldest du dich einfach mit demselben Konto an.'],
     'cl.unconfigured': ['پشتیبان‌گیری ابری هنوز فعال نشده است.', 'Cloud backup isn’t set up yet.', 'Cloud-Backup ist noch nicht eingerichtet.'],
     'cl.connect': ['اتصال به حساب گوگل', 'Connect Google account', 'Mit Google-Konto verbinden'],
     'cl.account': ['حساب متصل', 'Connected account', 'Verbundenes Konto'],
@@ -332,10 +332,10 @@
     'in.btn': ['نصب برنامه', 'Install app', 'App installieren'],
 
     /* onboarding */
-    'o.welcome': ['به ابرورا خوش آمدید', 'Welcome to Abrora', 'Willkommen bei Abrora'],
-    'o.welcome_d': ['چرخه‌ی خود را ساده و خصوصی دنبال کنید. همه‌چیز فقط روی همین گوشی می‌ماند.',
-                    'Follow your cycle simply and privately. Everything stays on this phone.',
-                    'Verfolge deinen Zyklus einfach und privat. Alles bleibt auf diesem Telefon.'],
+    'o.welcome': ['به %APP% خوش آمدید', 'Welcome to %APP%', 'Willkommen bei %APP%'],
+    'o.welcome_d': ['چرخه‌ی خود را ساده و خصوصی دنبال کنید. داده‌های سلامتی شما روی همین دستگاه می‌ماند.',
+                    'Follow your cycle simply and privately. Your health data stays on this device.',
+                    'Verfolge deinen Zyklus einfach und privat. Deine Gesundheitsdaten bleiben auf diesem Gerät.'],
     'o.start': ['شروع', 'Get started', 'Los geht’s'],
     'o.last_t': ['آخرین پریود شما کی شروع شد؟', 'When did your last period start?', 'Wann hat deine letzte Periode begonnen?'],
     'o.last_d': ['روز اول را در تقویم انتخاب کنید.', 'Tap the first day in the calendar.', 'Tippe im Kalender auf den ersten Tag.'],
@@ -345,7 +345,7 @@
                 'A cycle runs from the first day of one period to the day before the next. If you’re not sure, keep these values; the app sharpens them as you log.',
                 'Ein Zyklus reicht vom ersten Tag einer Periode bis zum Tag vor der nächsten. Wenn du unsicher bist, lass die Werte stehen – die App wird mit deinen Einträgen genauer.'],
     'o.next': ['ادامه', 'Continue', 'Weiter'],
-    'o.finish': ['ورود به برنامه', 'Open Abrora', 'Abrora öffnen'],
+    'o.finish': ['ورود به برنامه', 'Open %APP%', '%APP% öffnen'],
     'o.step': [function (a, b) { return num(a) + ' از ' + num(b); },
                function (a, b) { return a + ' of ' + b; },
                function (a, b) { return a + ' von ' + b; }],
@@ -378,9 +378,9 @@
 
     'lock.title': ['قفل برنامه', 'App lock', 'App-Sperre'],
     'lock.row': ['قفل با قفل گوشی', 'Lock with your phone’s screen lock', 'Mit der Displaysperre sperren'],
-    'lock.desc': ['ابرورا با Face ID، اثر انگشت یا رمز گوشی شما قفل می‌شود. این قفل فقط ورود به برنامه را می‌بندد؛ اطلاعات ذخیره‌شده روی گوشی رمزگذاری نمی‌شوند.',
-                  'Abrora locks with Face ID, your fingerprint or your phone’s passcode. The lock only closes the way into the app; the data saved on your phone is not encrypted.',
-                  'Abrora wird mit Face ID, Fingerabdruck oder dem Code deines Handys gesperrt. Die Sperre schließt nur den Zugang zur App; die auf dem Handy gespeicherten Daten werden nicht verschlüsselt.'],
+    'lock.desc': ['%APP% با Face ID، اثر انگشت یا رمز گوشی شما قفل می‌شود. این قفل فقط ورود به برنامه را می‌بندد؛ داده‌ها جدا از قفل برنامه، رمزگذاری‌شده روی دستگاه نگه داشته می‌شوند.',
+                  '%APP% locks with Face ID, your fingerprint or your phone’s passcode. The lock only closes the way into the app; your data is kept encrypted on the device separately from this lock.',
+                  '%APP% wird mit Face ID, Fingerabdruck oder dem Code deines Handys gesperrt. Die Sperre schließt nur den Zugang zur App; deine Daten liegen davon unabhängig verschlüsselt auf dem Gerät.'],
     'lock.none': ['این گوشی یا مرورگر قفل صفحه‌ی فعال ندارد یا از قفل برنامه پشتیبانی نمی‌کند. ابتدا در تنظیمات گوشی یک رمز، Face ID یا اثر انگشت فعال کنید.',
                   'This phone or browser has no active screen lock, or it does not support app lock. First turn on a passcode, Face ID or fingerprint in your phone settings.',
                   'Dieses Handy oder dieser Browser hat keine aktive Displaysperre oder unterstützt keine App-Sperre. Aktiviere zuerst in den Handy-Einstellungen einen Code, Face ID oder Fingerabdruck.'],
@@ -388,14 +388,14 @@
     'lock.off': ['قفل برنامه خاموش شد', 'App lock is off', 'App-Sperre ist aus'],
     'lock.fail': ['قفل فعال نشد. دوباره امتحان کنید.', 'Could not turn on the lock. Try again.', 'Die Sperre konnte nicht aktiviert werden. Versuche es erneut.'],
     'lock.off_fail': ['قفل خاموش نشد.', 'Could not turn the lock off.', 'Die Sperre konnte nicht ausgeschaltet werden.'],
-    'lock.locked': ['ابرورا قفل است', 'Abrora is locked', 'Abrora ist gesperrt'],
+    'lock.locked': ['%APP% قفل است', '%APP% is locked', '%APP% ist gesperrt'],
     'lock.unlock': ['باز کردن قفل', 'Unlock', 'Entsperren'],
     'lock.retry': ['قفل باز نشد. دوباره امتحان کنید.', 'Not unlocked. Try again.', 'Nicht entsperrt. Versuche es erneut.'],
     'lock.help': ['مشکل دارید؟', 'Trouble unlocking?', 'Probleme beim Entsperren?'],
     'lock.reset_t': ['قفل از نو راه‌اندازی شود؟', 'Reset the lock?', 'Sperre zurücksetzen?'],
-    'lock.reset_d': ['اگر قفل گوشی عوض شده یا باز نمی‌شود، تنها راه برداشتن این قفل پاک‌کردن اطلاعات ابرورا روی همین گوشی است. اگر پشتیبان دارید، بعداً می‌توانید بازیابی کنید.',
-                     'If your phone’s lock changed or will not open, the only way to remove this lock is to erase Abrora’s data on this phone. If you have a backup, you can restore it afterwards.',
-                     'Wenn sich die Sperre deines Handys geändert hat oder nicht aufgeht, lässt sich diese Sperre nur entfernen, indem die Daten von Abrora auf diesem Handy gelöscht werden. Hast du ein Backup, kannst du es danach wiederherstellen.'],
+    'lock.reset_d': ['اگر قفل گوشی عوض شده یا باز نمی‌شود، تنها راه برداشتن این قفل پاک‌کردن اطلاعات %APP% روی همین گوشی است. اگر پشتیبان دارید، بعداً می‌توانید بازیابی کنید.',
+                     'If your phone’s lock changed or will not open, the only way to remove this lock is to erase %APP%’s data on this phone. If you have a backup, you can restore it afterwards.',
+                     'Wenn sich die Sperre deines Handys geändert hat oder nicht aufgeht, lässt sich diese Sperre nur entfernen, indem die Daten von %APP% auf diesem Handy gelöscht werden. Hast du ein Backup, kannst du es danach wiederherstellen.'],
     'lock.reset_yes': ['پاک کردن و برداشتن قفل', 'Erase and remove lock', 'Löschen und Sperre entfernen'],
 
     'art.recommended': ['پیشنهاد برای امروز', 'Picked for today', 'Für heute ausgewählt'],
@@ -571,13 +571,16 @@
   var SYMPTOMS = [['cramps', '😖'], ['headache', '🤕'], ['bloating', '🎈'], ['backache', '💢'], ['breast', '🍒'],
                   ['acne', '🔴'], ['fatigue', '😴'], ['nausea', '🤢'], ['cravings', '🍫'], ['sleep', '🌙']];
 
+  /* %APP% is the product name (Abra / Aurora / Abrora). Brand names are never translated. */
+  function brand(s) { return typeof s === 'string' && s.indexOf('%APP%') >= 0 ? s.split('%APP%').join(root.Brand ? root.Brand.name() : 'Abra') : s; }
   function t(key) {
     var v = D[key];
     if (!v) return key;
     var s = v[IDX[lang]];
-    if (typeof s === 'function') return s.apply(null, Array.prototype.slice.call(arguments, 1));
-    return s;
+    if (typeof s === 'function') s = s.apply(null, Array.prototype.slice.call(arguments, 1));
+    return brand(s);
   }
+  function extend(map) { Object.keys(map).forEach(function (k) { D[k] = map[k]; }); }
   function pick(obj) { return obj[lang]; }
 
   /* Persian (Jalali) month names */
@@ -622,7 +625,7 @@
     setLang: function (l) { if (IDX[l] !== undefined) lang = l; },
     getLang: function () { return lang; },
     isRTL: function () { return lang === 'fa'; },
-    t: t, num: num, pick: pick, fmt: fmt,
+    t: t, extend: extend, brand: brand, num: num, pick: pick, fmt: fmt,
     setCalendar: function (c) { cal = c === 'jalali' ? 'jalali' : 'gregorian'; },
     getCalendar: function () { return cal; },
     weekdayShort: function (wd) { return WD_S[lang][wd]; },

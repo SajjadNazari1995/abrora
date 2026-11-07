@@ -1,12 +1,12 @@
-/* Abrora release info: THE ONLY place to change when you publish a new version.
+/* Abra release info: THE ONLY place to change when you publish a new version.
    - Both the app and the service worker read this file.
    - Changing it makes phones notice a new version and show the update button.
    - `notes` is shown inside the "new version" card (keep it short). */
 self.ABRORA_RELEASE = {
-  version: '1.5.1',
+  version: '2.1.0',
   notes: {
-    fa: ['۱۰ مقاله‌ی جدید: خواب، محصولات پریود، لکه‌بینی، PCOS، اندومتریوز، استرس، نشانه‌های تخمک‌گذاری، نفخ، جوش و دیرکرد پریود'],
-    en: ['10 new articles: sleep, period products, spotting, PCOS, endometriosis, stress, ovulation signs, bloating, acne and late periods'],
-    de: ['10 neue Artikel: Schlaf, Periodenprodukte, Schmierblutungen, PCOS, Endometriose, Stress, Eisprungzeichen, Blähbauch, Akne und verspätete Periode']
+    fa: ['اتصال به پارتنر با اشتراک انتخابی، گفتگوی رمزشده، رنگ‌ها و آیکن‌های تازه برای Abra، Aurora و Abrora'],
+    en: ['Connect with a partner with choose-what-to-share, encrypted chat, and new colours and icons for Abra, Aurora and Abrora'],
+    de: ['Mit dem Partner verbinden mit selbst gewähltem Teilen, verschlüsselter Chat, neue Farben und Symbole für Abra, Aurora und Abrora']
   }
 };

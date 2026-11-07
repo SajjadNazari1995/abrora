@@ -1,0 +1,125 @@
+/* ============================================================
+   Abra — v2 layer on top of app.css
+   1) Abra palette (rose + lilac, clouds)       2) Calm skin (default, own design)
+   3) Glass skin (translucent, frosted)         4) Pre-app screens: language, consent gate, sign-in
+   ============================================================ */
+
+/* ---------- 1. palette ---------- */
+html[data-theme="light"] {
+  --accent: #8a58dc; --accent2: #e0589f; --accent-soft: #f1e8ff; --accent-ink: #5d36b8;
+  --a1: #ffa6cc; --a2: #c4a8ff; --a3: #ffd3e6;
+  --shadow: 0 12px 30px rgba(138, 88, 220, .13);
+}
+html[data-theme="dark"] {
+  --accent: #c2a6ff; --accent2: #f58cc4;
+  --a1: #ff72b4; --a2: #8a63f2; --a3: #c34fa0;
+}
+.brand-name { font-family: var(--font-latin); letter-spacing: .3px; }
+
+/* ---------- 4. pre-app screens ---------- */
+.pre-head { position: fixed; z-index: 30; top: 0; left: 0; right: 0; direction: ltr; display: flex; align-items: center; justify-content: space-between;
+  padding: calc(env(safe-area-inset-top) + 10px) 16px 10px; pointer-events: none; }
+.pre-head > * { pointer-events: auto; }
+.pre-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; color: var(--ink); }
+.pre-brand img { border-radius: 9px; }
+/* language icon: always the TOP-RIGHT corner of the screen, in every language and direction */
+.lang-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; min-width: 44px; padding: 0 12px; border-radius: 999px; font-weight: 700; font-size: 13px;
+  color: var(--accent-ink); background: var(--surface); box-shadow: var(--shadow-s); border: 1px solid var(--line); margin-left: auto; }
+.lang-btn svg { width: 20px; height: 20px; }
+.lang-menu { position: absolute; top: calc(env(safe-area-inset-top) + 58px); right: 16px; min-width: 176px; padding: 6px; border-radius: 18px; background: var(--surface);
+  border: 1px solid var(--line); box-shadow: var(--shadow); display: grid; gap: 2px; direction: ltr; }
+.lang-menu button { text-align: start; min-height: 46px; padding: 0 14px; border-radius: 12px; font-size: 16px; font-weight: 500; color: var(--ink); }
+.lang-menu button[aria-checked="true"] { background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; }
+.lang-menu button[lang="fa"] { font-family: var(--font-fa); text-align: right; }
+.lang-btn:focus-visible, .lang-menu button:focus-visible, .link:focus-visible, .check input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.pre-body { position: relative; z-index: 1; max-width: 460px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 76px) 22px calc(env(safe-area-inset-bottom) + 28px); min-height: 100dvh; display: flex; flex-direction: column; gap: 14px; }
+.pre-title { text-align: center; }
+.pre-title h1 { font-size: 27px; line-height: 1.45; font-weight: 700; text-wrap: balance; }
+.pre-title .lead { color: var(--ink2); margin-top: 8px; font-size: 15.5px; line-height: 1.85; text-wrap: balance; }
+.pre-title .hero { width: 84px; height: 84px; border-radius: 24px; margin: 0 auto 14px; display: block; box-shadow: var(--shadow); }
+
+.doc-card { background: var(--surface); border-radius: var(--r-xl); box-shadow: var(--shadow-s); padding: 14px 14px 10px; border: 1px solid var(--line); }
+.doc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 0 4px 8px; }
+.doc-head h2 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.doc-step { font-size: 12.5px; color: var(--ink2); white-space: nowrap; }
+.doc-scroll { height: min(46dvh, 430px); overflow-y: auto; overscroll-behavior: contain; padding: 4px 6px 4px; border-radius: 14px; background: var(--surface2); -webkit-overflow-scrolling: touch; }
+.doc-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.doc-scroll h3 { font-size: 15.5px; font-weight: 700; margin: 14px 8px 4px; line-height: 1.6; }
+.doc-scroll p { font-size: 14.5px; line-height: 1.95; margin: 0 8px 4px; color: var(--ink); }
+.doc-hint { font-size: 12.5px; color: var(--ink2); padding: 8px 4px 2px; min-height: 22px; }
+.check { display: flex; gap: 12px; align-items: flex-start; padding: 6px 4px; font-size: 15px; line-height: 1.7; }
+.check input { width: 24px; height: 24px; flex: none; margin-top: 2px; accent-color: var(--accent); }
+.check input:disabled + span { opacity: .55; }
+
+.login-form { display: grid; gap: 6px; }
+.login-form .lbl, .pre-body .lbl { font-size: 14px; font-weight: 700; margin-top: 8px; }
+.field { width: 100%; min-height: 50px; padding: 0 16px; border-radius: 16px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); font-size: 16px; }
+.field:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.form-msg { min-height: 22px; font-size: 13.5px; line-height: 1.6; margin: 4px 2px; }
+.form-msg.err { color: var(--period-ink); } .form-msg.ok { color: var(--fertile-ink); }
+.link { color: var(--accent-ink); font-weight: 600; font-size: 14px; min-height: 44px; padding: 0 6px; text-decoration: underline; text-underline-offset: 3px; justify-self: start; }
+.link.center { justify-self: center; }
+.btn.ghost { background: transparent; border: 1.5px solid var(--line); color: var(--ink); }
+.btn.social { gap: 10px; }
+.g-mark { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #fff; color: #4285f4; font-size: 14px; }
+.a-mark { width: 18px; height: 18px; background: currentColor; -webkit-mask: radial-gradient(circle at 50% 60%, #000 55%, transparent 56%); mask: radial-gradient(circle at 50% 60%, #000 55%, transparent 56%); }
+.divider { display: flex; align-items: center; gap: 12px; color: var(--ink2); font-size: 13px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.hint.center { text-align: center; color: var(--ink2); font-size: 13px; line-height: 1.7; }
+.pre-body .btn[disabled] { opacity: .5; cursor: not-allowed; }
+.acct-id { font-weight: 700; margin: 6px 0 4px; word-break: break-all; }
+.stack { display: grid; gap: 10px; margin-top: 12px; }
+.plain { margin: 12px 0 0; padding-inline-start: 20px; display: grid; gap: 8px; font-size: 14.5px; line-height: 1.8; }
+.nz-logo { display: block; width: 130px; height: auto; margin: 12px 0 6px; }
+html[data-theme="dark"] .nz-logo { filter: invert(1) hue-rotate(180deg); }
+
+/* ---------- 3. glass skin ---------- */
+html[data-skin="glass"] body {
+  background:
+    radial-gradient(60vmax 40vmax at 8% 4%, rgba(255, 150, 205, .75), transparent 60%),
+    radial-gradient(55vmax 40vmax at 100% 14%, rgba(168, 140, 255, .7), transparent 60%),
+    radial-gradient(60vmax 45vmax at 30% 100%, rgba(255, 200, 225, .8), transparent 60%),
+    linear-gradient(160deg, #f3e9ff, #ffe6f1);
+  background-attachment: fixed;
+}
+html[data-skin="glass"][data-theme="dark"] body {
+  background:
+    radial-gradient(60vmax 40vmax at 8% 4%, rgba(214, 70, 150, .55), transparent 60%),
+    radial-gradient(55vmax 40vmax at 100% 14%, rgba(110, 80, 240, .6), transparent 60%),
+    radial-gradient(60vmax 45vmax at 30% 100%, rgba(150, 60, 160, .5), transparent 60%),
+    linear-gradient(160deg, #150f2c, #241238);
+  background-attachment: fixed;
+}
+html[data-skin="glass"] .aurora { opacity: .55; }
+html[data-skin="glass"] { --glass: rgba(255, 255, 255, .56); --glass-line: rgba(255, 255, 255, .7); --glass-shadow: 0 10px 34px rgba(110, 70, 190, .16); }
+html[data-skin="glass"][data-theme="dark"] { --glass: rgba(40, 28, 74, .52); --glass-line: rgba(255, 255, 255, .14); --glass-shadow: 0 10px 34px rgba(0, 0, 0, .4); }
+html[data-skin="glass"] .group, html[data-skin="glass"] .card, html[data-skin="glass"] .cal-card, html[data-skin="glass"] .sheet, html[data-skin="glass"] .tabbar,
+html[data-skin="glass"] .doc-card, html[data-skin="glass"] .lang-menu, html[data-skin="glass"] .lang-btn, html[data-skin="glass"] .update-card {
+  background: var(--glass); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+}
+html[data-skin="glass"] .field, html[data-skin="glass"] .doc-scroll, html[data-skin="glass"] .seg { background: rgba(255, 255, 255, .38); border-color: var(--glass-line); }
+html[data-skin="glass"][data-theme="dark"] .field, html[data-skin="glass"][data-theme="dark"] .doc-scroll, html[data-skin="glass"][data-theme="dark"] .seg { background: rgba(255, 255, 255, .07); }
+html[data-skin="glass"] .seg button[aria-pressed="true"] { background: var(--glass); }
+html[data-skin="glass"] .scrim { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-skin="glass"] .group, html[data-skin="glass"] .card, html[data-skin="glass"] .cal-card, html[data-skin="glass"] .sheet, html[data-skin="glass"] .tabbar,
+  html[data-skin="glass"] .doc-card, html[data-skin="glass"] .lang-menu, html[data-skin="glass"] .lang-btn { background: var(--surface); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-skin="glass"] .group, html[data-skin="glass"] .card, html[data-skin="glass"] .cal-card, html[data-skin="glass"] .sheet, html[data-skin="glass"] .tabbar,
+  html[data-skin="glass"] .doc-card, html[data-skin="glass"] .lang-menu, html[data-skin="glass"] .lang-btn { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* ---------- settings categories ---------- */
+.cat-list { display: grid; gap: 10px; margin-top: 6px; }
+.cat-row { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 68px; padding: 12px 16px; border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-s); text-align: start; color: var(--ink); }
+.cat-row:active { transform: scale(.985); }
+.cat-ic { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--accent-soft); font-size: 20px; }
+.cat-tx { flex: 1; display: grid; gap: 2px; min-width: 0; }
+.cat-tx b { font-size: 16px; font-weight: 700; }
+.cat-tx small { font-size: 13px; color: var(--ink2); line-height: 1.5; }
+.cat-row svg.flip { width: 18px; height: 18px; color: var(--ink2); }
+html[dir="rtl"] .cat-row svg.flip { transform: scaleX(-1); }
+html[data-skin="glass"] .cat-row { background: var(--glass); border: 1px solid var(--glass-line); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); }
